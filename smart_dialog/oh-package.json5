@@ -1,0 +1,10 @@
+{
+  // ohpm publish smart_dialog\build\default\outputs\default\smart_dialog.har
+  "name": "ohos_smart_dialog",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "xdd666",
+  "license": "MIT",
+  "dependencies": {}
+}

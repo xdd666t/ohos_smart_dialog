@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "smart_dialog",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet",
+      "2in1"
+    ]
+  }
+}
