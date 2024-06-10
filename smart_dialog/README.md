@@ -1,9 +1,9 @@
 # ohos_smart_dialog
 相对鸿蒙的弹窗（AlertDialog，CustomDialog，SubWindow）SmartDialog的优越性
 - 支持连续打开多弹窗，支持指定关闭弹窗
-- 支持在非UI区域随便调用
+- 支持在非UI区域调用
 - 优雅且简单的使用方式
-- 强度的参数定义
+- 强大的参数定义
 - 各种开箱即用的功能
 # 初始化
 
@@ -25,9 +25,9 @@ struct Index {
 ```
 # 使用
 - 打开弹窗
-    - 请注意: wrapBuilderArgs的传参必须是一个是个实体类，传基础类型会导致弹窗不生效
-    - 你在弹窗中操作的数据，都应该保存在你传入wrapBuilderArgs参数的对象中
-    - 因为鸿蒙的特殊性，打开多弹窗会刷新之前的弹窗，所有数据的展现，会以wrapBuilderArgs传入的对象数据为基准
+  - 请注意: wrapBuilderArgs的传参必须是一个实体类，传基础类型会导致弹窗不生效
+  - 你在弹窗中操作的数据，都应该保存在你传入wrapBuilderArgs参数的对象中
+  - 因为鸿蒙的特殊性，打开多弹窗会刷新之前的弹窗，所有数据的展现，会以wrapBuilderArgs传入的对象数据为基准
 ```dart
 @Entry  
 @Component  

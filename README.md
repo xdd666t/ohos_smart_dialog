@@ -25,7 +25,7 @@ struct Index {
 ```
 # 使用
 - 打开弹窗
-    - 请注意: wrapBuilderArgs的传参必须是一个是个实体类，传基础类型会导致弹窗不生效
+    - 请注意: wrapBuilderArgs的传参必须是一个实体类，传基础类型会导致弹窗不生效
     - 你在弹窗中操作的数据，都应该保存在你传入wrapBuilderArgs参数的对象中
     - 因为鸿蒙的特殊性，打开多弹窗会刷新之前的弹窗，所有数据的展现，会以wrapBuilderArgs传入的对象数据为基准
 ```dart
