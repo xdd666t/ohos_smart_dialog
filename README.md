@@ -50,8 +50,8 @@ struct Index {
 @Builder  
 function buttonText(params: Model) {  
   Text(params.msg.toString())  
-	.fontSize(30)  
-	.padding(50)
+    .fontSize(30)  
+    .padding(50)
     .backgroundColor(Color.Orange)  
     .onClick(() => {  
 	params.msg += 1  
