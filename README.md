@@ -56,8 +56,8 @@ function buttonText(params: Model) {
 	.padding(50)
     .backgroundColor(Color.Orange)  
     .onClick(() => {  
-		params.msg += 1  
-		params.controller?.refresh(params)
+	params.msg += 1  
+	params.controller?.refresh(params)
     })  
 }  
   
