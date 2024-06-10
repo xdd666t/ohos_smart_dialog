@@ -63,7 +63,7 @@ function buttonText(params: Model) {
   
 class Model {  
   msg: number = 0  
-  controller ?: SmartDialogController  
+  controller?: SmartDialogController  
 }
 ```
 - 关闭弹窗
