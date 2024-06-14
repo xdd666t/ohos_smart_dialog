@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "C:\\Users\\xdd66\\.ohos\\config\\default_ohos_smart_dialog_qC1s_tO_oGNOdYv8rBnkmmi3AQaaqNMoquE2-HrzQu0=.cer",
-          "storePassword": "0000001BA6C9CF00FD5D22F9B4098979FD8B2AEE1DE44D6D931BBF778171B05CC9643D500012B6A83F26D2",
+          "storePassword": "0000001AA7D9CFE27071D2E5016D7FE5008BD63B3C31BF2D42884DA5DB4F6163E098580B2F6C97B8E46C",
+          "certpath": "config/default_ohos_smart_dialog_qC1s_tO_oGNOdYv8rBnkmmi3AQaaqNMoquE2-HrzQu0=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B89C6500C668987AE4FC23DE850424DD4485DB2047A3D83AF10F18C32596CE88E74D2A941A52B79",
-          "profile": "C:\\Users\\xdd66\\.ohos\\config\\default_ohos_smart_dialog_qC1s_tO_oGNOdYv8rBnkmmi3AQaaqNMoquE2-HrzQu0=.p7b",
+          "keyPassword": "0000001AD8B2ADB74D90B97F2725406C86AF44AB422EEEF510C38E5425E9F1689BBAFBDC03B5C360082E",
+          "profile": "config/default_ohos_smart_dialog_qC1s_tO_oGNOdYv8rBnkmmi3AQaaqNMoquE2-HrzQu0=.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\xdd66\\.ohos\\config\\default_ohos_smart_dialog_qC1s_tO_oGNOdYv8rBnkmmi3AQaaqNMoquE2-HrzQu0=.p12"
+          "storeFile": "config/default_ohos_smart_dialog_qC1s_tO_oGNOdYv8rBnkmmi3AQaaqNMoquE2-HrzQu0=.p12"
         }
       }
     ],
