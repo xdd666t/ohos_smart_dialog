@@ -10,4 +10,6 @@ export class DialogModel {
   animationTime?: number
   clickMaskDismiss?: boolean
   tag?: string
+  routerName?: string
+  visible: boolean = true
 }

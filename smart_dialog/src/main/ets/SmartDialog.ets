@@ -2,6 +2,7 @@ import { SmartConfig } from './config/SmartConfig'
 import { DialogProxy } from './dialog_proxy/DialogProxy'
 import { randomTag } from './kit/function'
 import { SmartCustomDialogOption } from './config/option/SmartCustomDialogConfig'
+import SmartNavigatorObserver from './helper/SmartNavigatorObserver'
 
 export class SmartDialog {
   static readonly config: SmartConfig = new SmartConfig()
@@ -14,6 +15,7 @@ export class SmartDialog {
       animationTime: option.animationTime ?? SmartDialog.config.custom.animationTime,
       clickMaskDismiss: option.clickMaskDismiss ?? SmartDialog.config.custom.clickMaskDismiss,
       tag: option.tag ?? randomTag(),
+      routerName: SmartNavigatorObserver.curRouter,
     })
   }
 

@@ -1,8 +1,9 @@
-import { SmartCustomDialogOption } from '../config/option/SmartCustomDialogConfig'
 import { DialogModel } from '../config/model/DialogModel'
+import { CustomDialogOption } from '../config/model/CustomDialogConfig'
 
 @ObservedV2
 export class DialogProxyState {
-  optionDialogList: Array<SmartCustomDialogOption> = []
+  originDialogList: Array<CustomDialogOption> = []
   @Trace dialogList: Array<DialogModel> = []
+  @Trace visibleDialog: boolean = false
 }
