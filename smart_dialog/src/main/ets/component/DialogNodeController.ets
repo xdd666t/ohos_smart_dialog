@@ -1,5 +1,5 @@
 import { BuilderNode, FrameNode, NodeController } from '@kit.ArkUI';
-import { SmartDialogController } from './SmartDialogController';
+import { SmartDialogController } from '../helper/SmartDialogController';
 
 export class DialogNodeController extends NodeController {
   rootNode: BuilderNode<[Object]> | null = null

@@ -1,5 +1,4 @@
 import { DialogModel } from '../config/model/DialogModel'
-import { alignmentAnimation } from '../helper/AlignmentHelper'
 
 @Component
 export struct MainComponent {
@@ -12,7 +11,7 @@ export struct MainComponent {
   }
 
   build() {
-    NodeContainer(this.item.dialogNode)
+    NodeContainer(this.item.nodeController)
       .scale({ x: this.item.animation.mainScale, y: this.item.animation.mainScale })
       .position(this.item.animation.position)
       .onAppear(() => this.onComponentAppear())

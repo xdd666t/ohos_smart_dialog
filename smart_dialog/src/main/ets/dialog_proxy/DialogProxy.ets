@@ -1,5 +1,5 @@
 import { DialogModel } from '../config/model/DialogModel'
-import { DialogNodeController } from '../helper/DialogNodeController'
+import { DialogNodeController } from '../component/DialogNodeController'
 import { DialogProxyState } from './DialogProxyState'
 import { CustomDialogOption } from '../config/model/CustomDialogConfig'
 import { SmartDismissOption } from '../config/option/SmartDismissConfig'
@@ -24,7 +24,7 @@ export class DialogProxy {
 
   requestLayout() {
     this.dialogProxyState.dialogList.forEach((item) => {
-      item.dialogNode?.rootNode?.dispose()
+      item.nodeController?.rootNode?.dispose()
       item.controller?.removeListener()
     })
 
@@ -45,7 +45,7 @@ export class DialogProxy {
         model.maskWrapBuild = item.maskWrapBuild
         model.onMask = item.onMask
       }
-      model.dialogNode = new DialogNodeController(item.wrapBuilder, item.wrapBuilderArgs, item.controller)
+      model.nodeController = new DialogNodeController(item.wrapBuilder, item.wrapBuilderArgs, item.controller)
       list.push(model)
     })
     this.dialogProxyState.dialogList = list

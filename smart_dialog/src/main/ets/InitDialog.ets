@@ -18,6 +18,10 @@ export struct OhosSmartDialog {
 
   static onBackPressed = BackHelper.instance.onBackPressed
 
+  aboutToAppear(): void {
+    this.state.uiContext = this.getUIContext()
+  }
+
   build() {
     Stack() {
       ForEach(this.state.dialogList, (item: DialogModel, index: number) => {

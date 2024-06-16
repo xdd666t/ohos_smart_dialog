@@ -1,5 +1,6 @@
 import { randomColor } from '../../app/kit/Color'
 
+
 @Builder
 export function dialogLocationVertical() {
   Text("location")

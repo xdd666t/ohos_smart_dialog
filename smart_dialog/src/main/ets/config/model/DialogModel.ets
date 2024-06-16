@@ -1,5 +1,5 @@
 import { alignmentAnimation } from '../../helper/AlignmentHelper'
-import { DialogNodeController } from '../../helper/DialogNodeController'
+import { DialogNodeController } from '../../component/DialogNodeController'
 import { SmartDialogController } from '../../helper/SmartDialogController'
 import { delay } from '../../kit/function'
 import { AnimationModel } from './AnimationModel'
@@ -7,7 +7,7 @@ import { AnimationModel } from './AnimationModel'
 export class DialogModel {
   alignment?: Alignment
   animation: AnimationModel = new AnimationModel()
-  dialogNode?: DialogNodeController
+  nodeController?: DialogNodeController
   controller?: SmartDialogController
   animationTime?: number
   clickMaskDismiss?: boolean

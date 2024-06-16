@@ -6,4 +6,5 @@ export class DialogProxyState {
   originDialogList: Array<CustomDialogOption> = []
   @Trace dialogList: Array<DialogModel> = []
   @Trace visibleDialog: boolean = false
+  uiContext?: UIContext
 }

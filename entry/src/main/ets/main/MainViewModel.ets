@@ -1,10 +1,12 @@
 import { SmartDialog } from 'ohos_smart_dialog'
+import { SmartConfig } from 'ohos_smart_dialog/src/main/ets/config/SmartConfig'
 import { delay } from 'ohos_smart_dialog/src/main/ets/kit/function'
 import { dialogCustomMask } from './dialog/CustomMask'
 import { dialogJumpPage } from './dialog/JumpPage'
 import { dialogLocationCenter, dialogLocationHorizontal, dialogLocationVertical } from './dialog/LocationDialog'
 import { dialogShowDialog } from './dialog/ShowDialog'
 import { dialogTagA, dialogTagB, dialogTagC, dialogTagD, dialogTagE } from './dialog/TagDialog'
+import { ArgsModel, dialogArgs } from './dialog/UseArgs'
 import { MainFeature, MainState } from './MainState'
 
 export class MainViewModel {
@@ -15,7 +17,9 @@ export class MainViewModel {
   }
 
   showDialog(item: string) {
-    if (item === MainFeature.location) {
+    if (item === MainFeature.useArgs) {
+      this.useArgs()
+    } else if (item === MainFeature.location) {
       this.location()
     } else if (item === MainFeature.jumpPage) {
       this.jumpPage()
@@ -24,6 +28,14 @@ export class MainViewModel {
     } else if (item === MainFeature.tag) {
       this.tag()
     }
+  }
+
+  useArgs() {
+    SmartConfig
+    SmartDialog.show({
+      wrapBuilder: wrapBuilder(dialogArgs),
+      wrapBuilderArgs: { msg: Math.random().toString() } as ArgsModel
+    })
   }
 
   async location() {

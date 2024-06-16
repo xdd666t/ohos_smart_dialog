@@ -1,3 +1,3 @@
-type ParamVoidCallBack = () => void
+export type ParamVoidCallBack = () => void
 
-type ParamSingleCallBack<T> = (data: T) => void
+export type ParamSingleCallBack<T> = (data: T) => void
