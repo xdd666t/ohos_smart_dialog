@@ -12,9 +12,8 @@ export struct OhosSmartDialog {
   static observe: SmartNavigatorObserver = new SmartNavigatorObserver()
 
   static registerRouter(navPathStack: NavPathStack): NavPathStack {
-    DialogProxy.instance.navPathStack = navPathStack
     navPathStack.setInterception(OhosSmartDialog.observe)
-    return navPathStack
+    return DialogProxy.instance.navPathStack = navPathStack
   }
 
   static onBackPressed = BackHelper.instance.onBackPressed
@@ -22,7 +21,7 @@ export struct OhosSmartDialog {
   build() {
     Stack() {
       ForEach(this.state.dialogList, (item: DialogModel, index: number) => {
-        Stack() {
+        Stack({ alignContent: item.alignment }) {
           MaskComponent({ item: item })
 
           MainComponent({ item: item })
@@ -32,9 +31,5 @@ export struct OhosSmartDialog {
     .width('100%')
     .height('100%')
     .visibility(this.state.visibleDialog ? Visibility.Visible : Visibility.None)
-  }
-
-  onBackPress(): boolean | void {
-
   }
 }

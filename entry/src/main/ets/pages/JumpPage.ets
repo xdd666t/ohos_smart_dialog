@@ -1,6 +1,7 @@
 import { OhosSmartDialog, SmartDialog } from 'ohos_smart_dialog'
-import EntryAbility from '../app/EntryAbility'
-import { randomColor } from '../kit/Color'
+import { randomColor } from '../app/kit/Color'
+import { dialogShowDialog } from '../main/dialog/ShowDialog'
+
 
 @Builder
 export function buildJumPage() {
@@ -18,17 +19,12 @@ struct JumpPage {
       }.width("100%").height("100%").backgroundColor(randomColor())
     }
     .hideTitleBar(true)
-    .onBackPressed(() => {
-      if (OhosSmartDialog.onBackPressed()) {
-        return true
-      }
-      return false
-    })
+    .onBackPressed(OhosSmartDialog.onBackPressed)
   }
 
   showDialog() {
     SmartDialog.show({
-      wrapBuilder: wrapBuilder(buildJumPage)
+      wrapBuilder: wrapBuilder(dialogShowDialog)
     })
   }
 }

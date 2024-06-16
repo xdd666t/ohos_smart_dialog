@@ -1,8 +1,8 @@
 import { DialogModel } from '../config/model/DialogModel'
 import { DialogNodeController } from '../helper/DialogNodeController'
 import { DialogProxyState } from './DialogProxyState'
-import { delay } from '../kit/function'
 import { CustomDialogOption } from '../config/model/CustomDialogConfig'
+import { SmartDismissOption } from '../config/option/SmartDismissConfig'
 
 export class DialogProxy {
   private static _instance?: DialogProxy
@@ -34,12 +34,16 @@ export class DialogProxy {
       let model: DialogModel = new DialogModel()
       if (oldModel) {
         model = oldModel
+        model.isOld = true
       } else {
+        model.alignment = item.alignment
         model.controller = item.controller
         model.animationTime = item.animationTime
         model.clickMaskDismiss = item.clickMaskDismiss
         model.tag = item.tag
         model.routerName = item.routerName
+        model.maskWrapBuild = item.maskWrapBuild
+        model.onMask = item.onMask
       }
       model.dialogNode = new DialogNodeController(item.wrapBuilder, item.wrapBuilderArgs, item.controller)
       list.push(model)
@@ -55,22 +59,33 @@ export class DialogProxy {
     this.dialogProxyState.visibleDialog = visibleDialog
   }
 
-  async dismiss(): Promise<void> {
+  async dismiss(option?: SmartDismissOption): Promise<void> {
+    const state = this.dialogProxyState
+    let dialog = this.findDialog(option?.tag)
+    if (!dialog) {
+      return
+    }
+
+    await dialog.dismiss()
+    state.originDialogList = state.originDialogList.filter((item) => item.tag !== dialog?.tag)
+    DialogProxy.instance.requestLayout()
+  }
+
+  private findDialog(tag?: string): DialogModel | undefined {
     let dialogList = this.dialogProxyState.dialogList
     if (dialogList.length === 0) {
       return
     }
-    let lastDialog = dialogList[dialogList.length - 1]
-    animateTo({
-      duration: lastDialog.animationTime,
-      curve: Curve.Linear,
-    }, () => {
-      lastDialog.maskOpacity = 0
-      lastDialog.mainScale = 0
-    })
-    await delay(lastDialog.animationTime)
 
-    this.dialogProxyState.originDialogList.pop()
-    DialogProxy.instance.requestLayout()
+    if (tag) {
+      for (let index = 0; index < dialogList.length; index++) {
+        let item = dialogList[index]
+        if (item.tag === tag) {
+          return item
+        }
+      }
+    }
+
+    return dialogList[dialogList.length - 1]
   }
 }

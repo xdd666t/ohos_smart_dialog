@@ -1,19 +1,27 @@
 import { DialogModel } from '../config/model/DialogModel'
+import { alignmentAnimation } from '../helper/AlignmentHelper'
 
 @Component
 export struct MainComponent {
   item: DialogModel = new DialogModel()
 
+  aboutToAppear(): void {
+    if (!this.item.isOld) {
+      this.item.initAnimationModel()
+    }
+  }
+
   build() {
-    NodeContainer(this.item.dialogNode).scale({ x: this.item.mainScale, y: this.item.mainScale })
-      .onAppear(() => {
-        animateTo({
-          duration: this.item.animationTime,
-          curve: Curve.Linear,
-        }, () => {
-          this.item.maskOpacity = 0.3
-          this.item.mainScale = 1
-        })
-      })
+    NodeContainer(this.item.dialogNode)
+      .scale({ x: this.item.animation.mainScale, y: this.item.animation.mainScale })
+      .position(this.item.animation.position)
+      .onAppear(() => this.onComponentAppear())
+  }
+
+  private onComponentAppear(): void {
+    animateTo({ duration: this.item.animationTime, curve: Curve.Linear }, () => {
+      this.item.animation.mainScale = 1
+      this.item.animation.position = undefined
+    })
   }
 }

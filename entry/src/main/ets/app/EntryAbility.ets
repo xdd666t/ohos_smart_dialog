@@ -1,6 +1,5 @@
 import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
-import { OhosSmartDialog } from 'ohos_smart_dialog';
 
 export default class EntryAbility extends UIAbility {
   static tag = "EntryAbility.Tag"
@@ -35,6 +34,10 @@ export default class EntryAbility extends UIAbility {
   }
 
   onBackground(): void {
+    console.info(`${EntryAbility.tag}: onBackground`)
+  }
+
+  onBackPress(): boolean | void {
     console.info(`${EntryAbility.tag}: onBackground`)
   }
 }

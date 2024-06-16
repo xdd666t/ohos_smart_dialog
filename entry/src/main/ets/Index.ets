@@ -1,6 +1,6 @@
 import { OhosSmartDialog } from 'ohos_smart_dialog/';
-import { pageMap, RouterHelper } from './helper/RouterHelper';
-import { buildMainPage } from './MainPage';
+import { pageMap, RouterHelper } from './app/helper/RouterHelper';
+import { buildMainPage } from './main/MainPage';
 
 @Entry
 @Component
@@ -19,6 +19,13 @@ struct Index {
       // init
       OhosSmartDialog()
     }.height('100%').width('100%')
+  }
+
+  onBackPress(): boolean | void {
+    if (OhosSmartDialog.onBackPressed()) {
+      return true
+    }
+    return false
   }
 }
 

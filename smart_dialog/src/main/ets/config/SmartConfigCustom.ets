@@ -1,4 +1,6 @@
 export class SmartConfigCustom {
-  animationTime: number = 300
+  alignment: Alignment = Alignment.Center
+  animationTime: number = 200
   clickMaskDismiss: boolean = true
+  maskWrapBuild?: WrappedBuilder<ESObject>
 }
