@@ -1,5 +1,4 @@
 import { SmartDialog } from 'ohos_smart_dialog'
-import { SmartConfig } from 'ohos_smart_dialog/src/main/ets/config/SmartConfig'
 import { delay } from 'ohos_smart_dialog/src/main/ets/kit/function'
 import { dialogCustomMask } from './dialog/CustomMask'
 import { dialogJumpPage } from './dialog/JumpPage'
@@ -31,7 +30,6 @@ export class MainViewModel {
   }
 
   useArgs() {
-    SmartConfig
     SmartDialog.show({
       wrapBuilder: wrapBuilder(dialogArgs),
       wrapBuilderArgs: { msg: Math.random().toString() } as ArgsModel
