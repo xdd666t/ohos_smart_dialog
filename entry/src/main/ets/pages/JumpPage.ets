@@ -2,7 +2,6 @@ import { OhosSmartDialog, SmartDialog } from 'ohos_smart_dialog'
 import { randomColor } from '../app/kit/Color'
 import { dialogShowDialog } from '../main/dialog/ShowDialog'
 
-
 @Builder
 export function buildJumPage() {
   JumpPage()
@@ -19,7 +18,7 @@ struct JumpPage {
       }.width("100%").height("100%").backgroundColor(randomColor())
     }
     .hideTitleBar(true)
-    .onBackPressed(OhosSmartDialog.onBackPressed)
+    .onBackPressed(OhosSmartDialog.onBackPressed())
   }
 
   showDialog() {

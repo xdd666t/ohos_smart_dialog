@@ -20,10 +20,7 @@ struct Index {
   }
 
   onBackPress(): boolean | void {
-    if (OhosSmartDialog.onBackPressed()) {
-      return true
-    }
-    return false
+    return OhosSmartDialog.onBackPressed()()
   }
 }
 
