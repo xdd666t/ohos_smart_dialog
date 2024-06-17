@@ -1,8 +1,38 @@
+import { SmartDialog } from 'ohos_smart_dialog'
 import { randomColor } from '../../app/kit/Color'
+import { delay } from '../../app/kit/function'
+
+export async function demoLocation() {
+  const animationTime = 1000
+  SmartDialog.show({
+    wrapBuilder: wrapBuilder(dialogLocationHorizontal),
+    alignment: Alignment.Start,
+  })
+  await delay(animationTime)
+  SmartDialog.show({
+    wrapBuilder: wrapBuilder(dialogLocationVertical),
+    alignment: Alignment.Top,
+  })
+  await delay(animationTime)
+  SmartDialog.show({
+    wrapBuilder: wrapBuilder(dialogLocationHorizontal),
+    alignment: Alignment.End,
+  })
+  await delay(animationTime)
+  SmartDialog.show({
+    wrapBuilder: wrapBuilder(dialogLocationVertical),
+    alignment: Alignment.Bottom,
+  })
+  await delay(animationTime)
+  SmartDialog.show({
+    wrapBuilder: wrapBuilder(dialogLocationCenter),
+    alignment: Alignment.Center,
+  })
+}
 
 
 @Builder
-export function dialogLocationVertical() {
+function dialogLocationVertical() {
   Text("location")
     .width("100%")
     .height("20%")
@@ -14,7 +44,7 @@ export function dialogLocationVertical() {
 }
 
 @Builder
-export function dialogLocationHorizontal() {
+function dialogLocationHorizontal() {
   Text("location")
     .width("30%")
     .height("100%")
@@ -26,7 +56,7 @@ export function dialogLocationHorizontal() {
 }
 
 @Builder
-export function dialogLocationCenter() {
+function dialogLocationCenter() {
   Text("location")
     .width("30%")
     .height("30%")

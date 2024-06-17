@@ -123,12 +123,16 @@ export function randomColor(): string {
   }
   return color;
 }
+
+export function delay(ms?: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 ```
 
 ## 传参弹窗
 
 ```typescript
-function useArgs() {
+export function demoUseArgs() {
   SmartDialog.show({
     wrapBuilder: wrapBuilder(dialogArgs),
     wrapBuilderArgs: { msg: Math.random().toString() } as ArgsModel
@@ -136,17 +140,17 @@ function useArgs() {
 }
 
 @Builder
-export function dialogArgs(args: ArgsModel) {
+function dialogArgs(args: ArgsModel) {
   Text(args.msg)
     .fontSize(20)
     .fontColor(Color.White)
     .textAlign(TextAlign.Center)
     .padding(50)
     .margin(50)
-    .backgroundColor(Color.Blue)
+    .backgroundColor(randomColor())
 }
 
-export class ArgsModel {
+class ArgsModel {
   msg: string = ""
 }
 ```
@@ -154,7 +158,7 @@ export class ArgsModel {
 ## 多位置弹窗
 
 ```typescript
-async function location() {
+export async function demoLocation() {
   const animationTime = 1000
   SmartDialog.show({
     wrapBuilder: wrapBuilder(dialogLocationHorizontal),
@@ -172,8 +176,9 @@ async function location() {
   })
 }
 
+
 @Builder
-export function dialogLocationVertical() {
+function dialogLocationVertical() {
   Text("location")
     .width("100%")
     .height("20%")
@@ -185,7 +190,7 @@ export function dialogLocationVertical() {
 }
 
 @Builder
-export function dialogLocationHorizontal() {
+function dialogLocationHorizontal() {
   Text("location")
     .width("30%")
     .height("100%")
@@ -197,7 +202,7 @@ export function dialogLocationHorizontal() {
 }
 
 @Builder
-export function dialogLocationCenter() {
+function dialogLocationCenter() {
   Text("location")
     .width("30%")
     .height("30%")
@@ -212,7 +217,7 @@ export function dialogLocationCenter() {
 ## 关闭指定弹窗
 
 ```typescript
-async function tag() {
+export async function demoTag() {
   const animationTime = 1000
   SmartDialog.show({
     wrapBuilder: wrapBuilder(dialogTagA),
@@ -225,18 +230,13 @@ async function tag() {
     alignment: Alignment.Top,
     tag: "B",
   })
-  await delay(animationTime)
-  SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogTagC),
-    alignment: Alignment.Center,
-    tag: "C",
-  })
 }
 
 @Builder
-export function dialogTagA() {
+function dialogTagA() {
   Text("A")
-    .width("20%").height("100%")
+    .width("20%")
+    .height("100%")
     .fontSize(20)
     .fontColor(Color.White)
     .textAlign(TextAlign.Center)
@@ -245,21 +245,9 @@ export function dialogTagA() {
 }
 
 @Builder
-export function dialogTagB() {
-  Text("B")
-    .width("100%")
-    .height("20%")
-    .fontSize(20)
-    .fontColor(Color.White)
-    .textAlign(TextAlign.Center)
-    .padding(50)
-    .backgroundColor(randomColor())
-}
-
-@Builder
-export function dialogTagC() {
+function dialogTagB() {
   Flex({ wrap: FlexWrap.Wrap }) {
-    ForEach(["closA", "closeB", "closeSelf"], (item: string, index: number) => {
+    ForEach(["closA", "closeSelf"], (item: string, index: number) => {
       Button(item)
         .backgroundColor(Color.Orange)
         .margin(10)
@@ -268,8 +256,6 @@ export function dialogTagC() {
             SmartDialog.dismiss({ tag: "A" })
           } else if (index === 1) {
             SmartDialog.dismiss({ tag: "B" })
-          } else if (index === 2) {
-            SmartDialog.dismiss({ tag: "C" })
           }
         })
     })
@@ -280,7 +266,7 @@ export function dialogTagC() {
 ## 自定义遮罩
 
 ```typescript
-function customMask() {
+export function demoCustomMask() {
   SmartDialog.show({
     wrapBuilder: wrapBuilder(dialogShowDialog),
     maskWrapBuild: wrapBuilder(dialogCustomMask),
@@ -288,21 +274,19 @@ function customMask() {
 }
 
 @Builder
-export function dialogShowDialog() {
+function dialogCustomMask() {
+  Stack().width("100%").height("100%").backgroundColor(randomColor()).opacity(0.6)
+}
+
+@Builder
+function dialogShowDialog() {
   Text("showDialog")
     .fontSize(30)
     .padding(50)
     .backgroundColor(randomColor())
     .onClick(() => {
-      SmartDialog.show({
-        wrapBuilder: wrapBuilder(dialogShowDialog),
-      })
+      SmartDialog.show({ wrapBuilder: wrapBuilder(dialogShowDialog) })
     })
-}
-
-@Builder
-export function dialogCustomMask() {
-  Stack().width("100%").height("100%").backgroundColor(randomColor()).opacity(0.6)
 }
 ```
 

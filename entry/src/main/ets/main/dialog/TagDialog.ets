@@ -1,8 +1,42 @@
 import { SmartDialog } from 'ohos_smart_dialog'
 import { randomColor } from '../../app/kit/Color'
+import { delay } from '../../app/kit/function'
+
+export async function demoTag() {
+  const animationTime = 1000
+  SmartDialog.show({
+    wrapBuilder: wrapBuilder(dialogTagA),
+    alignment: Alignment.Start,
+    tag: "A",
+  })
+  await delay(animationTime)
+  SmartDialog.show({
+    wrapBuilder: wrapBuilder(dialogTagB),
+    alignment: Alignment.Top,
+    tag: "B",
+  })
+  await delay(animationTime)
+  SmartDialog.show({
+    wrapBuilder: wrapBuilder(dialogTagC),
+    alignment: Alignment.End,
+    tag: "C",
+  })
+  await delay(animationTime)
+  SmartDialog.show({
+    wrapBuilder: wrapBuilder(dialogTagD),
+    alignment: Alignment.Bottom,
+    tag: "D",
+  })
+  await delay(animationTime)
+  SmartDialog.show({
+    wrapBuilder: wrapBuilder(dialogTagE),
+    alignment: Alignment.Center,
+    tag: "E",
+  })
+}
 
 @Builder
-export function dialogTagA() {
+function dialogTagA() {
   Text("A")
     .width("20%")
     .height("100%")
@@ -14,7 +48,7 @@ export function dialogTagA() {
 }
 
 @Builder
-export function dialogTagB() {
+function dialogTagB() {
   Text("B")
     .width("100%")
     .height("20%")
@@ -26,7 +60,7 @@ export function dialogTagB() {
 }
 
 @Builder
-export function dialogTagC() {
+function dialogTagC() {
   Text("C")
     .width("20%")
     .height("100%")
@@ -38,7 +72,7 @@ export function dialogTagC() {
 }
 
 @Builder
-export function dialogTagD() {
+function dialogTagD() {
   Text("D")
     .width("100%")
     .height("20%")
@@ -50,7 +84,7 @@ export function dialogTagD() {
 }
 
 @Builder
-export function dialogTagE() {
+function dialogTagE() {
   Flex({ wrap: FlexWrap.Wrap }) {
     ForEach(["closA", "closeB", "closeC", "closeD", "closeSelf"], (item: string, index: number) => {
       Button(item)
