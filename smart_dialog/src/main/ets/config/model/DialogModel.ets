@@ -22,19 +22,19 @@ export class DialogModel {
     alignmentAnimation(this.alignment, {
       onStart: () => {
         this.animation.mainScale = 1
-        this.animation.position = { x: "-100%" }
+        this.animation.position = { right: "100%" }
       },
       onTop: () => {
         this.animation.mainScale = 1
-        this.animation.position = { y: "-100%" }
+        this.animation.position = { bottom: "100%" }
       },
       onEnd: () => {
         this.animation.mainScale = 1
-        this.animation.position = { x: "100%" }
+        this.animation.position = { left: "100%" }
       },
       onBottom: () => {
         this.animation.mainScale = 1
-        this.animation.position = { y: "100%" }
+        this.animation.position = { top: "100%" }
       },
       onCenter: () => {
         this.animation.mainScale = 0

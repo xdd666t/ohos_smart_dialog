@@ -19,7 +19,7 @@ struct MainPage {
           .margin(5)
           .onClick(() => this.viewModel.showDialog(item))
       })
-    }.width("100%").height("100%").padding(30)
+    }.width("100%").height("100%").padding(30).margin({ top: 30 })
   }
 }
 

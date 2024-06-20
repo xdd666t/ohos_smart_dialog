@@ -104,5 +104,5 @@ function dialogTagE() {
           }
         })
     })
-  }.backgroundColor(Color.Blue).margin({ left: 30, right: 30 })
+  }.backgroundColor(randomColor()).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
 }
