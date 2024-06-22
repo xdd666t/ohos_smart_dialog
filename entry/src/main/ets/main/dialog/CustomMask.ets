@@ -4,8 +4,8 @@ import { randomColor } from '../../app/kit/Color'
 
 export function demoCustomMask() {
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogShowDialog),
-    maskWrapBuild: wrapBuilder(dialogCustomMask),
+    builder: wrapBuilder(dialogShowDialog),
+    maskBuilder: wrapBuilder(dialogCustomMask),
   })
 }
 
@@ -19,9 +19,8 @@ function dialogShowDialog() {
   Text("showDialog")
     .fontSize(30)
     .padding(50)
+    .borderRadius(12)
     .backgroundColor(randomColor())
-    .onClick(() => {
-      SmartDialog.show({ wrapBuilder: wrapBuilder(dialogShowDialog) })
-    })
+    .onClick(() => demoCustomMask())
 }
 

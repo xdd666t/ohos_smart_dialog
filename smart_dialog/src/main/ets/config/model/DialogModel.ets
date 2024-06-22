@@ -1,55 +1,103 @@
 import { alignmentAnimation } from '../../helper/AlignmentHelper'
-import { DialogNodeController } from '../../component/DialogNodeController'
-import { SmartDialogController } from '../../helper/SmartDialogController'
 import { delay } from '../../kit/function'
-import { AnimationModel } from './AnimationModel'
+import { BuilderNode } from '@kit.ArkUI'
+import { DialogProxy } from '../../dialog_proxy/DialogProxy'
 
+@ObservedV2
+class AnimationModel {
+  @Trace maskOpacity: number = 0
+  @Trace mainScale: number = 0
+  @Trace position?: Edges
+}
+
+@ObservedV2
 export class DialogModel {
+  builder?: WrappedBuilder<ESObject>
+  builderArgs?: ESObject
   alignment?: Alignment
   animation: AnimationModel = new AnimationModel()
-  nodeController?: DialogNodeController
-  controller?: SmartDialogController
   animationTime?: number
   clickMaskDismiss?: boolean
   tag?: string
   routerName?: string
-  visible: boolean = true
-  maskWrapBuild?: WrappedBuilder<ESObject>
+  @Trace visible: boolean = true
+  maskBuilder?: WrappedBuilder<ESObject>
   onMask?: VoidCallback
-  isOld: boolean = false
+  builderNode?: BuilderNode<[ESObject]> | null = null
 
-  initAnimationModel() {
+  onAppear() {
+    this.initAnimationStatus()
+  }
+
+  initAnimationStatus() {
+    const animation = this.animation
     alignmentAnimation(this.alignment, {
       onStart: () => {
-        this.animation.mainScale = 1
-        this.animation.position = { right: "100%" }
+        animation.mainScale = 1
+        animation.position = { right: "100%" }
       },
       onTop: () => {
-        this.animation.mainScale = 1
-        this.animation.position = { bottom: "100%" }
+        animation.mainScale = 1
+        animation.position = { bottom: "100%" }
       },
       onEnd: () => {
-        this.animation.mainScale = 1
-        this.animation.position = { left: "100%" }
+        animation.mainScale = 1
+        animation.position = { left: "100%" }
       },
       onBottom: () => {
-        this.animation.mainScale = 1
-        this.animation.position = { top: "100%" }
+        animation.mainScale = 1
+        animation.position = { top: "100%" }
       },
       onCenter: () => {
-        this.animation.mainScale = 0
-        this.animation.position = undefined
+        animation.mainScale = 0
+        animation.position = undefined
       },
     })
-    this.animation.maskOpacity = 0
+    animation.maskOpacity = 0
+  }
+
+  async startAnimation(): Promise<void> {
+    const animation = this.animation
+    const animationTime = this.animationTime
+    animateTo({ duration: animationTime, curve: Curve.Linear }, () => {
+      alignmentAnimation(this.alignment, {
+        onStart: () => {
+          animation.position = { left: 0 }
+        },
+        onTop: () => {
+          animation.position = { top: 0 }
+        },
+        onEnd: () => {
+          animation.position = { right: 0 }
+        },
+        onBottom: () => {
+          animation.position = { bottom: 0 }
+        },
+        onCenter: () => {
+          animation.position = undefined
+        },
+      })
+      animation.mainScale = 1
+    })
+    await delay(animationTime)
+  }
+
+  async endAnimation(): Promise<void> {
+    const animationTime = this.animationTime
+    animateTo({ duration: animationTime, curve: Curve.Linear }, () => {
+      this.initAnimationStatus()
+    })
+
+    await delay(animationTime)
   }
 
 
   async dismiss(): Promise<void> {
-    animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
-      this.initAnimationModel()
-    })
+    await this.endAnimation()
+    this.remove()
+  }
 
-    await delay(this.animationTime)
+  remove() {
+    DialogProxy.instance.nodeController.remove(this)
   }
 }

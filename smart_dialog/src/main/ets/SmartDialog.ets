@@ -10,12 +10,11 @@ export class SmartDialog {
 
   static show(option: SmartCustomDialogOption) {
     DialogProxy.instance.show({
-      wrapBuilder: option.wrapBuilder,
-      wrapBuilderArgs: option.wrapBuilderArgs,
+      builder: option.builder,
+      builderArgs: option.builderArgs,
       alignment: option.alignment ?? SmartDialog.config.custom.alignment,
-      controller: option.controller,
       animationTime: option.animationTime ?? SmartDialog.config.custom.animationTime,
-      maskWrapBuild: option.maskWrapBuild ?? SmartDialog.config.custom.maskWrapBuild,
+      maskBuilder: option.maskBuilder ?? SmartDialog.config.custom.maskWrapBuild,
       clickMaskDismiss: option.clickMaskDismiss ?? SmartDialog.config.custom.clickMaskDismiss,
       onMask: option.onMask,
       tag: option.tag ?? randomTag(),

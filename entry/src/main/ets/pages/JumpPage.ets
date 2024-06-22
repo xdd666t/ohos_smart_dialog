@@ -23,7 +23,7 @@ struct JumpPage {
 
   showDialog() {
     SmartDialog.show({
-      wrapBuilder: wrapBuilder(dialogShowDialog)
+      builder: wrapBuilder(dialogShowDialog)
     })
   }
 }

@@ -9,7 +9,7 @@ export function dialogShowDialog() {
     .backgroundColor(randomColor())
     .onClick(() => {
       SmartDialog.show({
-        wrapBuilder: wrapBuilder(dialogShowDialog),
+        builder: wrapBuilder(dialogShowDialog),
       })
     })
 }

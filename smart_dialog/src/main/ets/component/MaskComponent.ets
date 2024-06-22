@@ -1,5 +1,5 @@
 import { DialogModel } from '../config/model/DialogModel'
-import { SmartDialog } from '../SmartDialog'
+import { DialogProxy } from '../dialog_proxy/DialogProxy'
 
 @Component
 export struct MaskComponent {
@@ -7,8 +7,8 @@ export struct MaskComponent {
 
   build() {
     Stack() {
-      if (this.item.maskWrapBuild) {
-        this.item.maskWrapBuild?.builder()
+      if (this.item.maskBuilder) {
+        this.item.maskBuilder?.builder()
       } else {
         Stack()
           .width('100%')
@@ -23,7 +23,7 @@ export struct MaskComponent {
     .onClick(() => {
       this.item.onMask?.()
       if (this.item.clickMaskDismiss) {
-        SmartDialog.dismiss()
+        DialogProxy.instance.dismiss()
       }
     })
     .onAppear(() => {

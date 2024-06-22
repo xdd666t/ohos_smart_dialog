@@ -1,13 +1,10 @@
-import { SmartDialogController } from '../../helper/SmartDialogController'
-
 export class SmartCustomDialogOption {
-  wrapBuilder?: WrappedBuilder<ESObject>
-  wrapBuilderArgs?: ESObject
+  builder?: WrappedBuilder<ESObject>
+  builderArgs?: ESObject
   alignment?: Alignment
-  controller?: SmartDialogController
   animationTime?: number
   clickMaskDismiss?: boolean
   tag?: string
-  maskWrapBuild?: WrappedBuilder<ESObject>
+  maskBuilder?: WrappedBuilder<ESObject>
   onMask?: VoidCallback
 }

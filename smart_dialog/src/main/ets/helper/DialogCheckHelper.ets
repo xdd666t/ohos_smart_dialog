@@ -1,5 +1,5 @@
 import { CheckExistOption } from '../config/model/CheckExistOption'
-import { DialogProxy } from '../dialog_proxy/DialogProxy'
+import { dialogProxy } from '../dialog_proxy/DialogProxy'
 
 export class DialogCheckHelper {
   private static _instance?: DialogCheckHelper
@@ -13,7 +13,7 @@ export class DialogCheckHelper {
   }
 
   checkExist(option?: CheckExistOption): boolean {
-    let dialogList = DialogProxy.instance.dialogProxyState.dialogList
+    let dialogList = dialogProxy.dialogList
 
     let exist = false
     dialogList.forEach((item) => {

@@ -5,31 +5,31 @@ import { delay } from '../../app/kit/function'
 export async function demoTag() {
   const animationTime = 1000
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogTagA),
+    builder: wrapBuilder(dialogTagA),
     alignment: Alignment.Start,
     tag: "A",
   })
   await delay(animationTime)
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogTagB),
+    builder: wrapBuilder(dialogTagB),
     alignment: Alignment.Top,
     tag: "B",
   })
   await delay(animationTime)
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogTagC),
+    builder: wrapBuilder(dialogTagC),
     alignment: Alignment.End,
     tag: "C",
   })
   await delay(animationTime)
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogTagD),
+    builder: wrapBuilder(dialogTagD),
     alignment: Alignment.Bottom,
     tag: "D",
   })
   await delay(animationTime)
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogTagE),
+    builder: wrapBuilder(dialogTagE),
     alignment: Alignment.Center,
     tag: "E",
   })
@@ -104,5 +104,5 @@ function dialogTagE() {
           }
         })
     })
-  }.backgroundColor(randomColor()).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
+  }.backgroundColor(randomColor()).width(350).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
 }

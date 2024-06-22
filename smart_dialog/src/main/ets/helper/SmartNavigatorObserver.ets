@@ -1,4 +1,4 @@
-import { DialogProxy } from '../dialog_proxy/DialogProxy'
+import { dialogProxy, DialogProxy } from '../dialog_proxy/DialogProxy'
 
 export default class SmartNavigatorObserver implements NavigationInterception {
   private static defaultRouter: string = "index"
@@ -15,7 +15,7 @@ export default class SmartNavigatorObserver implements NavigationInterception {
 
     this.processPush(allPathName)
     this.processPop(allPathName)
-    this.refresh()
+    this.dialogVisible()
 
     this.lastAllPathName = JSON.parse(JSON.stringify(allPathName))
   }
@@ -41,13 +41,19 @@ export default class SmartNavigatorObserver implements NavigationInterception {
     if (this.lastAllPathName.length > 0) {
       popRouter = this.lastAllPathName[this.lastAllPathName.length -1]
     }
-    DialogProxy.instance.dialogProxyState.originDialogList.filter((item) => item.routerName !== popRouter)
+    dialogProxy.dialogList.filter((item) => {
+      let isAccess = item.routerName !== popRouter
+      if (!isAccess) {
+        item.remove()
+      }
+
+      return isAccess
+    })
   }
 
-  refresh() {
-    DialogProxy.instance.dialogProxyState.dialogList.forEach((item) => {
+  dialogVisible() {
+    dialogProxy.dialogList.forEach((item) => {
       item.visible = SmartNavigatorObserver.curRouter === item.routerName
     })
-    DialogProxy.instance.requestLayout()
   }
 }

@@ -5,27 +5,27 @@ import { delay } from '../../app/kit/function'
 export async function demoLocation() {
   const animationTime = 1000
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogLocationHorizontal),
+    builder: wrapBuilder(dialogLocationHorizontal),
     alignment: Alignment.Start,
   })
   await delay(animationTime)
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogLocationVertical),
+    builder: wrapBuilder(dialogLocationVertical),
     alignment: Alignment.Top,
   })
   await delay(animationTime)
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogLocationHorizontal),
+    builder: wrapBuilder(dialogLocationHorizontal),
     alignment: Alignment.End,
   })
   await delay(animationTime)
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogLocationVertical),
+    builder: wrapBuilder(dialogLocationVertical),
     alignment: Alignment.Bottom,
   })
   await delay(animationTime)
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogLocationCenter),
+    builder: wrapBuilder(dialogLocationCenter),
     alignment: Alignment.Center,
   })
 }
@@ -61,6 +61,7 @@ function dialogLocationCenter() {
     .width("30%")
     .height("30%")
     .fontSize(20)
+    .borderRadius(12)
     .fontColor(Color.White)
     .textAlign(TextAlign.Center)
     .padding(50)

@@ -1,3 +1,4 @@
+import { randomColor } from '../app/kit/Color'
 import { MainState } from './MainState'
 import { MainViewModel } from './MainViewModel'
 
@@ -15,7 +16,8 @@ struct MainPage {
     Flex({ wrap: FlexWrap.Wrap }) {
       ForEach(this.state.feature, (item: string) => {
         Button(item)
-          .backgroundColor(Color.Orange)
+          .backgroundColor(randomColor())
+          .constraintSize({ minWidth: 100 })
           .margin(5)
           .onClick(() => this.viewModel.showDialog(item))
       })
