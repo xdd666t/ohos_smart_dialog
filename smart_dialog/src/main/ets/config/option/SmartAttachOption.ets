@@ -1,12 +1,12 @@
-
-export class CustomDialogOption {
+export class SmartAttachOption {
+  targetId: string = ''
   builder?: WrappedBuilder<ESObject>
   builderArgs?: ESObject
   alignment?: Alignment
   animationTime?: number
   clickMaskDismiss?: boolean
   tag?: string
-  routerName?: string
+  maskColor?: ResourceColor
   maskBuilder?: WrappedBuilder<ESObject>
   onMask?: VoidCallback
 }

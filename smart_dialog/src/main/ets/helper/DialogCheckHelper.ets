@@ -1,4 +1,4 @@
-import { CheckExistOption } from '../config/model/CheckExistOption'
+import { CheckExistOption } from '../config/option/CheckExistOption'
 import { dialogProxy } from '../dialog_proxy/DialogProxy'
 
 export class DialogCheckHelper {

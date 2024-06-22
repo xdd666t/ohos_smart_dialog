@@ -1,9 +1,9 @@
-import { DialogModel } from '../config/model/DialogModel'
+import { BaseDialogModel } from '../config/model/BaseDialogModel'
 import { DialogProxy } from '../dialog_proxy/DialogProxy'
 
 @Component
 export struct MaskComponent {
-  item: DialogModel = new DialogModel()
+  item: BaseDialogModel = new BaseDialogModel()
 
   build() {
     Stack() {
@@ -13,8 +13,7 @@ export struct MaskComponent {
         Stack()
           .width('100%')
           .height('100%')
-          .backgroundColor(Color.Black)
-          .opacity(0.46)
+          .backgroundColor(this.item.maskColor)
       }
     }
     .width('100%')

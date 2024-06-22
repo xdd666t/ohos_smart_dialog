@@ -5,6 +5,7 @@ export class MainState {
     MainFeature.jumpPage,
     MainFeature.customMask,
     MainFeature.tag,
+    MainFeature.targetId,
   ]
 }
 
@@ -14,4 +15,5 @@ export class MainFeature {
   static jumpPage: string = "jumpPage"
   static customMask: string = "customMask"
   static tag: string = "tag"
+  static targetId: string = "targetId"
 }

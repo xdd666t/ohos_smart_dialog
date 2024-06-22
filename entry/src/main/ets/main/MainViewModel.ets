@@ -2,6 +2,7 @@ import { demoCustomMask } from './dialog/CustomMask'
 import { demoJumpPage } from './dialog/JumpPage'
 import { demoLocation } from './dialog/LocationDialog'
 import { demoTag } from './dialog/TagDialog'
+import { targetId } from './dialog/TargetId'
 import { demoUseArgs } from './dialog/UseArgs'
 import { MainFeature, MainState } from './MainState'
 
@@ -24,6 +25,8 @@ export class MainViewModel {
       demoCustomMask()
     } else if (item === MainFeature.tag) {
       demoTag()
+    } else if (item === MainFeature.targetId) {
+      targetId(item)
     }
   }
 }

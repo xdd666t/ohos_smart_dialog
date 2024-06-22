@@ -1,3 +1,11 @@
+# 1.2.0
+- 重构多弹窗刷新能力
+- breakChange
+  - wrapBuilder -> builder
+  - wrapBuilderArgs -> builderArgs
+  - maskWrapBuilder -> maskBuilder
+  - remove SmartDialogController
+
 # 1.1.3
 - 优化alignment参数
 
