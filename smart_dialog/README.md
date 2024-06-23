@@ -14,6 +14,16 @@
 
 但凡用过鸿蒙原生弹窗，就能体会到有多么难用和奇葩，我就不吐槽了！！！实在受不了，就把鸿蒙版的SmartDialog写出来了，由于鸿蒙api的设计和相关限制，用法和相关初始化都有一定程度的妥协。
 
+# 效果
+
+- Tablet模拟器目前有些问题，会导致动画闪烁，请忽略
+
+![attachLocation](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725613.gif)
+
+![customTag](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725522.gif)
+
+![customJumpPage](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725830.gif)
+
 # 安装
 
 - github：https://github.com/xdd666t/ohos_smart_dialog
@@ -39,9 +49,10 @@ struct Index {
     Stack() {
       // here: monitor router
       Navigation(OhosSmartDialog.registerRouter(this.navPathStack)) {
-        buildMainPage()
+        MainPage()
       }
       .mode(NavigationMode.Stack)
+        .hideTitleBar(true)
         .navDestination(pageMap)
 
       // here
@@ -53,61 +64,63 @@ struct Index {
 
 > **返回事件监听**
 
-别问我为啥返回事件的监听，处理的这么不优雅，鸿蒙里面没找全局返回事件监听，我也没辙。。。
+别怪我为啥返回事件的监听，处理的这么麻烦，鸿蒙里面没找全局返回事件监听，我也没办法呀。。。
 
-- 如果你无需处理返回事件，可以使用下述写法
+- Entry页面处理
 
 ```typescript
-// Entry页面处理
 @Entry
 @Component
 struct Index {
-  onBackPress(): boolean | void {
-    return OhosSmartDialog.onBackPressed()()
+  build() {
+    // ....
   }
-}
 
-// 路由子页面
+  // here
+  onBackPress(): boolean | void {
+    if (OhosSmartDialog.onBackPressed()) {
+    return true
+  }
+  return false
+}
+}
+```
+
+- 路由子页面：如果你也需要处理返回事件，请参照Entry页面中的处理
+
+```typescript
+@Component
 struct JumpPage {
   build() {
     NavDestination() {
-      // ....
+      Stack()
     }
-    .onBackPressed(OhosSmartDialog.onBackPressed())
+    .hideTitleBar(true)
+      // here
+      .onBackPressed(OhosSmartDialog.onBackPressed)
   }
 }
 ```
 
-- 如果你需要处理返回事件，在OhosSmartDialog.onBackPressed()中传入你的方法即可
+# SmartConfig
+
+- 支持全局配置弹窗的默认属性
 
 ```typescript
-// Entry页面处理
-@Entry
-@Component
-struct Index {
-  onBackPress(): boolean | void {
-    return OhosSmartDialog.onBackPressed(this.onCustomBackPress)()
-  }
+function init() {
+  // show
+  SmartDialog.config.custom.maskColor = "#75000000"
+  SmartDialog.config.custom.alignment = Alignment.Center
 
-  onCustomBackPress(): boolean {
-    return false
-  }
+  // showAttach
+  SmartDialog.config.attach.attachAlignmentType = SmartAttachAlignmentType.center
 }
+```
 
-// 路由子页面
-@Component
-struct JumpPage {
-  build() {
-    NavDestination() {
-      // ...
-    }
-    .onBackPressed(OhosSmartDialog.onBackPressed(this.onCustomBackPress))
-  }
+- 检查弹窗是否存在
 
-  onCustomBackPress(): boolean {
-    return false
-  }
-}
+```typescript
+let isExist = SmartDialog.config.checkExist()
 ```
 
 # 使用
@@ -123,56 +136,136 @@ export function randomColor(): string {
   }
   return color;
 }
-
-export function delay(ms?: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 ```
 
 ## 传参弹窗
 
 ```typescript
-export function demoUseArgs() {
+export function customUseArgs() {
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogArgs),
-    wrapBuilderArgs: { msg: Math.random().toString() } as ArgsModel
+    builder: wrapBuilder(dialogArgs),
+    builderArgs: { num: Math.random() } as ArgsModel,
   })
 }
 
 @Builder
 function dialogArgs(args: ArgsModel) {
-  Text(args.msg)
+  Text(args.num.toString())
     .fontSize(20)
     .fontColor(Color.White)
     .textAlign(TextAlign.Center)
     .padding(50)
     .margin(50)
+    .borderRadius(12)
     .backgroundColor(randomColor())
 }
 
 class ArgsModel {
-  msg: string = ""
+  num: number = 0
+}
+```
+
+## 定位弹窗
+
+```typescript
+export function attachLocation() {
+  SmartDialog.show({
+    builder: wrapBuilder(dialog)
+  })
+}
+
+class AttachLocation {
+  title: string = ""
+  alignment?: Alignment
+}
+
+const locationList: Array<AttachLocation> = [
+  { title: "TopStart", alignment: Alignment.TopStart },
+  { title: "Top", alignment: Alignment.Top },
+  { title: "TopEnd", alignment: Alignment.TopEnd },
+  { title: "Start", alignment: Alignment.Start },
+  { title: "Center", alignment: Alignment.Center },
+  { title: "End", alignment: Alignment.End },
+  { title: "BottomStart", alignment: Alignment.BottomStart },
+  { title: "Bottom", alignment: Alignment.Bottom },
+  { title: "BottomEnd", alignment: Alignment.BottomEnd },
+]
+
+@Builder
+function dialog() {
+  Column() {
+    Grid() {
+      ForEach(locationList, (item: AttachLocation) => {
+        GridItem() {
+          buildButton(item.title, () => {
+            SmartDialog.showAttach({
+              targetId: item.title,
+              alignment: item.alignment,
+              maskColor: Color.Transparent,
+              builder: wrapBuilder(targetLocationDialog)
+            })
+          })
+        }
+      })
+    }.columnsTemplate('1fr 1fr 1fr').height(220)
+
+    buildButton("allOpen", async () => {
+      for (let index = 0; index < locationList.length; index++) {
+        let item = locationList[index]
+        SmartDialog.showAttach({
+          targetId: item.title,
+          alignment: item.alignment,
+          maskColor: Color.Transparent,
+          builder: wrapBuilder(targetLocationDialog),
+        })
+        await delay(300)
+      }
+    }, randomColor())
+  }
+  .borderRadius(12)
+    .width(700)
+    .padding(30)
+    .backgroundColor(Color.White)
+}
+
+@Builder
+function buildButton(title: string, onClick?: VoidCallback, bgColor?: ResourceColor) {
+  Text(title)
+    .backgroundColor(bgColor ?? "#4169E1")
+    .constraintSize({ minWidth: 120, minHeight: 46 })
+    .margin(10)
+    .textAlign(TextAlign.Center)
+    .fontColor(Color.White)
+    .borderRadius(5)
+    .onClick(onClick)
+    .id(title)
+}
+
+@Builder
+function targetLocationDialog() {
+  Text("targetIdDialog")
+    .fontSize(20)
+    .fontColor(Color.White)
+    .textAlign(TextAlign.Center)
+    .padding(50)
+    .borderRadius(12)
+    .backgroundColor(randomColor())
 }
 ```
 
 ## 多位置弹窗
 
 ```typescript
-export async function demoLocation() {
+export async function customLocation() {
   const animationTime = 1000
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogLocationHorizontal),
+    builder: wrapBuilder(dialogLocationHorizontal),
     alignment: Alignment.End,
   })
   await delay(animationTime)
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogLocationVertical),
+    builder: wrapBuilder(dialogLocationVertical),
     alignment: Alignment.Bottom,
-  })
-  await delay(animationTime)
-  SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogLocationCenter),
-    alignment: Alignment.Center,
   })
 }
 
@@ -200,34 +293,22 @@ function dialogLocationHorizontal() {
     .padding(50)
     .backgroundColor(randomColor())
 }
-
-@Builder
-function dialogLocationCenter() {
-  Text("location")
-    .width("30%")
-    .height("30%")
-    .fontSize(20)
-    .fontColor(Color.White)
-    .textAlign(TextAlign.Center)
-    .padding(50)
-    .backgroundColor(randomColor())
-}
 ```
 
 ## 关闭指定弹窗
 
 ```typescript
-export async function demoTag() {
+export async function customTag() {
   const animationTime = 1000
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogTagA),
+    builder: wrapBuilder(dialogTagA),
     alignment: Alignment.Start,
     tag: "A",
   })
   await delay(animationTime)
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogTagB),
-    alignment: Alignment.Top,
+    builder: wrapBuilder(dialogTagB),
+    alignment: Alignment.Center,
     tag: "B",
   })
 }
@@ -249,7 +330,7 @@ function dialogTagB() {
   Flex({ wrap: FlexWrap.Wrap }) {
     ForEach(["closA", "closeSelf"], (item: string, index: number) => {
       Button(item)
-        .backgroundColor(Color.Orange)
+        .backgroundColor("#4169E1")
         .margin(10)
         .onClick(() => {
           if (index === 0) {
@@ -259,17 +340,17 @@ function dialogTagB() {
           }
         })
     })
-  }.backgroundColor(Color.Blue).margin({ left: 30, right: 30 })
+  }.backgroundColor(Color.White).width(350).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
 }
 ```
 
 ## 自定义遮罩
 
 ```typescript
-export function demoCustomMask() {
+export function customMask() {
   SmartDialog.show({
-    wrapBuilder: wrapBuilder(dialogShowDialog),
-    maskWrapBuild: wrapBuilder(dialogCustomMask),
+    builder: wrapBuilder(dialogShowDialog),
+    maskBuilder: wrapBuilder(dialogCustomMask),
   })
 }
 
@@ -283,10 +364,10 @@ function dialogShowDialog() {
   Text("showDialog")
     .fontSize(30)
     .padding(50)
+    .fontColor(Color.White)
+    .borderRadius(12)
     .backgroundColor(randomColor())
-    .onClick(() => {
-      SmartDialog.show({ wrapBuilder: wrapBuilder(dialogShowDialog) })
-    })
+    .onClick(() => customMask())
 }
 ```
 

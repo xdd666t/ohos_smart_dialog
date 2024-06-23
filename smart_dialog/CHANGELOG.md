@@ -4,6 +4,7 @@
   - 完善attach弹窗基础动画
   - attach弹窗(showAttach)能力, 对其custom弹窗(show)
 - 重构多弹窗刷新能力
+- 优化tag探寻弹窗能力
 - breakChange
   - wrapBuilder -> builder
   - wrapBuilderArgs -> builderArgs

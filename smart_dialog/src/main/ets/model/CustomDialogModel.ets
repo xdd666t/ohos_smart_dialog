@@ -1,4 +1,4 @@
-import { alignmentAnimation } from '../../helper/AlignmentHelper'
+import { alignmentAnimation } from '../helper/AlignmentHelper'
 import { BaseDialogModel } from './BaseDialogModel'
 
 @ObservedV2

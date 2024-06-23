@@ -1,3 +1,82 @@
+/// dialog type
+// export enum SmartAllDialogType {
+//   /// custom dialog（show）
+//   custom,
+//
+//   /// attach dialog（showAttach）
+//   attach,
+//
+//   /// notify dialog（showNotify）
+//   notify,
+//
+//   /// loading（showLoading）
+//   loading,
+//
+//   /// toast（showToast）
+//   toast,
+// }
+
+// enum SmartCloseType {
+//   /// close single dialog：loading（showToast），custom（show）or attach（showAttach）
+//   ///
+//   /// 关闭单个dialog：loading（showLoading），custom（show）或 attach（showAttach）
+//   smart,
+//
+//   /// close toast（showToast）
+//   ///
+//   /// 关闭toast（showToast）
+//   toast,
+//
+//   /// close all toasts（showToast）
+//   ///
+//   /// 关闭所有toast（showToast）
+//   allToast,
+//
+//   /// close loading（showLoading）
+//   ///
+//   /// 关闭loading（showLoading）
+//   loading,
+//
+//   /// close single custom dialog（show）
+//   ///
+//   /// 关闭单个custom dialog（show）
+//   custom,
+//
+//   /// close single attach dialog（showAttach）
+//   ///
+//   /// 关闭单个attach dialog（showAttach）
+//   attach,
+//
+//   /// close single dialog（attach or custom）
+//   ///
+//   /// 关闭单个dialog（attach或custom）
+//   dialog,
+//
+//   /// close single notify
+//   ///
+//   /// 关闭单个notify
+//   notify,
+//
+//   /// close all custom dialog, but not close toast,loading and attach dialog
+//   ///
+//   /// 关闭打开的所有custom dialog，但是不关闭toast，loading和attach dialog
+//   allCustom,
+//
+//   /// close all attach dialog, but not close toast,loading and custom dialog
+//   ///
+//   /// 关闭打开的所有attach dialog，但是不关闭toast，loading和custom dialog
+//   allAttach,
+//
+//   /// close all dialog（attach and custom）, but not close toast and loading
+//   ///
+//   /// 关闭打开的所有dialog（attach和custom），但是不关闭toast和loading
+//   allDialog,
+//
+//   /// close all notify
+//   ///
+//   /// 关闭打开的所有notify
+//   allNotify,
+// }
 
 /// attach dialog选择不同alignment属性时的对齐效果
 export enum SmartAttachAlignmentType {

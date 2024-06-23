@@ -1,11 +1,11 @@
 import { DialogNodeController } from '../component/DialogNodeController'
-import { SmartDismissOption } from '../config/option/SmartDismissOption'
-import { BaseDialogModel } from '../config/model/BaseDialogModel'
-import { CustomDialogModel } from '../config/model/CustomDialogModel'
-import { SmartCustomOption } from '../config/option/SmartCustomOption'
+import { SmartDismissOption } from '../model/option/SmartDismissOption'
+import { BaseDialogModel } from '../model/BaseDialogModel'
+import { CustomDialogModel } from '../model/CustomDialogModel'
+import { SmartCustomOption } from '../model/option/SmartCustomOption'
 import SmartNavigatorObserver from '../helper/SmartNavigatorObserver'
-import { SmartAttachOption } from '../config/option/SmartAttachOption'
-import { AttachDialogModel } from '../config/model/AttachDialogModel'
+import { SmartAttachOption } from '../model/option/SmartAttachOption'
+import { AttachDialogModel } from '../model/AttachDialogModel'
 
 export class DialogProxy {
   private static _instance?: DialogProxy
@@ -57,7 +57,7 @@ export class DialogProxy {
   async dismiss(option?: SmartDismissOption): Promise<void> {
     let dialog = this.findDialog(option?.tag)
     if (!dialog) {
-      if (this.nodeController.rootNode?.getFirstChild()?.getFirstChild()) {
+      if (this.dialogList.length === 0 && this.nodeController.rootNode?.getFirstChild()?.getFirstChild()) {
         this.nodeController.rootNode?.clearChildren()
       }
       return
@@ -67,19 +67,22 @@ export class DialogProxy {
     this.dialogList = this.dialogList.filter((item) => item.tag !== dialog?.tag)
   }
 
-  private findDialog(tag?: string): BaseDialogModel | undefined {
+  findDialog(tag?: string): BaseDialogModel | undefined {
     let dialogList = this.dialogList
     if (dialogList.length === 0) {
       return
     }
 
     if (tag) {
-      for (let index = 0; index < dialogList.length; index++) {
+      let dialogInfo: BaseDialogModel | undefined = undefined
+      for (let index = dialogList.length - 1; index >= 0; index--) {
         let item = dialogList[index]
         if (item.tag === tag) {
-          return item
+          dialogInfo = item
+          break;
         }
       }
+      return dialogInfo
     }
 
     return dialogList[dialogList.length - 1]

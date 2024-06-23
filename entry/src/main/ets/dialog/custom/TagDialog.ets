@@ -88,7 +88,7 @@ function dialogTagE() {
   Flex({ wrap: FlexWrap.Wrap }) {
     ForEach(["closA", "closeB", "closeC", "closeD", "closeSelf"], (item: string, index: number) => {
       Button(item)
-        .backgroundColor(Color.Orange)
+        .backgroundColor("#4169E1")
         .margin(10)
         .onClick(() => {
           if (index === 0) {
@@ -104,5 +104,5 @@ function dialogTagE() {
           }
         })
     })
-  }.backgroundColor(randomColor()).width(350).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
+  }.backgroundColor(Color.White).width(350).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
 }

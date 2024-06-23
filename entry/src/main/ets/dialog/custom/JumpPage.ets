@@ -14,6 +14,7 @@ function dialogJumpPage() {
     .fontSize(30)
     .padding(50)
     .borderRadius(12)
+    .fontColor(Color.White)
     .backgroundColor(randomColor())
     .onClick(() => {
       RouterHelper.stack.pushPath(RouterHelper.navPathInfo(PageName.jumpPage))

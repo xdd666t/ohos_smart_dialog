@@ -1,9 +1,9 @@
 import { SmartConfig } from './config/SmartConfig'
 import { DialogProxy } from './dialog_proxy/DialogProxy'
 import { randomTag } from './kit/function'
-import { SmartDismissOption } from './config/option/SmartDismissOption'
-import { SmartCustomOption } from './config/option/SmartCustomOption'
-import { SmartAttachOption } from './config/option/SmartAttachOption'
+import { SmartDismissOption } from './model/option/SmartDismissOption'
+import { SmartCustomOption } from './model/option/SmartCustomOption'
+import { SmartAttachOption } from './model/option/SmartAttachOption'
 
 export class SmartDialog {
   static readonly config: SmartConfig = new SmartConfig()

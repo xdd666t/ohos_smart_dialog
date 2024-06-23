@@ -6,6 +6,7 @@ export function dialogShowDialog() {
   Text("showDialog")
     .fontSize(30)
     .padding(50)
+    .fontColor(Color.White)
     .backgroundColor(randomColor())
     .onClick(() => {
       SmartDialog.show({

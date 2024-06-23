@@ -1,7 +1,7 @@
 import { BaseDialogModel } from './BaseDialogModel'
 import { componentUtils, display, Offset } from '@kit.ArkUI'
-import { SmartDialog } from '../../SmartDialog'
-import { SmartAttachAlignmentType } from '../EnumConfig'
+import { SmartDialog } from '../SmartDialog'
+import { SmartAttachAlignmentType } from '../config/EnumConfig'
 
 @ObservedV2
 export class AttachDialogModel extends BaseDialogModel {

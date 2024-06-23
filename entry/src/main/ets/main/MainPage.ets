@@ -13,12 +13,15 @@ export struct MainPage {
         TabContent() {
           Flex({ wrap: FlexWrap.Wrap }) {
             ForEach(item.items, (subItem: FeatureItemModel) => {
-              Button(subItem.title)
+              Text(subItem.title)
                 .backgroundColor("#4169E1")
-                .constraintSize({ minWidth: 100 })
-                .margin(5)
+                .constraintSize({ minWidth: 100, minHeight: 46 })
+                .margin(10)
+                .padding(8)
+                .textAlign(TextAlign.Center)
+                .fontColor(Color.White)
+                .borderRadius(8)
                 .onClick(() => this.viewModel.showDialog(subItem.title))
-                .id(subItem.title)
             })
           }.width("100%").height("100%").padding(30).margin({ top: 30 })
         }

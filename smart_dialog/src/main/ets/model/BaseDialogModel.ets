@@ -1,6 +1,6 @@
-import { delay } from '../../kit/function'
+import { delay } from '../kit/function'
 import { BuilderNode } from '@kit.ArkUI'
-import { DialogProxy } from '../../dialog_proxy/DialogProxy'
+import { DialogProxy } from '../dialog_proxy/DialogProxy'
 
 @ObservedV2
 class AnimationModel {

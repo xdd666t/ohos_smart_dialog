@@ -1,7 +1,7 @@
 import { BuilderNode, FrameNode, NodeController } from '@kit.ArkUI'
-import { AttachDialogModel } from '../config/model/AttachDialogModel'
-import { BaseDialogModel } from '../config/model/BaseDialogModel'
-import { CustomDialogModel } from '../config/model/CustomDialogModel'
+import { AttachDialogModel } from '../model/AttachDialogModel'
+import { BaseDialogModel } from '../model/BaseDialogModel'
+import { CustomDialogModel } from '../model/CustomDialogModel'
 import { AttachDialogComponent } from './AttachDialogComponent'
 import { CustomDialogComponent } from './CustomDialogComponent'
 

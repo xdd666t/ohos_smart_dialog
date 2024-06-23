@@ -1,4 +1,4 @@
-import { BaseDialogModel } from '../config/model/BaseDialogModel'
+import { BaseDialogModel } from '../model/BaseDialogModel'
 import { DialogProxy } from '../dialog_proxy/DialogProxy'
 
 @Component

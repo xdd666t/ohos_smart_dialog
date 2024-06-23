@@ -1,4 +1,4 @@
-import { AttachDialogModel } from '../config/model/AttachDialogModel';
+import { AttachDialogModel } from '../model/AttachDialogModel';
 import { randomTag } from '../kit/function';
 
 

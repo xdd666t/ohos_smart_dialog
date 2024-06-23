@@ -19,6 +19,7 @@ function dialogShowDialog() {
   Text("showDialog")
     .fontSize(30)
     .padding(50)
+    .fontColor(Color.White)
     .borderRadius(12)
     .backgroundColor(randomColor())
     .onClick(() => customMask())

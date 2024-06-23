@@ -1,5 +1,5 @@
 import { DialogCheckHelper } from '../helper/DialogCheckHelper'
-import { CheckExistOption } from './option/CheckExistOption'
+import { CheckExistOption } from '../model/option/CheckExistOption'
 import { SmartConfigAttach } from './SmartConfigAttach'
 import { SmartConfigCustom } from './SmartConfigCustom'
 

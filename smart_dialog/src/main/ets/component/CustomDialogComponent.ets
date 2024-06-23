@@ -1,4 +1,4 @@
-import { CustomDialogModel } from '../config/model/CustomDialogModel'
+import { CustomDialogModel } from '../model/CustomDialogModel'
 
 @Component
 export struct CustomDialogComponent {

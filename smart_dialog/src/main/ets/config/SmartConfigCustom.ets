@@ -1,4 +1,7 @@
 export class SmartConfigCustom {
+  constructor() {
+  }
+
   alignment: Alignment = Alignment.Center
   animationTime: number = 200
   clickMaskDismiss: boolean = true

@@ -1,4 +1,4 @@
-import { attachLocation } from '../dialog/attach/TargetId'
+import { attachLocation } from '../dialog/attach/Location'
 import { customMask } from '../dialog/custom/CustomMask'
 import { customJumpPage } from '../dialog/custom/JumpPage'
 import { customLocation } from '../dialog/custom/LocationDialog'
@@ -25,7 +25,7 @@ export class MainViewModel {
     } else if (item === MainFeature.customTag) {
       customTag()
     } else if (item === MainFeature.attachLocation) {
-      attachLocation(item)
+      attachLocation()
     }
   }
 }

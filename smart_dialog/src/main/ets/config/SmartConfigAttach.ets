@@ -1,6 +1,9 @@
 import { SmartAttachAlignmentType } from './EnumConfig'
 
 export class SmartConfigAttach {
+  constructor() {
+  }
+
   alignment: Alignment = Alignment.Bottom
   animationTime: number = 200
   clickMaskDismiss: boolean = true
