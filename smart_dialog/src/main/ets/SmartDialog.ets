@@ -8,6 +8,25 @@ import { SmartAttachOption } from './model/option/SmartAttachOption'
 export class SmartDialog {
   static readonly config: SmartConfig = new SmartConfig()
 
+  /// custom弹窗
+  ///
+  /// [builder]：自定义 dialog
+  ///
+  /// [builderArgs]：传参
+  ///
+  /// [alignment]：控制弹窗的位置, 详细请参照[SmartConfigCustom]中alignment参数说明
+  ///
+  /// [animationTime]：动画持续时间
+  ///
+  /// [maskColor]：遮罩颜色，如果给[maskWidget]设置了值，该参数将会失效
+  ///
+  /// [maskBuilder]：可高度定制遮罩
+  ///
+  /// [clickMaskDismiss]：true（点击遮罩后，将关闭dialog），false（不关闭）
+  ///
+  /// [onMask]：点击遮罩时，该回调将会被触发
+  ///
+  /// [tag]：如果你给dialog设置了tag, 你可以针对性的关闭它
   static show(option: SmartCustomOption) {
     DialogProxy.instance.show({
       builder: option.builder,
@@ -22,6 +41,27 @@ export class SmartDialog {
     })
   }
 
+  /// attach弹窗
+  ///
+  /// [targetId]: 你需要定位的component的id
+  ///
+  /// [builder]：自定义 dialog
+  ///
+  /// [builderArgs]：传参
+  ///
+  /// [alignment]：控制弹窗的位置, 详细请参照[SmartConfigCustom]中alignment参数说明
+  ///
+  /// [animationTime]：动画持续时间
+  ///
+  /// [maskColor]：遮罩颜色，如果给[maskWidget]设置了值，该参数将会失效
+  ///
+  /// [maskBuilder]：可高度定制遮罩
+  ///
+  /// [clickMaskDismiss]：true（点击遮罩后，将关闭dialog），false（不关闭）
+  ///
+  /// [onMask]：点击遮罩时，该回调将会被触发
+  ///
+  /// [tag]：如果你给dialog设置了tag, 你可以针对性的关闭它
   static showAttach(option: SmartAttachOption) {
     DialogProxy.instance.showAttach({
       targetId: option.targetId,
@@ -37,6 +77,9 @@ export class SmartDialog {
     })
   }
 
+  /// 关闭dialog
+  ///
+  /// [tag]：如果你想关闭指定的dialog，你可以给它设置一个tag
   static async dismiss(option?: SmartDismissOption): Promise<void> {
     return DialogProxy.instance.dismiss(option)
   }
