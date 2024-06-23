@@ -4,7 +4,9 @@ import { DialogProxy } from '../../dialog_proxy/DialogProxy'
 
 @ObservedV2
 class AnimationModel {
-  @Trace maskOpacity: number = 1
+  @Trace maskOpacity: number = 0
+  @Trace dialogHeight: Length | undefined = undefined
+  @Trace dialogWidth: Length | undefined = undefined
   @Trace dialogScale: number = 1
   @Trace dialogOpacity: number = 1
   @Trace dialogPosition?: Edges
@@ -26,22 +28,23 @@ export class BaseDialogModel {
   onMask?: VoidCallback
   builderNode?: BuilderNode<[ESObject]> | null = null
 
-  initAnimationStatus(selfId?: string) {
+  initAnimationStatus() {
     const animation = this.animation
     animation.maskOpacity = 0
   }
 
   async startAnimation(): Promise<void> {
+    animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
+      this.animation.maskOpacity = 1
+    })
     await delay(this.animationTime)
   }
 
   async endAnimation(): Promise<void> {
-    const animationTime = this.animationTime
-    animateTo({ duration: animationTime, curve: Curve.Linear }, () => {
-      this.initAnimationStatus()
+    animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
+      this.animation.maskOpacity = 0
     })
-
-    await delay(animationTime)
+    await delay(this.animationTime)
   }
 
   async dismiss(): Promise<void> {

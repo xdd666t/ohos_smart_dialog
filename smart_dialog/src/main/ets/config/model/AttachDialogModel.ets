@@ -2,18 +2,24 @@ import { BaseDialogModel } from './BaseDialogModel'
 import { componentUtils, display, Offset } from '@kit.ArkUI'
 import { SmartDialog } from '../../SmartDialog'
 import { SmartAttachAlignmentType } from '../EnumConfig'
-import { delay } from '../../kit/function'
 
 @ObservedV2
 export class AttachDialogModel extends BaseDialogModel {
   targetId: string = ''
   private attachInfo = new AttachInfo()
 
+  constructor() {
+    super()
+    this.animation.dialogOpacity = 0
+    this.animation.dialogScale = 1
+    this.animation.dialogPosition = undefined
+  }
+
   initAnimationStatus(selfId?: string): void {
+    const animation = this.animation
     const attachInfo = this.attachInfo
     attachInfo.targetInfo = componentUtils.getRectangleById(this.targetId)
     attachInfo.selfInfo = componentUtils.getRectangleById(selfId ?? '')
-    const animation = this.animation
 
     let targetRect = this.handleLocation()
     animation.dialogPosition = {
@@ -22,19 +28,26 @@ export class AttachDialogModel extends BaseDialogModel {
       right: px2vp(targetRect.right),
       bottom: px2vp(targetRect.bottom),
     } as Edges
-    animation.dialogOpacity = 0
-
     super.initAnimationStatus()
+
+    this.startAnimation()
   }
 
   async startAnimation(): Promise<void> {
-    await delay(0.1)
     const animation = this.animation
     animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
       animation.dialogOpacity = 1
     })
 
     return super.startAnimation()
+  }
+
+  endAnimation(): Promise<void> {
+    animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
+      this.animation.dialogOpacity = 0
+    })
+
+    return super.endAnimation()
   }
 
   /// 处理: 方向及其位置

@@ -55,4 +55,11 @@ export class CustomDialogModel extends BaseDialogModel {
     })
     return super.startAnimation()
   }
+
+  endAnimation(): Promise<void> {
+    animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
+      this.initAnimationStatus()
+    })
+    return super.endAnimation()
+  }
 }
