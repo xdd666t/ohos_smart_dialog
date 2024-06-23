@@ -1,6 +1,6 @@
 import { OhosSmartDialog } from 'ohos_smart_dialog/';
 import { pageMap, RouterHelper } from './app/helper/RouterHelper';
-import { buildMainPage } from './main/MainPage';
+import { MainPage } from './main/MainPage';
 
 @Entry
 @Component
@@ -9,9 +9,10 @@ struct Index {
     Stack() {
       // here: monitor router
       Navigation(OhosSmartDialog.registerRouter(RouterHelper.stack)) {
-        buildMainPage()
+        MainPage()
       }
       .mode(NavigationMode.Stack)
+      .hideTitleBar(true)
       .navDestination(pageMap)
 
       // here: init dialog

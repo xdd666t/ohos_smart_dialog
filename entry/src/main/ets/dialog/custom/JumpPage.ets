@@ -2,7 +2,7 @@ import { SmartDialog } from 'ohos_smart_dialog'
 import { PageName, RouterHelper } from '../../app/helper/RouterHelper'
 import { randomColor } from '../../app/kit/Color'
 
-export function demoJumpPage() {
+export function customJumpPage() {
   SmartDialog.show({
     builder: wrapBuilder(dialogJumpPage),
   })

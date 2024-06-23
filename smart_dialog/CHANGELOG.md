@@ -1,4 +1,8 @@
 # 1.2.0
+- 重大更新
+  - 增加showAttach弹窗, 可以定位至component具体位置处显示
+  - 完善attach弹窗基础动画
+  - attach弹窗(showAttach)能力, 对其custom弹窗(show)
 - 重构多弹窗刷新能力
 - breakChange
   - wrapBuilder -> builder

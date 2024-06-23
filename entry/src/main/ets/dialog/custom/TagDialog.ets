@@ -2,7 +2,7 @@ import { SmartDialog } from 'ohos_smart_dialog'
 import { randomColor } from '../../app/kit/Color'
 import { delay } from '../../app/kit/function'
 
-export async function demoTag() {
+export async function customTag() {
   const animationTime = 1000
   SmartDialog.show({
     builder: wrapBuilder(dialogTagA),

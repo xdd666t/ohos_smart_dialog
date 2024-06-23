@@ -1,6 +1,6 @@
 import { OhosSmartDialog, SmartDialog } from 'ohos_smart_dialog'
 import { randomColor } from '../app/kit/Color'
-import { dialogShowDialog } from '../main/dialog/ShowDialog'
+import { dialogShowDialog } from '../dialog/custom/ShowDialog'
 
 @Builder
 export function buildJumPage() {

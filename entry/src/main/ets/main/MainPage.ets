@@ -1,28 +1,41 @@
-import { randomColor } from '../app/kit/Color'
-import { MainState } from './MainState'
+import { FeatureItemModel, FeatureTreeModel, MainState } from './MainState'
 import { MainViewModel } from './MainViewModel'
 
-@Builder
-export function buildMainPage() {
-  MainPage()
-}
 
 @Component
-struct MainPage {
-  state = new MainState()
+export struct MainPage {
+  @State state: MainState = new MainState()
   viewModel = new MainViewModel(this.state)
 
   build() {
-    Flex({ wrap: FlexWrap.Wrap }) {
-      ForEach(this.state.feature, (item: string) => {
-        Button(item)
-          .backgroundColor("#4169E1")
-          .constraintSize({ minWidth: 100 })
-          .margin(5)
-          .onClick(() => this.viewModel.showDialog(item))
-          .id(item)
+    Tabs({ barPosition: BarPosition.End, controller: this.state.tabsController }) {
+      ForEach(this.state.treeList, (item: FeatureTreeModel, index: number) => {
+        TabContent() {
+          Flex({ wrap: FlexWrap.Wrap }) {
+            ForEach(item.items, (subItem: FeatureItemModel) => {
+              Button(subItem.title)
+                .backgroundColor("#4169E1")
+                .constraintSize({ minWidth: 100 })
+                .margin(5)
+                .onClick(() => this.viewModel.showDialog(subItem.title))
+                .id(subItem.title)
+            })
+          }.width("100%").height("100%").padding(30).margin({ top: 30 })
+        }
+        .tabBar(this.tabBuilder(item.title, index))
+        .onWillShow(() => this.state.currentIndex = index)
       })
-    }.width("100%").height("100%").padding(30).margin({ top: 30 })
+    }.barHeight(100)
+  }
+
+  @Builder
+  tabBuilder(title: string, targetIndex: number) {
+    Text(title)
+      .fontColor(this.state.currentIndex === targetIndex ? '#4169E1' : Color.Black)
+      .onClick(() => {
+        this.state.currentIndex = targetIndex;
+        this.state.tabsController.changeIndex(this.state.currentIndex);
+      })
   }
 }
 

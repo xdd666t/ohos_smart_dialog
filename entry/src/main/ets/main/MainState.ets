@@ -1,19 +1,44 @@
 export class MainState {
-  feature: Array<string> = [
-    MainFeature.useArgs,
-    MainFeature.location,
-    MainFeature.jumpPage,
-    MainFeature.customMask,
-    MainFeature.tag,
-    MainFeature.targetId,
+  @Track tabsController: TabsController = new TabsController()
+  @Track currentIndex: number = 0
+  @Track treeList: Array<FeatureTreeModel> = [
+    {
+      title: "show",
+      items: [
+        { title: MainFeature.customUseArgs },
+        { title: MainFeature.customLocation },
+        { title: MainFeature.customJumpPage },
+        { title: MainFeature.customMask },
+        { title: MainFeature.customTag },
+      ]
+    },
+    {
+      title: "showAttach",
+      items: [
+        { title: MainFeature.attachLocation },
+      ]
+    },
   ]
 }
 
+
 export class MainFeature {
-  static useArgs: string = "useArgs"
-  static location: string = "location"
-  static jumpPage: string = "jumpPage"
+  // show
+  static customUseArgs: string = "customUseArgs"
+  static customLocation: string = "customLocation"
+  static customJumpPage: string = "customJumpPage"
   static customMask: string = "customMask"
-  static tag: string = "tag"
-  static targetId: string = "targetId"
+  static customTag: string = "customTag"
+  // attach
+  static attachLocation: string = "attachLocation"
+}
+
+
+export class FeatureTreeModel {
+  title: string = ""
+  items: Array<FeatureItemModel> = []
+}
+
+export class FeatureItemModel {
+  title: string = ""
 }

@@ -2,7 +2,7 @@ import { SmartDialog } from 'ohos_smart_dialog'
 import { randomColor } from '../../app/kit/Color'
 
 
-export function demoCustomMask() {
+export function customMask() {
   SmartDialog.show({
     builder: wrapBuilder(dialogShowDialog),
     maskBuilder: wrapBuilder(dialogCustomMask),
@@ -21,6 +21,6 @@ function dialogShowDialog() {
     .padding(50)
     .borderRadius(12)
     .backgroundColor(randomColor())
-    .onClick(() => demoCustomMask())
+    .onClick(() => customMask())
 }
 
