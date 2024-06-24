@@ -1,11 +1,13 @@
+import { SmartBuilder } from '../../kit/function'
+
 export class SmartCustomOption {
-  builder?: WrappedBuilder<ESObject>
+  builder?: SmartBuilder
   builderArgs?: ESObject
   alignment?: Alignment
   animationTime?: number
   clickMaskDismiss?: boolean
   tag?: string
   maskColor?: ResourceColor
-  maskBuilder?: WrappedBuilder<ESObject>
+  maskBuilder?: SmartBuilder
   onMask?: VoidCallback
 }

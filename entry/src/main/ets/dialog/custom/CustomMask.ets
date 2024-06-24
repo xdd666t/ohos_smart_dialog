@@ -4,8 +4,8 @@ import { randomColor } from '../../app/kit/Color'
 
 export function customMask() {
   SmartDialog.show({
-    builder: wrapBuilder(dialogShowDialog),
-    maskBuilder: wrapBuilder(dialogCustomMask),
+    builder: dialogShowDialog,
+    maskBuilder: dialogCustomMask,
   })
 }
 

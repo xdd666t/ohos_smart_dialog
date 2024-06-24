@@ -12,7 +12,7 @@ struct JumpPage {
   build() {
     NavDestination() {
       Stack() {
-        Button("JumpPage")
+        Button("showDialog")
           .backgroundColor(Color.Orange)
           .onClick(() => this.showDialog())
       }.width("100%").height("100%").backgroundColor(randomColor())
@@ -23,7 +23,7 @@ struct JumpPage {
 
   showDialog() {
     SmartDialog.show({
-      builder: wrapBuilder(dialogShowDialog)
+      builder: dialogShowDialog
     })
   }
 }

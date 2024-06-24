@@ -1,7 +1,9 @@
+import { SmartBuilder } from '../kit/function'
 import { CustomDialogModel } from '../model/CustomDialogModel'
 
 @Component
 export struct CustomDialogComponent {
+  @BuilderParam builder?: SmartBuilder
   item: CustomDialogModel = new CustomDialogModel()
 
   aboutToAppear(): void {
@@ -10,7 +12,7 @@ export struct CustomDialogComponent {
 
   build() {
     Stack() {
-      this.item.builder?.builder(this.item.builderArgs)
+      this.builder?.(this.item.builderArgs)
     }
     .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
     .position(this.item.animation.dialogPosition)

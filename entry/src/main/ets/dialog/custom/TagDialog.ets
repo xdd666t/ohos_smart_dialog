@@ -5,31 +5,31 @@ import { delay } from '../../app/kit/function'
 export async function customTag() {
   const animationTime = 1000
   SmartDialog.show({
-    builder: wrapBuilder(dialogTagA),
+    builder: dialogTagA,
     alignment: Alignment.Start,
     tag: "A",
   })
   await delay(animationTime)
   SmartDialog.show({
-    builder: wrapBuilder(dialogTagB),
+    builder: dialogTagB,
     alignment: Alignment.Top,
     tag: "B",
   })
   await delay(animationTime)
   SmartDialog.show({
-    builder: wrapBuilder(dialogTagC),
+    builder: dialogTagC,
     alignment: Alignment.End,
     tag: "C",
   })
   await delay(animationTime)
   SmartDialog.show({
-    builder: wrapBuilder(dialogTagD),
+    builder: dialogTagD,
     alignment: Alignment.Bottom,
     tag: "D",
   })
   await delay(animationTime)
   SmartDialog.show({
-    builder: wrapBuilder(dialogTagE),
+    builder: dialogTagE,
     alignment: Alignment.Center,
     tag: "E",
   })

@@ -52,8 +52,8 @@ struct Index {
         MainPage()
       }
       .mode(NavigationMode.Stack)
-      .hideTitleBar(true)
-      .navDestination(pageMap)
+        .hideTitleBar(true)
+        .navDestination(pageMap)
 
       // here
       OhosSmartDialog()
@@ -143,7 +143,7 @@ export function randomColor(): string {
 ```typescript
 export function customUseArgs() {
   SmartDialog.show({
-    builder: wrapBuilder(dialogArgs),
+    builder: dialogArgs,
     builderArgs: { num: Math.random() } as ArgsModel,
   })
 }
@@ -170,7 +170,7 @@ class ArgsModel {
 ```typescript
 export function attachLocation() {
   SmartDialog.show({
-    builder: wrapBuilder(dialog)
+    builder: dialog
   })
 }
 
@@ -202,7 +202,7 @@ function dialog() {
               targetId: item.title,
               alignment: item.alignment,
               maskColor: Color.Transparent,
-              builder: wrapBuilder(targetLocationDialog)
+              builder: targetLocationDialog
             })
           })
         }
@@ -216,16 +216,16 @@ function dialog() {
           targetId: item.title,
           alignment: item.alignment,
           maskColor: Color.Transparent,
-          builder: wrapBuilder(targetLocationDialog),
+          builder: targetLocationDialog,
         })
         await delay(300)
       }
     }, randomColor())
   }
   .borderRadius(12)
-    .width(700)
-    .padding(30)
-    .backgroundColor(Color.White)
+  .width(700)
+  .padding(30)
+  .backgroundColor(Color.White)
 }
 
 @Builder
@@ -259,13 +259,13 @@ function targetLocationDialog() {
 export async function customLocation() {
   const animationTime = 1000
   SmartDialog.show({
-    builder: wrapBuilder(dialogLocationHorizontal),
-    alignment: Alignment.End,
+    builder: dialogLocationHorizontal,
+    alignment: Alignment.Start,
   })
   await delay(animationTime)
   SmartDialog.show({
-    builder: wrapBuilder(dialogLocationVertical),
-    alignment: Alignment.Bottom,
+    builder: dialogLocationVertical,
+    alignment: Alignment.Top,
   })
 }
 
@@ -301,14 +301,14 @@ function dialogLocationHorizontal() {
 export async function customTag() {
   const animationTime = 1000
   SmartDialog.show({
-    builder: wrapBuilder(dialogTagA),
+    builder: dialogTagA,
     alignment: Alignment.Start,
     tag: "A",
   })
   await delay(animationTime)
   SmartDialog.show({
-    builder: wrapBuilder(dialogTagB),
-    alignment: Alignment.Center,
+    builder: dialogTagB,
+    alignment: Alignment.Top,
     tag: "B",
   })
 }
@@ -337,7 +337,7 @@ function dialogTagB() {
             SmartDialog.dismiss({ tag: "A" })
           } else if (index === 1) {
             SmartDialog.dismiss({ tag: "B" })
-          }
+          } 
         })
     })
   }.backgroundColor(Color.White).width(350).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
@@ -349,8 +349,8 @@ function dialogTagB() {
 ```typescript
 export function customMask() {
   SmartDialog.show({
-    builder: wrapBuilder(dialogShowDialog),
-    maskBuilder: wrapBuilder(dialogCustomMask),
+    builder: dialogShowDialog,
+    maskBuilder: dialogCustomMask,
   })
 }
 
@@ -370,4 +370,3 @@ function dialogShowDialog() {
     .onClick(() => customMask())
 }
 ```
-

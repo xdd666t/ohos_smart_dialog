@@ -1,3 +1,6 @@
+# 1.3.0
+- 简化用法, 移除wrapBuilder
+
 # 1.2.0
 - 重大更新
   - 增加showAttach弹窗, 可以定位至component具体位置处显示

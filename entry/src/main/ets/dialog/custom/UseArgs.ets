@@ -3,7 +3,7 @@ import { randomColor } from '../../app/kit/Color'
 
 export function customUseArgs() {
   SmartDialog.show({
-    builder: wrapBuilder(dialogArgs),
+    builder: dialogArgs,
     builderArgs: { num: Math.random() } as ArgsModel,
   })
 }

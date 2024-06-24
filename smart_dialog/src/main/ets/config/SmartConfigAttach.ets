@@ -1,3 +1,4 @@
+import { SmartBuilder } from '../kit/function'
 import { SmartAttachAlignmentType } from './EnumConfig'
 
 export class SmartConfigAttach {
@@ -23,7 +24,7 @@ export class SmartConfigAttach {
   /// 遮罩颜色：[maskWrapBuild]参数设置了数据，该参数会失效
   maskColor: ResourceColor = "#75000000"
   /// 可高度定制遮罩
-  maskWrapBuild?: WrappedBuilder<ESObject>
+  maskWrapBuild?: SmartBuilder
   /// attach dialog选择不同alignment属性时的对齐效果, 具体说明请参照[SmartAttachAlignmentType]
   attachAlignmentType: SmartAttachAlignmentType = SmartAttachAlignmentType.center
 }

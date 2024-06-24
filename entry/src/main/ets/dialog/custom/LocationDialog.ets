@@ -5,27 +5,27 @@ import { delay } from '../../app/kit/function'
 export async function customLocation() {
   const animationTime = 1000
   SmartDialog.show({
-    builder: wrapBuilder(dialogLocationHorizontal),
+    builder: dialogLocationHorizontal,
     alignment: Alignment.Start,
   })
   await delay(animationTime)
   SmartDialog.show({
-    builder: wrapBuilder(dialogLocationVertical),
+    builder: dialogLocationVertical,
     alignment: Alignment.Top,
   })
   await delay(animationTime)
   SmartDialog.show({
-    builder: wrapBuilder(dialogLocationHorizontal),
+    builder: dialogLocationHorizontal,
     alignment: Alignment.End,
   })
   await delay(animationTime)
   SmartDialog.show({
-    builder: wrapBuilder(dialogLocationVertical),
+    builder: dialogLocationVertical,
     alignment: Alignment.Bottom,
   })
   await delay(animationTime)
   SmartDialog.show({
-    builder: wrapBuilder(dialogLocationCenter),
+    builder: dialogLocationCenter,
     alignment: Alignment.Center,
   })
 }

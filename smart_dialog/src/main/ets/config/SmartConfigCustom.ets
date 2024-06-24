@@ -1,3 +1,5 @@
+import { SmartBuilder } from '../kit/function'
+
 export class SmartConfigCustom {
   constructor() {
   }
@@ -21,5 +23,5 @@ export class SmartConfigCustom {
   /// 遮罩颜色：[maskWrapBuild]参数设置了数据，该参数会失效
   maskColor: ResourceColor = "#75000000"
   /// 可高度定制遮罩
-  maskWrapBuild?: WrappedBuilder<ESObject>
+  maskWrapBuild?: SmartBuilder
 }

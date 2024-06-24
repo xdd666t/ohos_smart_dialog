@@ -4,7 +4,7 @@ import { randomColor } from '../../app/kit/Color'
 
 export function customJumpPage() {
   SmartDialog.show({
-    builder: wrapBuilder(dialogJumpPage),
+    builder: dialogJumpPage,
   })
 }
 

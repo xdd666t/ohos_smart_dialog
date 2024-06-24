@@ -4,7 +4,7 @@ import { randomColor } from '../../app/kit/Color'
 
 export function attachLocation() {
   SmartDialog.show({
-    builder: wrapBuilder(dialog)
+    builder: dialog
   })
 }
 
@@ -36,7 +36,7 @@ function dialog() {
               targetId: item.title,
               alignment: item.alignment,
               maskColor: Color.Transparent,
-              builder: wrapBuilder(targetLocationDialog)
+              builder: targetLocationDialog
             })
           })
         }
@@ -50,7 +50,7 @@ function dialog() {
           targetId: item.title,
           alignment: item.alignment,
           maskColor: Color.Transparent,
-          builder: wrapBuilder(targetLocationDialog),
+          builder: targetLocationDialog,
         })
         await delay(300)
       }

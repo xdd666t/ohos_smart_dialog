@@ -1,16 +1,17 @@
 import { AttachDialogModel } from '../model/AttachDialogModel';
-import { randomTag } from '../kit/function';
+import { randomTag, SmartBuilder } from '../kit/function';
 
 
 @Component
 export struct AttachDialogComponent {
+  @BuilderParam builder?: SmartBuilder
   item: AttachDialogModel = new AttachDialogModel()
   selfId = randomTag()
   firstRender = true
 
   build() {
     Stack() {
-      this.item.builder?.builder(this.item.builderArgs)
+      this.builder?.(this.item.builderArgs)
     }
     .height(this.item.animation.dialogHeight)
     .width(this.item.animation.dialogWidth)

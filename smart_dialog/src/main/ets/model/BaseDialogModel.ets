@@ -1,4 +1,4 @@
-import { delay } from '../kit/function'
+import { delay, SmartBuilder } from '../kit/function'
 import { BuilderNode } from '@kit.ArkUI'
 import { DialogProxy } from '../dialog_proxy/DialogProxy'
 
@@ -14,7 +14,7 @@ class AnimationModel {
 
 @ObservedV2
 export class BaseDialogModel {
-  builder?: WrappedBuilder<ESObject>
+  builder?: SmartBuilder
   builderArgs?: ESObject
   alignment?: Alignment
   animation: AnimationModel = new AnimationModel()
@@ -24,7 +24,7 @@ export class BaseDialogModel {
   routerName?: string
   @Trace visible: boolean = true
   maskColor?: ResourceColor
-  maskBuilder?: WrappedBuilder<ESObject>
+  maskBuilder?: SmartBuilder
   onMask?: VoidCallback
   builderNode?: BuilderNode<[ESObject]> | null = null
 
