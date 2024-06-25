@@ -63,41 +63,59 @@ struct Index {
 ```
 
 > **返回事件监听**
+别问我为啥返回事件的监听，处理的这么不优雅，鸿蒙里面没找全局返回事件监听，我也没辙。。。
 
-别怪我为啥返回事件的监听，处理的这么麻烦，鸿蒙里面没找全局返回事件监听，我也没办法呀。。。
-
-- Entry页面处理
+- 如果你无需处理返回事件，可以使用下述写法
 
 ```typescript
+// Entry页面处理
 @Entry
 @Component
 struct Index {
-  build() {
-    // ....
-  }
-
-  // here
   onBackPress(): boolean | void {
-    if (OhosSmartDialog.onBackPressed()) {
-    return true
+    return OhosSmartDialog.onBackPressed()()
   }
-  return false
 }
+
+// 路由子页面
+struct JumpPage {
+  build() {
+    NavDestination() {
+      // ....
+    }
+    .onBackPressed(OhosSmartDialog.onBackPressed())
+  }
 }
 ```
 
-- 路由子页面：如果你也需要处理返回事件，请参照Entry页面中的处理
+- 如果你需要处理返回事件，在OhosSmartDialog.onBackPressed()中传入你的方法即可
 
 ```typescript
+// Entry页面处理
+@Entry
+@Component
+struct Index {
+  onBackPress(): boolean | void {
+    return OhosSmartDialog.onBackPressed(this.onCustomBackPress)()
+  }
+
+  onCustomBackPress(): boolean {
+    return false
+  }
+}
+
+// 路由子页面
 @Component
 struct JumpPage {
   build() {
     NavDestination() {
-      Stack()
+      // ...
     }
-    .hideTitleBar(true)
-      // here
-      .onBackPressed(OhosSmartDialog.onBackPressed)
+    .onBackPressed(OhosSmartDialog.onBackPressed(this.onCustomBackPress))
+  }
+
+  onCustomBackPress(): boolean {
+    return false
   }
 }
 ```
@@ -223,9 +241,9 @@ function dialog() {
     }, randomColor())
   }
   .borderRadius(12)
-  .width(700)
-  .padding(30)
-  .backgroundColor(Color.White)
+    .width(700)
+    .padding(30)
+    .backgroundColor(Color.White)
 }
 
 @Builder
@@ -337,7 +355,7 @@ function dialogTagB() {
             SmartDialog.dismiss({ tag: "A" })
           } else if (index === 1) {
             SmartDialog.dismiss({ tag: "B" })
-          } 
+          }
         })
     })
   }.backgroundColor(Color.White).width(350).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
