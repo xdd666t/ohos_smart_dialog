@@ -62,8 +62,9 @@ struct Index {
 }
 ```
 
-> **返回事件监听**
-别问我为啥返回事件的监听，处理的这么不优雅，鸿蒙里面没找全局返回事件监听，我也没辙。。。
+**返回事件监听**
+
+> 别问我为啥返回事件的监听，处理的这么不优雅，鸿蒙里面没找全局返回事件监听，我也没辙。。。
 
 - 如果你无需处理返回事件，可以使用下述写法
 
@@ -355,7 +356,7 @@ function dialogTagB() {
             SmartDialog.dismiss({ tag: "A" })
           } else if (index === 1) {
             SmartDialog.dismiss({ tag: "B" })
-          } 
+          }
         })
     })
   }.backgroundColor(Color.White).width(350).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
