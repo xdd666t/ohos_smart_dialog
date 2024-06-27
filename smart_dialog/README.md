@@ -1,4 +1,4 @@
-[![stars](https://img.shields.io/github/stars/xdd666t/ohos_smart_dialog?logo=github)](https://github.com/xdd666t/ohos_smart_dialog)  [![issues](https://img.shields.io/github/issues/xdd666t/ohos_smart_dialog?logo=github)](https://github.com/xdd666t/ohos_smart_dialog/issues) [![commit](https://img.shields.io/github/last-commit/xdd666t/ohos_smart_dialog?logo=github)](https://github.com/xdd666t/ohos_smart_dialog/commits)
+[![ohos_smart_dialog](https://img.shields.io/badge/ohpm-ohos_smart_dialog-4169E1)](https://ohpm.openharmony.cn/#/cn/detail/ohos_smart_dialog)[![stars](https://img.shields.io/github/stars/xdd666t/ohos_smart_dialog?logo=github)](https://github.com/xdd666t/ohos_smart_dialog)  [![issues](https://img.shields.io/github/issues/xdd666t/ohos_smart_dialog?logo=github)](https://github.com/xdd666t/ohos_smart_dialog/issues) [![commit](https://img.shields.io/github/last-commit/xdd666t/ohos_smart_dialog?logo=github)](https://github.com/xdd666t/ohos_smart_dialog/commits)
 
 **强大的SmartDialog**
 
@@ -25,7 +25,6 @@
 ![customJumpPage](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725830.gif)
 
 # 安装
-
 - github：https://github.com/xdd666t/ohos_smart_dialog
 - ohos：https://ohpm.openharmony.cn/#/cn/detail/ohos_smart_dialog
 
