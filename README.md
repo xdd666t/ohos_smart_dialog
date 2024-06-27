@@ -1,4 +1,4 @@
-# ohos_smart_dialog
+[![stars](https://img.shields.io/github/stars/xdd666t/ohos_smart_dialog?logo=github)](https://github.com/xdd666t/ohos_smart_dialog)  [![issues](https://img.shields.io/github/issues/xdd666t/ohos_smart_dialog?logo=github)](https://github.com/xdd666t/ohos_smart_dialog/issues) [![commit](https://img.shields.io/github/last-commit/xdd666t/ohos_smart_dialog?logo=github)](https://github.com/xdd666t/ohos_smart_dialog/commits)
 
 **强大的SmartDialog**
 
