@@ -7,6 +7,10 @@ export struct MaskComponent {
   @BuilderParam maskBuilder?: SmartBuilder
   item: BaseDialogModel = new BaseDialogModel()
 
+  aboutToAppear(): void {
+    this.maskBuilder = this.item.maskBuilder
+  }
+
   build() {
     Stack() {
       if (this.maskBuilder) {

@@ -53,12 +53,12 @@ struct SmartNode {
 
   build() {
     Stack({ alignContent: this.item.alignment }) {
-      MaskComponent({ item: this.item, maskBuilder: this.item.maskBuilder })
+      MaskComponent({ item: this.item })
 
       if (this.item instanceof CustomDialogModel) {
-        CustomDialogComponent({ item: this.item, builder: this.item.builder })
+        CustomDialogComponent({ item: this.item })
       } else if (this.item instanceof AttachDialogModel) {
-        AttachDialogComponent({ item: this.item, builder: this.item.builder })
+        AttachDialogComponent({ item: this.item })
       }
     }.visibility(this.item.visible === true ? Visibility.Visible : Visibility.None)
   }

@@ -9,6 +9,10 @@ export struct AttachDialogComponent {
   selfId = randomTag()
   firstRender = true
 
+  aboutToAppear(): void {
+    this.builder = this.item.builder
+  }
+
   build() {
     Stack() {
       this.builder?.(this.item.builderArgs)

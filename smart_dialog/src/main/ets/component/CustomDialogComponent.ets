@@ -7,6 +7,7 @@ export struct CustomDialogComponent {
   item: CustomDialogModel = new CustomDialogModel()
 
   aboutToAppear(): void {
+    this.builder = this.item.builder
     this.item.initAnimationStatus()
   }
 
