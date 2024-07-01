@@ -25,6 +25,7 @@
 ![customJumpPage](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725830.gif)
 
 # 安装
+
 - github：https://github.com/xdd666t/ohos_smart_dialog
 - ohos：https://ohpm.openharmony.cn/#/cn/detail/ohos_smart_dialog
 
@@ -153,6 +154,10 @@ export function randomColor(): string {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+export function delay(ms?: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 ```
 
