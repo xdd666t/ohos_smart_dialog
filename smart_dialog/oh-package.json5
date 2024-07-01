@@ -8,5 +8,27 @@
   "homepage": "https://github.com/xdd666t",
   "repository": "https://github.com/xdd666t/ohos_smart_dialog",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "keywords": [
+    "OpenHarmony",
+    "HarmonyOS",
+    "弹窗",
+    "SmartDialog",
+    "Dialog",
+    "Toast",
+    "Loading",
+    "Attach",
+    "PopupWindow",
+  ],
+  "tags": [
+    "OpenHarmony",
+    "HarmonyOS",
+    "弹窗",
+    "SmartDialog",
+    "Dialog",
+    "Toast",
+    "Loading",
+    "Attach",
+    "PopupWindow",
+  ],
 }
