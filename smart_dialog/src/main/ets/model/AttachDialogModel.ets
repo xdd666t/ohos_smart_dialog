@@ -29,24 +29,16 @@ export class AttachDialogModel extends BaseDialogModel {
       bottom: px2vp(targetRect.bottom),
     } as Edges
     super.initAnimationStatus()
-
-    this.startAnimation()
   }
 
-  async startAnimation(): Promise<void> {
+  startAnimation(): Promise<void> {
     const animation = this.animation
-    animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
-      animation.dialogOpacity = 1
-    })
-
+    animation.dialogOpacity = 1
     return super.startAnimation()
   }
 
   endAnimation(): Promise<void> {
-    animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
-      this.animation.dialogOpacity = 0
-    })
-
+    this.animation.dialogOpacity = 0
     return super.endAnimation()
   }
 

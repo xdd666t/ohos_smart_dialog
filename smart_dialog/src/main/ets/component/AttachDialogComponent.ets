@@ -7,27 +7,40 @@ export struct AttachDialogComponent {
   @BuilderParam builder?: SmartBuilder
   item: AttachDialogModel = new AttachDialogModel()
   selfId = randomTag()
-  firstRender = true
+  @State firstRender: boolean = true
+  alreadyStartAnimation: boolean = false
 
   aboutToAppear(): void {
     this.builder = this.item.builder
   }
 
   build() {
-    Stack() {
-      this.builder?.(this.item.builderArgs)
-    }
-    .height(this.item.animation.dialogHeight)
-    .width(this.item.animation.dialogWidth)
-    .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
-    .position(this.item.animation.dialogPosition)
-    .opacity(this.item.animation.dialogOpacity)
-    .onSizeChange(() => {
-      if (this.firstRender) {
-        this.firstRender = false
-        this.item.initAnimationStatus(this.selfId)
+    if (this.firstRender) {
+      Stack() {
+        this.builder?.(this.item.builderArgs)
       }
-    })
-    .id(this.selfId)
+      .onSizeChange(() => {
+        this.item.initAnimationStatus(this.selfId)
+        this.firstRender = false
+      })
+      .visibility(Visibility.Hidden)
+      .id(this.selfId)
+    } else {
+      Stack() {
+        this.builder?.(this.item.builderArgs)
+      }
+      .height(this.item.animation.dialogHeight)
+      .width(this.item.animation.dialogWidth)
+      .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
+      .position(this.item.animation.dialogPosition)
+      .opacity(this.item.animation.dialogOpacity)
+      .animation({ duration: this.item.animationTime, curve: Curve.Linear })
+      .onSizeChange(() => {
+        if (!this.alreadyStartAnimation) {
+          this.alreadyStartAnimation = true
+          this.item.startAnimation()
+        }
+      })
+    }
   }
 }
