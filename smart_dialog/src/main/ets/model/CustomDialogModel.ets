@@ -32,34 +32,29 @@ export class CustomDialogModel extends BaseDialogModel {
 
   startAnimation(): Promise<void> {
     const animation = this.animation
-    const animationTime = this.animationTime
-    animateTo({ duration: animationTime, curve: Curve.Linear }, () => {
-      alignmentAnimation(this.alignment, {
-        onStart: () => {
-          animation.dialogPosition = { left: 0 }
-        },
-        onTop: () => {
-          animation.dialogPosition = { top: 0 }
-        },
-        onEnd: () => {
-          animation.dialogPosition = { right: 0 }
-        },
-        onBottom: () => {
-          animation.dialogPosition = { bottom: 0 }
-        },
-        onCenter: () => {
-          animation.dialogPosition = undefined
-        },
-      })
-      animation.dialogScale = 1
+    alignmentAnimation(this.alignment, {
+      onStart: () => {
+        animation.dialogPosition = { left: 0 }
+      },
+      onTop: () => {
+        animation.dialogPosition = { top: 0 }
+      },
+      onEnd: () => {
+        animation.dialogPosition = { right: 0 }
+      },
+      onBottom: () => {
+        animation.dialogPosition = { bottom: 0 }
+      },
+      onCenter: () => {
+        animation.dialogPosition = undefined
+      },
     })
+    animation.dialogScale = 1
     return super.startAnimation()
   }
 
   endAnimation(): Promise<void> {
-    animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
-      this.initAnimationStatus()
-    })
+    this.initAnimationStatus()
     return super.endAnimation()
   }
 }

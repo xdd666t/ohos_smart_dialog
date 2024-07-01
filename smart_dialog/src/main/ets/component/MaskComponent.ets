@@ -19,10 +19,10 @@ export struct MaskComponent {
         Stack().width('100%').height('100%').backgroundColor(this.item.maskColor)
       }
     }
-    .clip(true)
+    .opacity(this.item.animation.maskOpacity)
+    .animation({ duration: this.item.animationTime, curve: Curve.Linear })
     .width('100%')
     .height('100%')
-    .opacity(this.item.animation.maskOpacity)
     .onClick(() => {
       this.item.onMask?.()
       if (this.item.clickMaskDismiss) {

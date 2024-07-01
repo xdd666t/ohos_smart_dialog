@@ -17,6 +17,7 @@ export struct CustomDialogComponent {
     }
     .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
     .position(this.item.animation.dialogPosition)
+    .animation({ duration: this.item.animationTime, curve: Curve.Linear })
     .onAppear(() => this.item.startAnimation())
   }
 }

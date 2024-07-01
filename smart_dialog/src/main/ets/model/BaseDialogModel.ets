@@ -34,16 +34,12 @@ export class BaseDialogModel {
   }
 
   async startAnimation(): Promise<void> {
-    animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
-      this.animation.maskOpacity = 1
-    })
+    this.animation.maskOpacity = 1
     await delay(this.animationTime)
   }
 
   async endAnimation(): Promise<void> {
-    animateTo({ duration: this.animationTime, curve: Curve.Linear }, () => {
-      this.animation.maskOpacity = 0
-    })
+    this.animation.maskOpacity = 0
     await delay(this.animationTime)
   }
 
