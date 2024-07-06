@@ -29,7 +29,7 @@ export class DialogProxy {
     model.animationTime = option.animationTime
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
-    model.routerName = SmartNavigatorObserver.curRouter
+    model.router = SmartNavigatorObserver.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
@@ -46,7 +46,7 @@ export class DialogProxy {
     model.animationTime = option.animationTime
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
-    model.routerName = SmartNavigatorObserver.curRouter
+    model.router = SmartNavigatorObserver.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask

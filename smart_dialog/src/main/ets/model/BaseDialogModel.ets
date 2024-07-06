@@ -21,7 +21,7 @@ export class BaseDialogModel {
   animationTime?: number
   clickMaskDismiss?: boolean
   tag?: string
-  routerName?: string
+  router?: string
   @Trace visible: boolean = true
   maskColor?: ResourceColor
   maskBuilder?: SmartBuilder
