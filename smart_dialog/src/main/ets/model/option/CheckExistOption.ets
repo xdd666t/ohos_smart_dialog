@@ -1,4 +1,6 @@
+import { SmartAllDialogType } from '../../config/EnumConfig'
+
 export class CheckExistOption {
   tag?: string
-  // checkType?: Set<SmartAllDialogType>
+  dialogTypes?: Array<SmartAllDialogType>
 }

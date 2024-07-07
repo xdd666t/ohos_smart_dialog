@@ -1,7 +1,7 @@
-import { BaseDialogModel } from './BaseDialogModel'
+import { BaseDialogModel } from '../../model/BaseDialogModel'
 import { componentUtils, display, Offset } from '@kit.ArkUI'
-import { SmartDialog } from '../SmartDialog'
-import { SmartAttachAlignmentType } from '../config/EnumConfig'
+import { SmartDialog } from '../../SmartDialog'
+import { SmartAttachAlignmentType } from '../../config/EnumConfig'
 
 @ObservedV2
 export class AttachDialogModel extends BaseDialogModel {
@@ -31,15 +31,16 @@ export class AttachDialogModel extends BaseDialogModel {
     super.initAnimationStatus()
   }
 
-  startAnimation(): Promise<void> {
+  show(): Promise<void> {
     const animation = this.animation
     animation.dialogOpacity = 1
-    return super.startAnimation()
+    return super.show()
   }
 
-  endAnimation(): Promise<void> {
+  async dismiss(): Promise<void> {
     this.animation.dialogOpacity = 0
-    return super.endAnimation()
+    await super.dismiss()
+    this.remove()
   }
 
   /// 处理: 方向及其位置

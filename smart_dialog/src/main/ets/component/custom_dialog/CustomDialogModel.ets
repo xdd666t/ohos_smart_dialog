@@ -1,5 +1,6 @@
-import { alignmentAnimation } from '../helper/AlignmentHelper'
-import { BaseDialogModel } from './BaseDialogModel'
+import { alignmentAnimation } from '../../helper/AlignmentHelper'
+import { BaseDialogModel } from '../../model/BaseDialogModel'
+import { SmartDialog } from '../../SmartDialog'
 
 @ObservedV2
 export class CustomDialogModel extends BaseDialogModel {
@@ -30,7 +31,7 @@ export class CustomDialogModel extends BaseDialogModel {
     super.initAnimationStatus()
   }
 
-  startAnimation(): Promise<void> {
+  show(): Promise<void> {
     const animation = this.animation
     alignmentAnimation(this.alignment, {
       onStart: () => {
@@ -50,11 +51,12 @@ export class CustomDialogModel extends BaseDialogModel {
       },
     })
     animation.dialogScale = 1
-    return super.startAnimation()
+    return super.show()
   }
 
-  endAnimation(): Promise<void> {
+  async dismiss(): Promise<void> {
     this.initAnimationStatus()
-    return super.endAnimation()
+    await super.dismiss()
+    this.remove()
   }
 }

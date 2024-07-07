@@ -1,11 +1,15 @@
 import { DialogNodeController } from '../component/DialogNodeController'
 import { SmartDismissOption } from '../model/option/SmartDismissOption'
 import { BaseDialogModel } from '../model/BaseDialogModel'
-import { CustomDialogModel } from '../model/CustomDialogModel'
+import { CustomDialogModel } from '../component/custom_dialog/CustomDialogModel'
 import { SmartCustomOption } from '../model/option/SmartCustomOption'
 import SmartNavigatorObserver from '../helper/SmartNavigatorObserver'
 import { SmartAttachOption } from '../model/option/SmartAttachOption'
-import { AttachDialogModel } from '../model/AttachDialogModel'
+import { AttachDialogModel } from '../component/attach_dialog/AttachDialogModel'
+import { SmartLoadingOption } from '../model/option/SmartLoadingOption'
+import { LoadingDialogModel } from '../component/loading_dialog/LoadingDialogModel'
+import { SmartDialog } from '../SmartDialog'
+import { SmartAllDialogType } from '../config/EnumConfig'
 
 export class DialogProxy {
   private static _instance?: DialogProxy
@@ -20,6 +24,7 @@ export class DialogProxy {
   dialogList: Array<BaseDialogModel> = []
   navPathStack: NavPathStack = new NavPathStack()
   nodeController: DialogNodeController = new DialogNodeController()
+  loadingDialog: LoadingDialogModel = new LoadingDialogModel()
 
   show(option: SmartCustomOption) {
     let model = new CustomDialogModel()
@@ -33,6 +38,7 @@ export class DialogProxy {
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
+    model.dialogType = SmartAllDialogType.custom
     this.nodeController.inset(model)
     this.dialogList.push(model)
   }
@@ -50,11 +56,32 @@ export class DialogProxy {
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
+    model.dialogType = SmartAllDialogType.attach
     this.nodeController.inset(model)
     this.dialogList.push(model)
   }
 
+  showLoading(option: SmartLoadingOption) {
+    let model = this.loadingDialog
+    model.builder = option.builder
+    model.builderArgs = option.builderArgs
+    model.alignment = option.alignment
+    model.animationTime = option.animationTime
+    model.clickMaskDismiss = option.clickMaskDismiss
+    model.router = SmartNavigatorObserver.curRouter
+    model.maskColor = option.maskColor
+    model.maskBuilder = option.maskBuilder
+    model.onMask = option.onMask
+    model.dialogType = SmartAllDialogType.loading
+    model.visible = true
+  }
+
   async dismiss(option?: SmartDismissOption): Promise<void> {
+    if (SmartDialog.config.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {
+      await this.loadingDialog.dismiss()
+      return
+    }
+
     let dialog = this.findDialog(option?.tag)
     if (!dialog) {
       if (this.dialogList.length === 0 && this.nodeController.rootNode?.getFirstChild()?.getFirstChild()) {

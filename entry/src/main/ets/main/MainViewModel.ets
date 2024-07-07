@@ -4,6 +4,7 @@ import { customJumpPage } from '../dialog/custom/JumpPage'
 import { customLocation } from '../dialog/custom/LocationDialog'
 import { customTag } from '../dialog/custom/TagDialog'
 import { customUseArgs } from '../dialog/custom/UseArgs'
+import { loadingShow } from '../dialog/loading/Show'
 import { MainFeature, MainState } from './MainState'
 
 export class MainViewModel {
@@ -14,6 +15,7 @@ export class MainViewModel {
   }
 
   showDialog(item: string) {
+    // custom
     if (item === MainFeature.customUseArgs) {
       customUseArgs()
     } else if (item === MainFeature.customLocation) {
@@ -24,8 +26,16 @@ export class MainViewModel {
       customMask()
     } else if (item === MainFeature.customTag) {
       customTag()
-    } else if (item === MainFeature.attachLocation) {
+    }
+
+    // attach
+    if (item === MainFeature.attachLocation) {
       attachLocation()
+    }
+
+    // loading
+    if (item === MainFeature.loadingShow) {
+      loadingShow()
     }
   }
 }

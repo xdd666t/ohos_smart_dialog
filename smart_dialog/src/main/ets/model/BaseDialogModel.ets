@@ -1,6 +1,7 @@
 import { delay, SmartBuilder } from '../kit/function'
 import { BuilderNode } from '@kit.ArkUI'
 import { DialogProxy } from '../dialog_proxy/DialogProxy'
+import { SmartAllDialogType } from '../config/EnumConfig'
 
 @ObservedV2
 class AnimationModel {
@@ -27,25 +28,21 @@ export class BaseDialogModel {
   maskBuilder?: SmartBuilder
   onMask?: VoidCallback
   builderNode?: BuilderNode<[ESObject]> | null = null
+  dialogType?: SmartAllDialogType
 
   initAnimationStatus() {
     const animation = this.animation
     animation.maskOpacity = 0
   }
 
-  async startAnimation(): Promise<void> {
+  async show(): Promise<void> {
     this.animation.maskOpacity = 1
     await delay(this.animationTime)
   }
 
-  async endAnimation(): Promise<void> {
+  async dismiss(): Promise<void> {
     this.animation.maskOpacity = 0
     await delay(this.animationTime)
-  }
-
-  async dismiss(): Promise<void> {
-    await this.endAnimation()
-    this.remove()
   }
 
   remove() {
