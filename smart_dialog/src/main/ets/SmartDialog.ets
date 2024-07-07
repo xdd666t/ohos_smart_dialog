@@ -5,6 +5,9 @@ import { SmartDismissOption } from './model/option/SmartDismissOption'
 import { SmartCustomOption } from './model/option/SmartCustomOption'
 import { SmartAttachOption } from './model/option/SmartAttachOption'
 import { SmartLoadingOption } from './model/option/SmartLoadingOption'
+import { CheckExistOption } from './model/option/CheckExistOption'
+import { DialogCheckHelper } from './helper/DialogCheckHelper'
+import { SmartAllDialogType } from './config/EnumConfig'
 
 export class SmartDialog {
   static readonly config: SmartConfig = new SmartConfig()
@@ -113,5 +116,16 @@ export class SmartDialog {
   /// [tag]：如果你想关闭指定的dialog，你可以给它设置一个tag
   static async dismiss(option?: SmartDismissOption): Promise<void> {
     return DialogProxy.instance.dismiss(option)
+  }
+
+  /// 检查弹窗是否存在
+  static checkExist(option?: CheckExistOption): boolean {
+    return DialogCheckHelper.instance.checkExist(option ?? {
+      dialogTypes: [
+        SmartAllDialogType.custom,
+        SmartAllDialogType.attach,
+        SmartAllDialogType.loading,
+      ]
+    })
   }
 }

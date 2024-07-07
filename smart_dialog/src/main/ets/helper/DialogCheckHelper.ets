@@ -17,7 +17,7 @@ export class DialogCheckHelper {
   checkExist(option: CheckExistOption): boolean {
     let dialogTypes = option.dialogTypes
 
-    if (option?.tag && dialogProxy.findDialog(option?.tag)) {
+    if (option?.tag && (dialogProxy.findDialog(option?.tag) !== undefined)) {
       return true
     }
 

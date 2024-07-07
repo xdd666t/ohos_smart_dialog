@@ -77,7 +77,7 @@ export class DialogProxy {
   }
 
   async dismiss(option?: SmartDismissOption): Promise<void> {
-    if (SmartDialog.config.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {
+    if (SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {
       await this.loadingDialog.dismiss()
       return
     }
