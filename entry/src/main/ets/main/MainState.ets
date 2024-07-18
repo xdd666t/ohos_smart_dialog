@@ -18,6 +18,12 @@ export class MainState {
         { title: MainFeature.attachLocation },
       ]
     },
+    {
+      title: "showLoading",
+      items: [
+        { title: MainFeature.loadingShow },
+      ]
+    },
   ]
 }
 
@@ -31,6 +37,8 @@ export class MainFeature {
   static customTag: string = "customTag"
   // attach
   static attachLocation: string = "attachLocation"
+  // loading
+  static loadingShow: string = "loadingShow"
 }
 
 

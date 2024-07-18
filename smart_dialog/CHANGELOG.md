@@ -1,3 +1,9 @@
+# 1.5.0
+- 增加showLoading
+- 强化SmartDialog.checkExist能力, 可检测指定类型弹窗是否存在
+- breakChange
+  - SmartDialog.config.checkExist -> SmartDialog.checkExist
+
 # 1.3.5
 - showAttach弹窗动画实现调整: 显式动画改为属性动画
 

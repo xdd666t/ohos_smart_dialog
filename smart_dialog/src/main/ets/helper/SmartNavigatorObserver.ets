@@ -1,48 +1,52 @@
-import { dialogProxy, DialogProxy } from '../dialog_proxy/DialogProxy'
+import { dialogProxy } from '../dialog_proxy/DialogProxy'
+import { safeReturn } from '../kit/function'
 
 export default class SmartNavigatorObserver implements NavigationInterception {
-  private static defaultRouter: string = "index"
-  static curRouter: string = SmartNavigatorObserver.defaultRouter
-  private lastAllPathName: Array<string> = []
+  static curRouter?: string
   // 开始显示
-  willShow?: InterceptionShowCallback = (from, to, operation, isAnimated) => {
-    let allPathName = DialogProxy.instance.navPathStack.getAllPathName()
-    let curRouter = SmartNavigatorObserver.defaultRouter
-    if (allPathName.length > 0) {
-      curRouter = allPathName[allPathName.length - 1]
+  willShow?: InterceptionShowCallback =
+    (from: NavDestinationContext | NavBar,
+      to: NavDestinationContext | NavBar,
+      operation: NavigationOperation,
+      isAnimated: boolean) => {
+      SmartNavigatorObserver.curRouter = safeReturn(() => {
+        return (to as NavDestinationContext).navDestinationId
+      })
+      if (operation === NavigationOperation.PUSH) {
+        this.onPush(from, to)
+      } else if (operation === NavigationOperation.REPLACE) {
+        this.onReplace(from, to)
+      } else if (operation === NavigationOperation.POP) {
+        this.onPop(from, to)
+      }
+      this.dialogVisible()
+      // safeUse(() => {
+      //   let fromCtx = from as NavDestinationContext
+      //   let toCtx = to as NavDestinationContext
+      //   console.info(`SmartNavigatorObserver:from:${fromCtx.navDestinationId},to:${toCtx.navDestinationId}`)
+      // })
     }
-    SmartNavigatorObserver.curRouter = curRouter
-
-    this.processPush(allPathName)
-    this.processPop(allPathName)
-    this.dialogVisible()
-
-    this.lastAllPathName = JSON.parse(JSON.stringify(allPathName))
-  }
   //结束显示
   didShow?: InterceptionShowCallback = (from, to, operation, isAnimated) => {
   }
 
-  processPush(allPathName: Array<string>) {
-    if (this.lastAllPathName.length > allPathName.length) {
-      return
-    }
-    let pushRouter = ""
-    if (allPathName.length > 0) {
-      pushRouter = allPathName[allPathName.length -1]
-    }
+  private onPush(from: NavDestinationContext | NavBar, to: NavDestinationContext | NavBar) {
   }
 
-  processPop(allPathName: Array<string>) {
-    if (this.lastAllPathName.length < allPathName.length) {
-      return
-    }
-    let popRouter = ""
-    if (this.lastAllPathName.length > 0) {
-      popRouter = this.lastAllPathName[this.lastAllPathName.length -1]
-    }
+  private onReplace(from: NavDestinationContext | NavBar, to: NavDestinationContext | NavBar) {
+    this.popRouter(from, to)
+  }
+
+  private onPop(from: NavDestinationContext | NavBar, to: NavDestinationContext | NavBar) {
+    this.popRouter(from, to)
+  }
+
+  private popRouter(from: NavDestinationContext | NavBar, to: NavDestinationContext | NavBar) {
+    let popRouter: string | undefined = safeReturn(() => {
+      return (from as NavDestinationContext).navDestinationId
+    })
     dialogProxy.dialogList.filter((item) => {
-      let isAccess = item.routerName !== popRouter
+      let isAccess = item.router !== popRouter
       if (!isAccess) {
         item.remove()
       }
@@ -51,9 +55,9 @@ export default class SmartNavigatorObserver implements NavigationInterception {
     })
   }
 
-  dialogVisible() {
+  private dialogVisible() {
     dialogProxy.dialogList.forEach((item) => {
-      item.visible = SmartNavigatorObserver.curRouter === item.routerName
+      item.visible = SmartNavigatorObserver.curRouter === item.router
     })
   }
 }

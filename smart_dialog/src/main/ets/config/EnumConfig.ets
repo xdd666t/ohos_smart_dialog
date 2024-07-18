@@ -1,20 +1,20 @@
 /// dialog type
-// export enum SmartAllDialogType {
-//   /// custom dialog（show）
-//   custom,
-//
-//   /// attach dialog（showAttach）
-//   attach,
-//
-//   /// notify dialog（showNotify）
-//   notify,
-//
-//   /// loading（showLoading）
-//   loading,
-//
-//   /// toast（showToast）
-//   toast,
-// }
+export enum SmartAllDialogType {
+  /// custom dialog（show）
+  custom,
+
+  /// attach dialog（showAttach）
+  attach,
+
+  /// notify dialog（showNotify）
+  // notify,
+
+  /// loading（showLoading）
+  loading,
+
+  /// toast（showToast）
+  // toast,
+}
 
 // enum SmartCloseType {
 //   /// close single dialog：loading（showToast），custom（show）or attach（showAttach）

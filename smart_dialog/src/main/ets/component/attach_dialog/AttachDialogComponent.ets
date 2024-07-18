@@ -1,5 +1,5 @@
-import { AttachDialogModel } from '../model/AttachDialogModel';
-import { randomTag, SmartBuilder } from '../kit/function';
+import { AttachDialogModel } from './AttachDialogModel';
+import { randomTag, SmartBuilder } from '../../kit/function';
 
 
 @Component
@@ -38,7 +38,7 @@ export struct AttachDialogComponent {
       .onSizeChange(() => {
         if (!this.alreadyStartAnimation) {
           this.alreadyStartAnimation = true
-          this.item.startAnimation()
+          this.item.show()
         }
       })
     }

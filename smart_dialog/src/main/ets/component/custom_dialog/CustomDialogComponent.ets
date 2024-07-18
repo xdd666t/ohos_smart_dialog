@@ -1,5 +1,5 @@
-import { SmartBuilder } from '../kit/function'
-import { CustomDialogModel } from '../model/CustomDialogModel'
+import { SmartBuilder } from '../../kit/function'
+import { CustomDialogModel } from './CustomDialogModel'
 
 @Component
 export struct CustomDialogComponent {
@@ -18,6 +18,6 @@ export struct CustomDialogComponent {
     .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
     .position(this.item.animation.dialogPosition)
     .animation({ duration: this.item.animationTime, curve: Curve.Linear })
-    .onAppear(() => this.item.startAnimation())
+    .onAppear(() => this.item.show())
   }
 }

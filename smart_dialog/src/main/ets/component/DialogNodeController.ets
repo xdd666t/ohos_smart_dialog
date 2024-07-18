@@ -1,9 +1,9 @@
 import { BuilderNode, FrameNode, NodeController } from '@kit.ArkUI'
-import { AttachDialogModel } from '../model/AttachDialogModel'
+import { AttachDialogModel } from './attach_dialog/AttachDialogModel'
 import { BaseDialogModel } from '../model/BaseDialogModel'
-import { CustomDialogModel } from '../model/CustomDialogModel'
-import { AttachDialogComponent } from './AttachDialogComponent'
-import { CustomDialogComponent } from './CustomDialogComponent'
+import { CustomDialogModel } from './custom_dialog/CustomDialogModel'
+import { AttachDialogComponent } from './attach_dialog/AttachDialogComponent'
+import { CustomDialogComponent } from './custom_dialog/CustomDialogComponent'
 
 import { MaskComponent } from './MaskComponent'
 
@@ -38,8 +38,8 @@ export class DialogNodeController extends NodeController {
     }
 
     const frameNode = model.builderNode?.getFrameNode()
-    frameNode?.disposeTree()
     this.rootNode.removeChild(frameNode)
+    frameNode?.disposeTree()
   }
 }
 
@@ -62,6 +62,6 @@ struct SmartNode {
       } else if (this.item instanceof AttachDialogModel) {
         AttachDialogComponent({ item: this.item })
       }
-    }.visibility(this.item.visible === true ? Visibility.Visible : Visibility.None)
+    }.visibility(this.item.visible ? Visibility.Visible : Visibility.None)
   }
 }

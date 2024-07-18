@@ -1,14 +1,10 @@
-import { DialogCheckHelper } from '../helper/DialogCheckHelper'
-import { CheckExistOption } from '../model/option/CheckExistOption'
 import { SmartConfigAttach } from './SmartConfigAttach'
 import { SmartConfigCustom } from './SmartConfigCustom'
+import { SmartConfigLoading } from './SmartConfigLoading'
 
 export class SmartConfig {
   custom: SmartConfigCustom = new SmartConfigCustom()
   attach: SmartConfigAttach = new SmartConfigAttach()
-
-  checkExist(option?: CheckExistOption): boolean {
-    return DialogCheckHelper.instance.checkExist(option)
-  }
+  loading: SmartConfigLoading = new SmartConfigLoading()
 }
 

@@ -13,7 +13,7 @@ export class BackHelper {
 
   onBackPressed(onBack?: () => boolean): () => boolean {
     return () => {
-      if (SmartDialog.config.checkExist()) {
+      if (SmartDialog.checkExist()) {
         SmartDialog.dismiss()
         return true
       }
