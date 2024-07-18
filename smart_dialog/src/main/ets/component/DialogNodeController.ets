@@ -37,7 +37,9 @@ export class DialogNodeController extends NodeController {
       return
     }
 
-    this.rootNode.removeChild(model.builderNode?.getFrameNode())
+    const frameNode = model.builderNode?.getFrameNode()
+    frameNode?.disposeTree()
+    this.rootNode.removeChild(frameNode)
   }
 }
 
