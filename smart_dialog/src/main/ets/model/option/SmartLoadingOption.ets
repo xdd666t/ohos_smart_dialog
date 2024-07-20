@@ -1,3 +1,4 @@
+import { SmartBackType } from '../../config/EnumConfig'
 import { SmartBuilder } from '../../kit/function'
 
 export class SmartLoadingOption {
@@ -10,4 +11,5 @@ export class SmartLoadingOption {
   maskColor?: ResourceColor
   maskBuilder?: SmartBuilder
   onMask?: VoidCallback
+  backType?: SmartBackType
 }

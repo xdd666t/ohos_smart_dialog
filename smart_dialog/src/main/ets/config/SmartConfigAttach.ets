@@ -1,5 +1,5 @@
 import { SmartBuilder } from '../kit/function'
-import { SmartAttachAlignmentType } from './EnumConfig'
+import { SmartAttachAlignmentType, SmartBackType } from './EnumConfig'
 
 export class SmartConfigAttach {
   constructor() {
@@ -27,4 +27,6 @@ export class SmartConfigAttach {
   maskWrapBuild?: SmartBuilder
   /// attach dialog选择不同alignment属性时的对齐效果, 具体说明请参照[SmartAttachAlignmentType]
   attachAlignmentType: SmartAttachAlignmentType = SmartAttachAlignmentType.center
+  /// 返回事件对弹窗的影响
+  backType: SmartBackType = SmartBackType.dismiss
 }

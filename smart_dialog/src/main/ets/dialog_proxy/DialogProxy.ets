@@ -39,6 +39,7 @@ export class DialogProxy {
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.custom
+    model.backType = option.backType
     this.nodeController.inset(model)
     this.dialogList.push(model)
   }
@@ -57,6 +58,7 @@ export class DialogProxy {
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.attach
+    model.backType = option.backType
     this.nodeController.inset(model)
     this.dialogList.push(model)
   }
@@ -73,6 +75,7 @@ export class DialogProxy {
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.loading
+    model.backType = option.backType
     model.visible = true
   }
 
@@ -97,7 +100,7 @@ export class DialogProxy {
   findDialog(tag?: string): BaseDialogModel | undefined {
     let dialogList = this.dialogList
     if (dialogList.length === 0) {
-      return
+      return undefined
     }
 
     if (tag) {
@@ -109,10 +112,17 @@ export class DialogProxy {
           break;
         }
       }
-      return dialogInfo
+      return dialogInfo?.visible ? dialogInfo : undefined
     }
 
-    return dialogList[dialogList.length - 1]
+    for (let i = dialogList.length - 1; i >= 0; i--) {
+      let item = dialogList[i]
+      if (item.visible) {
+        return item
+      }
+    }
+
+    return undefined
   }
 }
 

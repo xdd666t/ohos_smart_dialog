@@ -1,7 +1,6 @@
 import { CheckExistOption } from '../model/option/CheckExistOption'
 import { dialogProxy } from '../dialog_proxy/DialogProxy'
 import { SmartAllDialogType } from '../config/EnumConfig'
-import { SmartDialog } from '../SmartDialog'
 
 export class DialogCheckHelper {
   private static _instance?: DialogCheckHelper

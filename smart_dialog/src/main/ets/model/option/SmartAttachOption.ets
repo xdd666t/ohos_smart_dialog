@@ -1,3 +1,4 @@
+import { SmartBackType } from '../../config/EnumConfig'
 import { SmartBuilder } from '../../kit/function'
 
 export class SmartAttachOption {
@@ -11,4 +12,5 @@ export class SmartAttachOption {
   maskColor?: ResourceColor
   maskBuilder?: SmartBuilder
   onMask?: VoidCallback
+  backType?: SmartBackType
 }

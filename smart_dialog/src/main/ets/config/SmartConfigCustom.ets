@@ -1,4 +1,5 @@
 import { SmartBuilder } from '../kit/function'
+import { SmartBackType } from './EnumConfig'
 
 export class SmartConfigCustom {
   constructor() {
@@ -24,4 +25,6 @@ export class SmartConfigCustom {
   maskColor: ResourceColor = "#75000000"
   /// 可高度定制遮罩
   maskWrapBuild?: SmartBuilder
+  /// 返回事件对弹窗的影响
+  backType: SmartBackType = SmartBackType.dismiss
 }

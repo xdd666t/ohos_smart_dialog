@@ -1,7 +1,7 @@
 import { delay, SmartBuilder } from '../kit/function'
 import { BuilderNode } from '@kit.ArkUI'
 import { DialogProxy } from '../dialog_proxy/DialogProxy'
-import { SmartAllDialogType } from '../config/EnumConfig'
+import { SmartAllDialogType, SmartBackType } from '../config/EnumConfig'
 
 @ObservedV2
 class AnimationModel {
@@ -29,6 +29,7 @@ export class BaseDialogModel {
   onMask?: VoidCallback
   builderNode?: BuilderNode<[ESObject]> | null = null
   dialogType?: SmartAllDialogType
+  backType?: SmartBackType
 
   initAnimationStatus() {
     const animation = this.animation

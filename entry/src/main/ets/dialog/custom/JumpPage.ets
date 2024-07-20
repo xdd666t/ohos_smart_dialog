@@ -1,4 +1,4 @@
-import { SmartDialog } from 'ohos_smart_dialog'
+import { SmartBackType, SmartDialog } from 'ohos_smart_dialog'
 import { PageName, RouterHelper } from '../../app/helper/RouterHelper'
 import { randomColor } from '../../app/kit/Color'
 

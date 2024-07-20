@@ -31,17 +31,21 @@ export class SmartDialog {
   /// [onMask]：点击遮罩时，该回调将会被触发
   ///
   /// [tag]：如果你给dialog设置了tag, 你可以针对性的关闭它
+  ///
+  /// [backType]: 返回事件对弹窗的影响
   static show(option: SmartCustomOption) {
+    const customConfig = SmartDialog.config.custom
     DialogProxy.instance.show({
       builder: option.builder,
       builderArgs: option.builderArgs,
-      alignment: option.alignment ?? SmartDialog.config.custom.alignment,
-      animationTime: option.animationTime ?? SmartDialog.config.custom.animationTime,
-      maskColor: option.maskColor ?? SmartDialog.config.custom.maskColor,
-      maskBuilder: option.maskBuilder ?? SmartDialog.config.custom.maskWrapBuild,
-      clickMaskDismiss: option.clickMaskDismiss ?? SmartDialog.config.custom.clickMaskDismiss,
+      alignment: option.alignment ?? customConfig.alignment,
+      animationTime: option.animationTime ?? customConfig.animationTime,
+      maskColor: option.maskColor ?? customConfig.maskColor,
+      maskBuilder: option.maskBuilder ?? customConfig.maskWrapBuild,
+      clickMaskDismiss: option.clickMaskDismiss ?? customConfig.clickMaskDismiss,
       onMask: option.onMask,
       tag: option.tag ?? randomTag(),
+      backType: option.backType ?? customConfig.backType,
     })
   }
 
@@ -66,22 +70,26 @@ export class SmartDialog {
   /// [onMask]：点击遮罩时，该回调将会被触发
   ///
   /// [tag]：如果你给dialog设置了tag, 你可以针对性的关闭它
+  ///
+  /// [backType]: 返回事件对弹窗的影响
   static showAttach(option: SmartAttachOption) {
+    const attachConfig = SmartDialog.config.attach
     DialogProxy.instance.showAttach({
       targetId: option.targetId,
       builder: option.builder,
       builderArgs: option.builderArgs,
-      alignment: option.alignment ?? SmartDialog.config.attach.alignment,
-      animationTime: option.animationTime ?? SmartDialog.config.attach.animationTime,
-      maskColor: option.maskColor ?? SmartDialog.config.attach.maskColor,
-      maskBuilder: option.maskBuilder ?? SmartDialog.config.attach.maskWrapBuild,
-      clickMaskDismiss: option.clickMaskDismiss ?? SmartDialog.config.attach.clickMaskDismiss,
+      alignment: option.alignment ?? attachConfig.alignment,
+      animationTime: option.animationTime ?? attachConfig.animationTime,
+      maskColor: option.maskColor ?? attachConfig.maskColor,
+      maskBuilder: option.maskBuilder ?? attachConfig.maskWrapBuild,
+      clickMaskDismiss: option.clickMaskDismiss ?? attachConfig.clickMaskDismiss,
       onMask: option.onMask,
       tag: option.tag ?? randomTag(),
+      backType: option.backType ?? attachConfig.backType,
     })
   }
 
-  /// custom弹窗
+  /// loading弹窗
   ///
   /// [builder]：自定义 dialog
   ///
@@ -98,16 +106,20 @@ export class SmartDialog {
   /// [clickMaskDismiss]：true（点击遮罩后，将关闭dialog），false（不关闭）
   ///
   /// [onMask]：点击遮罩时，该回调将会被触发
+  ///
+  /// [backType]: 返回事件对弹窗的影响
   static showLoading(option: SmartLoadingOption) {
+    const loadingConfig = SmartDialog.config.loading
     DialogProxy.instance.showLoading({
       builder: option.builder,
       builderArgs: option.builderArgs,
-      alignment: option.alignment ?? SmartDialog.config.custom.alignment,
-      animationTime: option.animationTime ?? SmartDialog.config.custom.animationTime,
-      maskColor: option.maskColor ?? SmartDialog.config.custom.maskColor,
-      maskBuilder: option.maskBuilder ?? SmartDialog.config.custom.maskWrapBuild,
-      clickMaskDismiss: option.clickMaskDismiss ?? SmartDialog.config.custom.clickMaskDismiss,
+      alignment: option.alignment ?? loadingConfig.alignment,
+      animationTime: option.animationTime ?? loadingConfig.animationTime,
+      maskColor: option.maskColor ?? loadingConfig.maskColor,
+      maskBuilder: option.maskBuilder ?? loadingConfig.maskWrapBuild,
+      clickMaskDismiss: option.clickMaskDismiss ?? loadingConfig.clickMaskDismiss,
       onMask: option.onMask,
+      backType: option.backType ?? loadingConfig.backType,
     })
   }
 

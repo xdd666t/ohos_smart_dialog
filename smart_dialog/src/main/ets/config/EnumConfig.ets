@@ -94,3 +94,15 @@ export enum SmartAttachAlignmentType {
   /// Alignment.bottomLeft/topLeft(dialog右边边缘对齐目标控件左侧边缘), Alignment.bottomRight/topRight((dialog左边边缘对齐目标控件右侧边缘))
   outside,
 }
+
+/// 返回事件对弹窗的影响
+export enum SmartBackType {
+  /// 消费返回事件: 返回事件将关闭弹窗, 且拦截返回事件继续向后传递
+  dismiss,
+
+  /// 阻塞返回事件: 返回事件无法关闭弹窗, 且拦截返回事件继续向后传递
+  block,
+
+  /// 忽略返回事件: 返回事件不会关闭弹窗, 且返回事件继续向后传递
+  ignore,
+}
