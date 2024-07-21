@@ -21,7 +21,8 @@ export class MainState {
     {
       title: "showLoading",
       items: [
-        { title: MainFeature.loadingShow },
+        { title: MainFeature.loadingDefault },
+        { title: MainFeature.loadingCustom },
       ]
     },
   ]
@@ -38,7 +39,8 @@ export class MainFeature {
   // attach
   static attachLocation: string = "attachLocation"
   // loading
-  static loadingShow: string = "loadingShow"
+  static loadingDefault: string = "loadingDefault"
+  static loadingCustom: string = "loadingCustom"
 }
 
 

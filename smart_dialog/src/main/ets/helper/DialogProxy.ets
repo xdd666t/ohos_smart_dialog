@@ -11,6 +11,7 @@ import { LoadingDialogModel } from '../component/loading_dialog/LoadingDialogMod
 import { SmartDialog } from '../SmartDialog'
 import { SmartAllDialogType } from '../config/EnumConfig'
 import { LoadingNodeController } from '../node_controller/LoadingNodeController'
+import { SmartBuilder } from '../kit/function'
 
 export class DialogProxy {
   private static _instance?: DialogProxy
@@ -27,6 +28,8 @@ export class DialogProxy {
   navPathStack: NavPathStack = new NavPathStack()
   dialogNodeController: DialogNodeController = new DialogNodeController()
   loadingNodeController: LoadingNodeController = new LoadingNodeController()
+  // default style
+  loadingBuilder?: SmartBuilder
 
   show(option: SmartCustomOption) {
     let model = new CustomDialogModel()

@@ -1,7 +1,9 @@
 # 1.5.0
-- 增加showLoading
-- 强化SmartDialog.checkExist能力, 可检测指定类型弹窗是否存在
-- 增加backType: 返回事件对弹窗的影响
+- feature
+  - 增加showLoading
+  - 增加设置默认loading样式
+  - 强化SmartDialog.checkExist能力, 可检测指定类型弹窗是否存在
+  - 增加backType: 返回事件对弹窗的影响
 - breakChange
   - SmartDialog.config.checkExist -> SmartDialog.checkExist
 

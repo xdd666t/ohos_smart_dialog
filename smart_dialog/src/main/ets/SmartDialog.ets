@@ -108,18 +108,18 @@ export class SmartDialog {
   /// [onMask]：点击遮罩时，该回调将会被触发
   ///
   /// [backType]: 返回事件对弹窗的影响
-  static showLoading(option: SmartLoadingOption) {
+  static showLoading(option?: SmartLoadingOption) {
     const loadingConfig = SmartDialog.config.loading
     DialogProxy.instance.showLoading({
-      builder: option.builder,
-      builderArgs: option.builderArgs,
-      alignment: option.alignment ?? loadingConfig.alignment,
-      animationTime: option.animationTime ?? loadingConfig.animationTime,
-      maskColor: option.maskColor ?? loadingConfig.maskColor,
-      maskBuilder: option.maskBuilder ?? loadingConfig.maskWrapBuild,
-      clickMaskDismiss: option.clickMaskDismiss ?? loadingConfig.clickMaskDismiss,
-      onMask: option.onMask,
-      backType: option.backType ?? loadingConfig.backType,
+      builder: option?.builder ?? DialogProxy.instance.loadingBuilder,
+      builderArgs: option?.builderArgs,
+      alignment: option?.alignment ?? loadingConfig.alignment,
+      animationTime: option?.animationTime ?? loadingConfig.animationTime,
+      maskColor: option?.maskColor ?? loadingConfig.maskColor,
+      maskBuilder: option?.maskBuilder ?? loadingConfig.maskWrapBuild,
+      clickMaskDismiss: option?.clickMaskDismiss ?? loadingConfig.clickMaskDismiss,
+      onMask: option?.onMask,
+      backType: option?.backType ?? loadingConfig.backType,
     })
   }
 

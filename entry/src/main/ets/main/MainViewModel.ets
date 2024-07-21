@@ -1,10 +1,11 @@
+import { SmartDialog } from 'ohos_smart_dialog'
 import { attachLocation } from '../dialog/attach/Location'
 import { customMask } from '../dialog/custom/CustomMask'
 import { customJumpPage } from '../dialog/custom/JumpPage'
 import { customLocation } from '../dialog/custom/LocationDialog'
 import { customTag } from '../dialog/custom/TagDialog'
 import { customUseArgs } from '../dialog/custom/UseArgs'
-import { loadingShow } from '../dialog/loading/Show'
+import { loadingCustom } from '../dialog/loading/CustomLoading'
 import { MainFeature, MainState } from './MainState'
 
 export class MainViewModel {
@@ -34,8 +35,10 @@ export class MainViewModel {
     }
 
     // loading
-    if (item === MainFeature.loadingShow) {
-      loadingShow()
+    if (item === MainFeature.loadingDefault) {
+      SmartDialog.showLoading()
+    } else if (item === MainFeature.loadingCustom) {
+      loadingCustom()
     }
   }
 }
