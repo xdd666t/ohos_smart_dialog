@@ -35,7 +35,7 @@ SmartDialog.show({
 
 @Builder
 function dialogArgs(args: number) {
-  Text(args.toString()).fontSize(20).padding(50).backgroundColor(Color.White)
+  Text(args.toString()).padding(50).backgroundColor(Color.White)
 }
 
 // loading
@@ -249,24 +249,15 @@ export function delay(ms?: number): Promise<void> {
 export function customUseArgs() {
   SmartDialog.show({
     builder: dialogArgs,
-    builderArgs: { num: Math.random() } as ArgsModel,
+    // 支持任何类型
+    builderArgs: Math.random(),
   })
 }
 
 @Builder
-function dialogArgs(args: ArgsModel) {
-  Text(args.num.toString())
-    .fontSize(20)
-    .fontColor(Color.White)
-    .textAlign(TextAlign.Center)
-    .padding(50)
-    .margin(50)
-    .borderRadius(12)
-    .backgroundColor(randomColor())
-}
-
-class ArgsModel {
-  num: number = 0
+function dialogArgs(args: number) {
+  Text(`${args}`).fontColor(Color.White).padding(50)
+    .borderRadius(12).backgroundColor(randomColor())
 }
 ```
 
