@@ -10,7 +10,7 @@ export function loadingCustom() {
 @Builder
 export function customLoading() {
   Column({ space: 5 }) {
-    Text("open other loading").fontSize(16).fontColor(Color.White)
+    Text("again open loading").fontSize(16).fontColor(Color.White)
     LoadingProgress().width(80).height(80).color(Color.White)
   }
   .backgroundColor(randomColor())
