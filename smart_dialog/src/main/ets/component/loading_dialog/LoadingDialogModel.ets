@@ -62,7 +62,11 @@ export class LoadingDialogModel extends BaseDialogModel {
   }
 
 
-  async dismiss(): Promise<void> {
+  async dismiss(tag?: string): Promise<void> {
+    if (tag && tag !== this.tag) {
+      return
+    }
+
     const animation = this.animation
     animation.time = animation.endTime
     this.initAnimationStatus()

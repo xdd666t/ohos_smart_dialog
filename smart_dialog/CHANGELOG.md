@@ -2,6 +2,7 @@
 - feature
   - 增加showLoading
   - 增加设置默认loading样式
+  - 定制showLoading tag能力
   - 强化SmartDialog.checkExist能力, 可检测指定类型弹窗是否存在
   - 增加backType: 返回事件对弹窗的影响
 - breakChange

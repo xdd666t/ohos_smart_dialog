@@ -107,6 +107,8 @@ export class SmartDialog {
   ///
   /// [onMask]：点击遮罩时，该回调将会被触发
   ///
+  /// [tag]：如果你给dialog设置了tag, 你可以针对性的关闭它
+  ///
   /// [backType]: 返回事件对弹窗的影响
   static showLoading(option?: SmartLoadingOption) {
     const loadingConfig = SmartDialog.config.loading
@@ -119,6 +121,7 @@ export class SmartDialog {
       maskBuilder: option?.maskBuilder ?? loadingConfig.maskWrapBuild,
       clickMaskDismiss: option?.clickMaskDismiss ?? loadingConfig.clickMaskDismiss,
       onMask: option?.onMask,
+      tag: option?.tag,
       backType: option?.backType ?? loadingConfig.backType,
     })
   }

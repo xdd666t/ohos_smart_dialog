@@ -78,6 +78,7 @@ export class DialogProxy {
     model.animation.startTime = option.animationTime
     model.animation.endTime = option.animationTime
     model.clickMaskDismiss = option.clickMaskDismiss
+    model.tag = option.tag
     model.router = SmartNavigatorObserver.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
@@ -90,7 +91,7 @@ export class DialogProxy {
 
   async dismiss(option?: SmartDismissOption): Promise<void> {
     if (SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {
-      await this.loadingDialog?.dismiss()
+      await this.loadingDialog?.dismiss(option?.tag)
       return
     }
 

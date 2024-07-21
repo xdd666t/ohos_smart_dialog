@@ -4,6 +4,11 @@ import { randomColor } from '../../app/kit/Color'
 export function loadingCustom() {
   SmartDialog.showLoading({
     builder: customLoading,
+    clickMaskDismiss: false,
+    onMask: () => {
+      SmartDialog.dismiss({ tag: '111' })
+    },
+    tag: "1"
   })
 }
 
