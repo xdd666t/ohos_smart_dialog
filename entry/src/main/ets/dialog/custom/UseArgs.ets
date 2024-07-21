@@ -2,6 +2,7 @@ import { SmartDialog } from 'ohos_smart_dialog'
 import { randomColor } from '../../app/kit/Color'
 
 export function customUseArgs() {
+  SmartDialog.showLoading({ builderArgs: 1 })
   SmartDialog.show({
     builder: dialogArgs,
     builderArgs: { num: Math.random() } as ArgsModel,
@@ -10,6 +11,7 @@ export function customUseArgs() {
 
 @Builder
 function dialogArgs(args: ArgsModel) {
+
   Text(args.num.toString())
     .fontSize(20)
     .fontColor(Color.White)

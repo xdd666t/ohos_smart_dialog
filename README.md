@@ -3,12 +3,12 @@
 **强大的SmartDialog**
 
 - 单次初始化后即可使用，无需多处配置相关Component
-- 非UI区域内使用
-- 自定义Component
-- 弹窗中打开页面的优雅交互
-- 返回事件处理
-- 打开多弹窗能力
-- 多位置弹窗: 上下左右中间
+- 优雅，极简的用法
+- 非UI区域内使用，自定义Component
+- 返回事件处理，优化的跨页面交互
+- 多弹窗能力，多位置弹窗：上下左右中间
+- 定位弹窗：自动定位目标Component
+- 极简用法的loading弹窗
 
 鸿蒙版本的SmartDialog，功能会逐步和 [flutter_smart_dialog](https://github.com/fluttercandies/flutter_smart_dialog) 对齐（长期），api会尽量保持一致
 
@@ -23,6 +23,24 @@
 ![customTag](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725522.gif)
 
 ![customJumpPage](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725830.gif)
+
+# 极简用法
+
+```typescript
+// dialog
+SmartDialog.show({
+  builder: dialogArgs,
+  builderArgs: Math.random(),
+})
+
+@Builder
+function dialogArgs(args: number) {
+  Text(args.toString()).fontSize(20).padding(50).backgroundColor(Color.White)
+}
+
+// loading
+SmartDialog.showLoading()
+```
 
 # 安装
 
@@ -52,8 +70,8 @@ struct Index {
         MainPage()
       }
       .mode(NavigationMode.Stack)
-        .hideTitleBar(true)
-        .navDestination(pageMap)
+      .hideTitleBar(true)
+      .navDestination(pageMap)
 
       // here
       OhosSmartDialog()
@@ -121,6 +139,29 @@ struct JumpPage {
 }
 ```
 
+**路由监听的注意事项**
+
+- 一般来说，你无需关注SmartDialog的路由监听，因为内部已经设置了路由监听拦截器
+
+- **但是**NavPathStack仅支持单拦截器（setInterception），如果业务代码也使用了这个api，会导致SmartDialog的路由监听被覆盖，从而失效
+
+> **如果出现该情况，请参照下述解决方案**
+
+- 在你的路由监听类中手动调用`OhosSmartDialog.observe`
+
+```typescript
+export default class YourNavigatorObserver implements NavigationInterception {
+  willShow?: InterceptionShowCallback = (from, to, operation, isAnimated) => {
+    OhosSmartDialog.observe.willShow?.(from, to, operation, isAnimated)
+    // ...
+  }
+  didShow?: InterceptionShowCallback = (from, to, operation, isAnimated) => {
+    OhosSmartDialog.observe.didShow?.(from, to, operation, isAnimated)
+    // ...
+  }
+}
+```
+
 # SmartConfig
 
 - 支持全局配置弹窗的默认属性
@@ -139,10 +180,51 @@ function init() {
 - 检查弹窗是否存在
 
 ```typescript
-let isExist = SmartDialog.config.checkExist()
+let isExist = SmartDialog.checkExist()
 ```
 
-# 使用
+# 配置全局默认样式
+
+- showLoading自定样式十分简单
+
+```typescript
+SmartDialog.showLoading({ builder: customLoading })
+```
+
+**但是对于大家来说，肯定是想用`SmartDialog.showLoading()`这种简单写法，估支持自定义全局默认样式**
+
+- 需要在OhosSmartDialog上配置自定义的全局默认样式
+
+```typescript
+@Entry
+@Component
+struct Index {
+  build() {
+    Stack() {
+      OhosSmartDialog({
+        // custom global loading
+        loadingBuilder: customLoading,
+      })
+    }.height('100%').width('100%')
+  }
+}
+
+@Builder
+export function customLoading(args: ESObject) {
+  LoadingProgress().width(80).height(80).color(Color.White)
+}
+```
+
+- 配置完你的自定样式后，使用下述代码，就会显示你的loading样式
+
+```typescript
+SmartDialog.showLoading()
+
+// 支持入参，可以在特殊场景下灵活配置
+SSmartDialog.showLoading({ builderArgs: 1 })
+```
+
+# Demo
 
 - 下方会共用的方法
 
