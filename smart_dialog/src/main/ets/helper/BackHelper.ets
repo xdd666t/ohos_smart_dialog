@@ -1,7 +1,7 @@
 import { SmartAllDialogType, SmartBackType } from '../config/EnumConfig'
-import { dialogProxy } from '../dialog_proxy/DialogProxy'
 import { BaseDialogModel } from '../model/BaseDialogModel'
 import { SmartDialog } from '../SmartDialog'
+import { DialogProxy } from './DialogProxy'
 
 export class BackHelper {
   private static _instance?: BackHelper
@@ -29,6 +29,7 @@ export class BackHelper {
   }
 
   findMultiDialog(): BaseDialogModel | undefined {
+    const dialogProxy = DialogProxy.instance
     if (SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {
       return dialogProxy.loadingDialog
     }

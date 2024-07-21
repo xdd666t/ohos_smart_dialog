@@ -1,6 +1,6 @@
 import { BaseDialogModel } from '../model/BaseDialogModel'
-import { DialogProxy } from '../dialog_proxy/DialogProxy'
 import { SmartBuilder } from '../kit/function'
+import { DialogProxy } from '../helper/DialogProxy'
 
 @Component
 export struct MaskComponent {
@@ -20,7 +20,7 @@ export struct MaskComponent {
       }
     }
     .opacity(this.item.animation.maskOpacity)
-    .animation({ duration: this.item.animationTime, curve: Curve.Linear })
+    .animation({ duration: this.item.animation.time, curve: Curve.Linear })
     .width('100%')
     .height('100%')
     .onClick(() => {

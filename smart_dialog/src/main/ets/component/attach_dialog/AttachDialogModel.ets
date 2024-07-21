@@ -18,6 +18,7 @@ export class AttachDialogModel extends BaseDialogModel {
   initAnimationStatus(selfId?: string): void {
     const animation = this.animation
     const attachInfo = this.attachInfo
+    animation.time = animation.startTime
     attachInfo.targetInfo = componentUtils.getRectangleById(this.targetId)
     attachInfo.selfInfo = componentUtils.getRectangleById(selfId ?? '')
 
@@ -38,7 +39,9 @@ export class AttachDialogModel extends BaseDialogModel {
   }
 
   async dismiss(): Promise<void> {
-    this.animation.dialogOpacity = 0
+    const animation = this.animation
+    animation.time = animation.endTime
+    animation.dialogOpacity = 0
     await super.dismiss()
     this.remove()
   }

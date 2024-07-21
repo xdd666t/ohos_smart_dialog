@@ -1,7 +1,7 @@
 import { delay, SmartBuilder } from '../kit/function'
 import { BuilderNode } from '@kit.ArkUI'
-import { DialogProxy } from '../dialog_proxy/DialogProxy'
 import { SmartAllDialogType, SmartBackType } from '../config/EnumConfig'
+import { DialogProxy } from '../helper/DialogProxy'
 
 @ObservedV2
 class AnimationModel {
@@ -11,6 +11,9 @@ class AnimationModel {
   @Trace dialogScale: number = 1
   @Trace dialogOpacity: number = 1
   @Trace dialogPosition?: Edges
+  @Trace time?: number
+  startTime?: number
+  endTime?: number
 }
 
 @ObservedV2
@@ -19,7 +22,6 @@ export class BaseDialogModel {
   builderArgs?: ESObject
   alignment?: Alignment
   animation: AnimationModel = new AnimationModel()
-  animationTime?: number
   clickMaskDismiss?: boolean
   tag?: string
   router?: string
@@ -37,16 +39,18 @@ export class BaseDialogModel {
   }
 
   async show(): Promise<void> {
-    this.animation.maskOpacity = 1
-    await delay(this.animationTime)
+    const animation = this.animation
+    animation.maskOpacity = 1
+    await delay(animation.startTime)
   }
 
   async dismiss(): Promise<void> {
-    this.animation.maskOpacity = 0
-    await delay(this.animationTime)
+    const animation = this.animation
+    animation.maskOpacity = 0
+    await delay(animation.endTime)
   }
 
   remove() {
-    DialogProxy.instance.nodeController.remove(this)
+    DialogProxy.instance.dialogNodeController.remove(this)
   }
 }

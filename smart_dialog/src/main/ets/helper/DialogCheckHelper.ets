@@ -1,6 +1,6 @@
 import { CheckExistOption } from '../model/option/CheckExistOption'
-import { dialogProxy } from '../dialog_proxy/DialogProxy'
 import { SmartAllDialogType } from '../config/EnumConfig'
+import { DialogProxy } from './DialogProxy'
 
 export class DialogCheckHelper {
   private static _instance?: DialogCheckHelper
@@ -14,7 +14,8 @@ export class DialogCheckHelper {
   }
 
   checkExist(option: CheckExistOption): boolean {
-    let dialogTypes = option.dialogTypes
+    const dialogTypes = option.dialogTypes
+    const dialogProxy = DialogProxy.instance
 
     if (option?.tag && (dialogProxy.findDialog(option?.tag) !== undefined)) {
       return true
@@ -28,13 +29,14 @@ export class DialogCheckHelper {
       result = this.isExistDialog(SmartAllDialogType.attach)
     }
     if (!result && dialogTypes?.includes(SmartAllDialogType.loading)) {
-      result = dialogProxy.loadingDialog.visible
+      result = dialogProxy.loadingNodeController.rootNode?.getFirstChild() !== null
     }
 
     return result
   }
 
   private isExistDialog(dialogType: SmartAllDialogType): boolean {
+    const dialogProxy = DialogProxy.instance
     let isExist = false
     for (let item of dialogProxy.dialogList) {
       if (item.visible && item.dialogType === dialogType) {

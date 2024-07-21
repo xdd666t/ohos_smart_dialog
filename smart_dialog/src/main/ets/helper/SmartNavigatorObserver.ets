@@ -1,4 +1,4 @@
-import { dialogProxy } from '../dialog_proxy/DialogProxy'
+import { DialogProxy } from './DialogProxy'
 import { safeReturn } from '../kit/function'
 
 export default class SmartNavigatorObserver implements NavigationInterception {
@@ -45,7 +45,7 @@ export default class SmartNavigatorObserver implements NavigationInterception {
     let popRouter: string | undefined = safeReturn(() => {
       return (from as NavDestinationContext).navDestinationId
     })
-    dialogProxy.dialogList.filter((item) => {
+    DialogProxy.instance.dialogList.filter((item) => {
       let isAccess = item.router !== popRouter
       if (!isAccess) {
         item.remove()
@@ -56,7 +56,7 @@ export default class SmartNavigatorObserver implements NavigationInterception {
   }
 
   private dialogVisible() {
-    dialogProxy.dialogList.forEach((item) => {
+    DialogProxy.instance.dialogList.forEach((item) => {
       item.visible = SmartNavigatorObserver.curRouter === item.router
     })
   }

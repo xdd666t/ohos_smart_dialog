@@ -1,7 +1,6 @@
-import { dialogProxy } from './dialog_proxy/DialogProxy'
 import SmartNavigatorObserver from './helper/SmartNavigatorObserver'
 import { BackHelper } from './helper/BackHelper'
-import { LoadingNode } from './component/loading_dialog/LoadingDialogComponent'
+import { DialogProxy } from './helper/DialogProxy'
 
 @Component
 export struct OhosSmartDialog {
@@ -9,16 +8,16 @@ export struct OhosSmartDialog {
 
   static registerRouter(navPathStack: NavPathStack): NavPathStack {
     navPathStack.setInterception(OhosSmartDialog.observe)
-    return dialogProxy.navPathStack = navPathStack
+    return DialogProxy.instance.navPathStack = navPathStack
   }
 
   static onBackPressed = BackHelper.instance.onBackPressed
 
   build() {
     Stack() {
-      NodeContainer(dialogProxy.nodeController)
+      NodeContainer(DialogProxy.instance.dialogNodeController)
 
-      LoadingNode()
+      NodeContainer(DialogProxy.instance.loadingNodeController)
     }
   }
 }

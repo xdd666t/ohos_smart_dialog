@@ -1,15 +1,16 @@
-import { DialogNodeController } from '../component/DialogNodeController'
+import { DialogNodeController } from '../node_controller/DialogNodeController'
 import { SmartDismissOption } from '../model/option/SmartDismissOption'
 import { BaseDialogModel } from '../model/BaseDialogModel'
 import { CustomDialogModel } from '../component/custom_dialog/CustomDialogModel'
 import { SmartCustomOption } from '../model/option/SmartCustomOption'
-import SmartNavigatorObserver from '../helper/SmartNavigatorObserver'
+import SmartNavigatorObserver from './SmartNavigatorObserver'
 import { SmartAttachOption } from '../model/option/SmartAttachOption'
 import { AttachDialogModel } from '../component/attach_dialog/AttachDialogModel'
 import { SmartLoadingOption } from '../model/option/SmartLoadingOption'
 import { LoadingDialogModel } from '../component/loading_dialog/LoadingDialogModel'
 import { SmartDialog } from '../SmartDialog'
 import { SmartAllDialogType } from '../config/EnumConfig'
+import { LoadingNodeController } from '../node_controller/LoadingNodeController'
 
 export class DialogProxy {
   private static _instance?: DialogProxy
@@ -22,16 +23,18 @@ export class DialogProxy {
   }
 
   dialogList: Array<BaseDialogModel> = []
+  loadingDialog?: LoadingDialogModel
   navPathStack: NavPathStack = new NavPathStack()
-  nodeController: DialogNodeController = new DialogNodeController()
-  loadingDialog: LoadingDialogModel = new LoadingDialogModel()
+  dialogNodeController: DialogNodeController = new DialogNodeController()
+  loadingNodeController: LoadingNodeController = new LoadingNodeController()
 
   show(option: SmartCustomOption) {
     let model = new CustomDialogModel()
     model.builder = option.builder
     model.builderArgs = option.builderArgs
     model.alignment = option.alignment
-    model.animationTime = option.animationTime
+    model.animation.startTime = option.animationTime
+    model.animation.endTime = option.animationTime
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
     model.router = SmartNavigatorObserver.curRouter
@@ -40,7 +43,7 @@ export class DialogProxy {
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.custom
     model.backType = option.backType
-    this.nodeController.inset(model)
+    this.dialogNodeController.inset(model)
     this.dialogList.push(model)
   }
 
@@ -50,7 +53,8 @@ export class DialogProxy {
     model.builder = option.builder
     model.builderArgs = option.builderArgs
     model.alignment = option.alignment
-    model.animationTime = option.animationTime
+    model.animation.startTime = option.animationTime
+    model.animation.endTime = option.animationTime
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
     model.router = SmartNavigatorObserver.curRouter
@@ -59,16 +63,17 @@ export class DialogProxy {
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.attach
     model.backType = option.backType
-    this.nodeController.inset(model)
+    this.dialogNodeController.inset(model)
     this.dialogList.push(model)
   }
 
   showLoading(option: SmartLoadingOption) {
-    let model = this.loadingDialog
+    let model = this.loadingDialog = new LoadingDialogModel()
     model.builder = option.builder
     model.builderArgs = option.builderArgs
     model.alignment = option.alignment
-    model.animationTime = option.animationTime
+    model.animation.startTime = option.animationTime
+    model.animation.endTime = option.animationTime
     model.clickMaskDismiss = option.clickMaskDismiss
     model.router = SmartNavigatorObserver.curRouter
     model.maskColor = option.maskColor
@@ -76,25 +81,28 @@ export class DialogProxy {
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.loading
     model.backType = option.backType
-    model.visible = true
+
+    this.loadingNodeController.update(model)
   }
 
   async dismiss(option?: SmartDismissOption): Promise<void> {
     if (SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {
-      await this.loadingDialog.dismiss()
+      await this.loadingDialog?.dismiss()
       return
     }
 
+    const dialogList = this.dialogList
     let dialog = this.findDialog(option?.tag)
     if (!dialog) {
-      if (this.dialogList.length === 0 && this.nodeController.rootNode?.getFirstChild()?.getFirstChild()) {
-        this.nodeController.rootNode?.clearChildren()
+      const rootNode = this.dialogNodeController.rootNode
+      if (dialogList.length === 0 && rootNode?.getFirstChild()) {
+        rootNode?.clearChildren()
       }
       return
     }
 
     await dialog.dismiss()
-    this.dialogList = this.dialogList.filter((item) => item.tag !== dialog?.tag)
+    this.dialogList = dialogList.filter((item) => item.tag !== dialog?.tag)
   }
 
   findDialog(tag?: string): BaseDialogModel | undefined {
@@ -125,5 +133,3 @@ export class DialogProxy {
     return undefined
   }
 }
-
-export const dialogProxy = DialogProxy.instance
