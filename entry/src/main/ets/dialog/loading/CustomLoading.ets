@@ -13,8 +13,9 @@ export function customLoading() {
     Text("again open loading").fontSize(16).fontColor(Color.White)
     LoadingProgress().width(80).height(80).color(Color.White)
   }
-  .backgroundColor(randomColor())
   .padding(20)
   .borderRadius(12)
   .onClick(() => loadingCustom())
+  .backgroundColor(randomColor())
+  // .backgroundColor($r("app.color.bg_theme_color"))
 }

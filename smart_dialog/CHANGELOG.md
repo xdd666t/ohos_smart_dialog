@@ -1,3 +1,6 @@
+# 1.5.1
+- 适配暗黑模式: 切换暗黑模式时, 所有dialog自动重建
+
 # 1.5.0
 - feature
   - 增加showLoading
