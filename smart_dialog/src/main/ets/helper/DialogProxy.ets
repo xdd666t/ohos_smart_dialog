@@ -12,11 +12,25 @@ import { SmartDialog } from '../SmartDialog'
 import { SmartAllDialogType } from '../config/EnumConfig'
 import { LoadingNodeController } from '../node_controller/LoadingNodeController'
 import { SmartBuilder } from '../kit/function'
+import { Configuration } from '@kit.AbilityKit'
+
 
 export class DialogProxy {
   private static _instance?: DialogProxy
 
   private constructor() {
+    // 处理暗黑模式
+    this.onConfigurationUpdate = (newConfig: Configuration) => {
+      this.dialogList.forEach((item) => {
+        item.remove(false)
+        item.animation.startTime = 0
+        this.dialogNodeController.inset(item)
+      })
+
+      if (SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {
+        this.loadingNodeController.update(this.loadingDialog)
+      }
+    }
   }
 
   static get instance() {
@@ -30,6 +44,7 @@ export class DialogProxy {
   loadingNodeController: LoadingNodeController = new LoadingNodeController()
   // default style
   loadingBuilder?: SmartBuilder
+  onConfigurationUpdate: (newConfig: Configuration) => void
 
   show(option: SmartCustomOption) {
     let model = new CustomDialogModel()

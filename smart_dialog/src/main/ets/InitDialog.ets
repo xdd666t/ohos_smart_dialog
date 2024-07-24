@@ -9,6 +9,7 @@ export struct OhosSmartDialog {
   // 默认loading样式
   @BuilderParam loadingBuilder?: SmartBuilder
   static observe: SmartNavigatorObserver = new SmartNavigatorObserver()
+  static onConfigurationUpdate = DialogProxy.instance.onConfigurationUpdate
 
   aboutToAppear(): void {
     DialogProxy.instance.loadingBuilder = this.loadingBuilder ?? defaultLoadingBuilder

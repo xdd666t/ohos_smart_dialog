@@ -12,5 +12,7 @@ export function customUseArgs() {
 @Builder
 function dialogArgs(args: number) {
   Text(`${args}`).fontColor(Color.White).padding(50)
-    .borderRadius(12).backgroundColor(randomColor())
+    .borderRadius(12)
+    .backgroundColor(randomColor())
+    // .backgroundColor($r("app.color.bg_theme_color"))
 }
