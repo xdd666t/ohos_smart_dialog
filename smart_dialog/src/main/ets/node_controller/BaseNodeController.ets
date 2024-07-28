@@ -27,15 +27,13 @@ export class BaseNodeController extends NodeController {
     model.builderNode = builderNode
   }
 
-  remove(model: BaseDialogModel, needDispose: boolean = true) {
+  remove(model: BaseDialogModel) {
     if (this.rootNode === null) {
       return
     }
 
     const frameNode = model.builderNode?.getFrameNode()
     this.rootNode.removeChild(frameNode)
-    if (needDispose) {
-      frameNode?.disposeTree()
-    }
+    frameNode?.disposeTree()
   }
 }

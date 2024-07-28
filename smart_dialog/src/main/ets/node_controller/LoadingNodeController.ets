@@ -4,6 +4,7 @@ import { BaseDialogModel } from '../model/BaseDialogModel'
 import { BaseNodeController } from './BaseNodeController'
 import { SmartDialog } from '../SmartDialog'
 import { SmartAllDialogType } from '../config/EnumConfig'
+import { DialogProxy } from '../helper/DialogProxy'
 
 export class LoadingNodeController extends BaseNodeController {
   inset(model: BaseDialogModel) {
@@ -11,10 +12,11 @@ export class LoadingNodeController extends BaseNodeController {
   }
 
   clearChildren() {
+    DialogProxy.instance.loadingDialog.builderNode?.getFrameNode()?.disposeTree()
     this.rootNode?.clearChildren()
   }
 
-  update(loadingDialog?: LoadingDialogModel) {
+  update(loadingDialog: LoadingDialogModel) {
     if (!loadingDialog) {
       return
     }
@@ -29,14 +31,10 @@ export class LoadingNodeController extends BaseNodeController {
 
 @Builder
 function buildLoadingNode(loadingDialog: LoadingDialogModel) {
-  LoadingNode({ loadingDialog: loadingDialog })
-}
-
-@Component
-struct LoadingNode {
-  loadingDialog: LoadingDialogModel = new LoadingDialogModel()
-
-  build() {
-    LoadingDialogComponent({ item: this.loadingDialog })
+  Stack() {
+    LoadingDialogComponent({
+      item: loadingDialog,
+      builder: loadingDialog.builder
+    })
   }
 }

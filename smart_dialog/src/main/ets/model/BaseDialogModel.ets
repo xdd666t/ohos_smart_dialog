@@ -50,7 +50,7 @@ export class BaseDialogModel {
     await delay(animation.endTime)
   }
 
-  remove(needDispose: boolean = true) {
-    DialogProxy.instance.dialogNodeController.remove(this, needDispose)
+  remove() {
+    DialogProxy.instance.dialogNodeController.remove(this)
   }
 }

@@ -22,7 +22,7 @@ export class DialogProxy {
     // 处理暗黑模式
     this.onConfigurationUpdate = (newConfig: Configuration) => {
       this.dialogList.forEach((item) => {
-        item.remove(false)
+        item.remove()
         item.animation.startTime = 0
         this.dialogNodeController.inset(item)
       })
@@ -38,7 +38,7 @@ export class DialogProxy {
   }
 
   dialogList: Array<BaseDialogModel> = []
-  loadingDialog?: LoadingDialogModel
+  loadingDialog: LoadingDialogModel = new LoadingDialogModel()
   navPathStack: NavPathStack = new NavPathStack()
   dialogNodeController: DialogNodeController = new DialogNodeController()
   loadingNodeController: LoadingNodeController = new LoadingNodeController()
@@ -106,7 +106,7 @@ export class DialogProxy {
 
   async dismiss(option?: SmartDismissOption): Promise<void> {
     if (SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {
-      await this.loadingDialog?.dismiss(option?.tag)
+      await this.loadingDialog.dismiss(option?.tag)
       return
     }
 
