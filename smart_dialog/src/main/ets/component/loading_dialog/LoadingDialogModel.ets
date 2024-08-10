@@ -66,7 +66,6 @@ export class LoadingDialogModel extends BaseDialogModel {
     if (tag && tag !== this.tag) {
       return
     }
-
     const animation = this.animation
     animation.time = animation.endTime
     this.initAnimationStatus()

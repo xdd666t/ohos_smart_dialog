@@ -13,4 +13,5 @@ export class SmartAttachOption {
   maskBuilder?: SmartBuilder
   onMask?: VoidCallback
   backType?: SmartBackType
+  onDismiss?: VoidCallback
 }

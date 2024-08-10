@@ -12,4 +12,5 @@ export class SmartLoadingOption {
   maskBuilder?: SmartBuilder
   onMask?: VoidCallback
   backType?: SmartBackType
+  onDismiss?: VoidCallback
 }

@@ -32,6 +32,7 @@ export class BaseDialogModel {
   builderNode?: BuilderNode<[ESObject]> | null = null
   dialogType?: SmartAllDialogType
   backType?: SmartBackType
+  onDismiss?: VoidCallback
 
   initAnimationStatus() {
     const animation = this.animation
@@ -45,6 +46,8 @@ export class BaseDialogModel {
   }
 
   async dismiss(): Promise<void> {
+    this.onDismiss?.()
+
     const animation = this.animation
     animation.maskOpacity = 0
     await delay(animation.endTime)

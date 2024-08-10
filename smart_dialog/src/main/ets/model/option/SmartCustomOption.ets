@@ -12,4 +12,5 @@ export class SmartCustomOption {
   maskBuilder?: SmartBuilder
   onMask?: VoidCallback
   backType?: SmartBackType
+  onDismiss?: VoidCallback
 }

@@ -46,6 +46,7 @@ export class SmartDialog {
       onMask: option.onMask,
       tag: option.tag ?? randomTag(),
       backType: option.backType ?? customConfig.backType,
+      onDismiss: option.onDismiss,
     })
   }
 
@@ -86,6 +87,7 @@ export class SmartDialog {
       onMask: option.onMask,
       tag: option.tag ?? randomTag(),
       backType: option.backType ?? attachConfig.backType,
+      onDismiss: option.onDismiss,
     })
   }
 
@@ -123,6 +125,7 @@ export class SmartDialog {
       onMask: option?.onMask,
       tag: option?.tag,
       backType: option?.backType ?? loadingConfig.backType,
+      onDismiss: option?.onDismiss,
     })
   }
 

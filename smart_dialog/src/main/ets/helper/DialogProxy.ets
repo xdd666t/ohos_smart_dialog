@@ -61,6 +61,7 @@ export class DialogProxy {
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.custom
     model.backType = option.backType
+    model.onDismiss = option.onDismiss
     this.dialogNodeController.inset(model)
     this.dialogList.push(model)
   }
@@ -81,6 +82,7 @@ export class DialogProxy {
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.attach
     model.backType = option.backType
+    model.onDismiss = option.onDismiss
     this.dialogNodeController.inset(model)
     this.dialogList.push(model)
   }
@@ -100,6 +102,7 @@ export class DialogProxy {
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.loading
     model.backType = option.backType
+    model.onDismiss = option.onDismiss
 
     this.loadingNodeController.update(model)
   }

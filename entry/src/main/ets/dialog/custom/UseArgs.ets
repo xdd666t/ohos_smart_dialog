@@ -14,5 +14,5 @@ function dialogArgs(args: number) {
   Text(`${args}`).fontColor(Color.White).padding(50)
     .borderRadius(12)
     .backgroundColor(randomColor())
-    // .backgroundColor($r("app.color.bg_theme_color"))
+  // .backgroundColor($r("app.color.bg_theme_color"))
 }
