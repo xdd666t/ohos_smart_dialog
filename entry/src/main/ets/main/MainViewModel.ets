@@ -1,4 +1,5 @@
 import { SmartDialog } from 'ohos_smart_dialog'
+import { attachEasy } from '../dialog/attach/Easy'
 import { attachLocation } from '../dialog/attach/Location'
 import { customMask } from '../dialog/custom/CustomMask'
 import { customJumpPage } from '../dialog/custom/JumpPage'
@@ -30,7 +31,9 @@ export class MainViewModel {
     }
 
     // attach
-    if (item === MainFeature.attachLocation) {
+    if (item === MainFeature.attachEasy) {
+      attachEasy()
+    } else if (item === MainFeature.attachLocation) {
       attachLocation()
     }
 

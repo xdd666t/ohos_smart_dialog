@@ -15,6 +15,7 @@ export class MainState {
     {
       title: "showAttach",
       items: [
+        { title: MainFeature.attachEasy },
         { title: MainFeature.attachLocation },
       ]
     },
@@ -37,6 +38,7 @@ export class MainFeature {
   static customMask: string = "customMask"
   static customTag: string = "customTag"
   // attach
+  static attachEasy: string = "attachEasy"
   static attachLocation: string = "attachLocation"
   // loading
   static loadingDefault: string = "loadingDefault"

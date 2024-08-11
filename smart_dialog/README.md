@@ -16,11 +16,11 @@
 
 # 效果
 
-- Tablet模拟器目前有些问题，会导致动画闪烁，请忽略
+- Tablet 模拟器目前有些问题，会导致动画闪烁，请忽略；注：真机动画丝滑流畅，无任何问题
 
 ![attachLocation](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725613.gif)
 
-![customTag](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725522.gif)
+![customTag](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102228252.gif)
 
 ![customJumpPage](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725830.gif)
 
@@ -48,7 +48,7 @@ SmartDialog.showLoading()
 - ohos：https://ohpm.openharmony.cn/#/cn/detail/ohos_smart_dialog
 
 ```typescript
- ohpm install ohos_smart_dialog 
+ohpm install ohos_smart_dialog 
 ```
 
 # 配置
@@ -234,10 +234,17 @@ function init() {
 - 检查弹窗是否存在
 
 ```typescript
+// 检查当前是否有CustomDialog，AttachDialog或LoadingDialog处于打开状态
 let isExist = SmartDialog.checkExist()
+
+// 检查当前是否有AttachDialog处于打开状态
+let isExist = SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.attach] })
+
+// 检查当前是否有tag为“xxx”的dialog处于打开状态
+let isExist = SmartDialog.checkExist({ tag: "xxx" })
 ```
 
-# Demo
+# CustomDialog
 
 - 下方会共用的方法
 
@@ -274,7 +281,206 @@ function dialogArgs(args: number) {
 }
 ```
 
-## 定位弹窗
+![customUseArgs](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102227942.gif)
+
+## 多位置弹窗
+
+```typescript
+export async function customLocation() {
+  const animationTime = 1000
+  SmartDialog.show({
+    builder: dialogLocationHorizontal,
+    alignment: Alignment.Start,
+  })
+  await delay(animationTime)
+  SmartDialog.show({
+    builder: dialogLocationVertical,
+    alignment: Alignment.Top,
+  })
+}
+
+
+@Builder
+function dialogLocationVertical() {
+  Text("location")
+    .width("100%")
+    .height("20%")
+    .fontSize(20)
+    .fontColor(Color.White)
+    .textAlign(TextAlign.Center)
+    .padding(50)
+    .backgroundColor(randomColor())
+}
+
+@Builder
+function dialogLocationHorizontal() {
+  Text("location")
+    .width("30%")
+    .height("100%")
+    .fontSize(20)
+    .fontColor(Color.White)
+    .textAlign(TextAlign.Center)
+    .padding(50)
+    .backgroundColor(randomColor())
+}
+```
+
+![customLocation](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102228928.gif)
+
+## 跨页面交互
+
+- 正常使用，无需设置什么参数
+
+```typescript
+export function customJumpPage() {
+  SmartDialog.show({
+    builder: dialogJumpPage,
+  })
+}
+
+@Builder
+function dialogJumpPage() {
+  Text("JumPage")
+    .fontSize(30)
+    .padding(50)
+    .borderRadius(12)
+    .fontColor(Color.White)
+    .backgroundColor(randomColor())
+    .onClick(() => {
+      // 跳转页面
+    })
+}
+```
+
+![customJumpPage](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102228102.gif)
+
+## 关闭指定弹窗
+
+```typescript
+export async function customTag() {
+  const animationTime = 1000
+  SmartDialog.show({
+    builder: dialogTagA,
+    alignment: Alignment.Start,
+    tag: "A",
+  })
+  await delay(animationTime)
+  SmartDialog.show({
+    builder: dialogTagB,
+    alignment: Alignment.Top,
+    tag: "B",
+  })
+}
+
+@Builder
+function dialogTagA() {
+  Text("A")
+    .width("20%")
+    .height("100%")
+    .fontSize(20)
+    .fontColor(Color.White)
+    .textAlign(TextAlign.Center)
+    .padding(50)
+    .backgroundColor(randomColor())
+}
+
+@Builder
+function dialogTagB() {
+  Flex({ wrap: FlexWrap.Wrap }) {
+    ForEach(["closA", "closeSelf"], (item: string, index: number) => {
+      Button(item)
+        .backgroundColor("#4169E1")
+        .margin(10)
+        .onClick(() => {
+          if (index === 0) {
+            SmartDialog.dismiss({ tag: "A" })
+          } else if (index === 1) {
+            SmartDialog.dismiss({ tag: "B" })
+          }
+        })
+    })
+  }.backgroundColor(Color.White).width(350).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
+}
+```
+
+![customTag](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102228252.gif)
+
+## 自定义遮罩
+
+```typescript
+export function customMask() {
+  SmartDialog.show({
+    builder: dialogShowDialog,
+    maskBuilder: dialogCustomMask,
+  })
+}
+
+@Builder
+function dialogCustomMask() {
+  Stack().width("100%").height("100%").backgroundColor(randomColor()).opacity(0.6)
+}
+
+@Builder
+function dialogShowDialog() {
+  Text("showDialog")
+    .fontSize(30)
+    .padding(50)
+    .fontColor(Color.White)
+    .borderRadius(12)
+    .backgroundColor(randomColor())
+    .onClick(() => customMask())
+}
+```
+
+![customMask](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102228981.gif)
+
+# AttachDialog
+
+## 默认定位
+
+```typescript
+export function attachEasy() {
+  SmartDialog.show({
+    builder: dialog
+  })
+}
+
+@Builder
+function dialog() {
+  Stack() {
+    Text("Attach")
+      .backgroundColor(randomColor())
+      .padding(20)
+      .fontColor(Color.White)
+      .borderRadius(5)
+      .onClick(() => {
+        SmartDialog.showAttach({
+          targetId: "Attach",
+          builder: targetLocationDialog,
+        })
+      })
+      .id("Attach")
+  }
+  .borderRadius(12)
+  .padding(50)
+  .backgroundColor(Color.White)
+}
+
+@Builder
+function targetLocationDialog() {
+  Text("targetIdDialog")
+    .fontSize(20)
+    .fontColor(Color.White)
+    .textAlign(TextAlign.Center)
+    .padding(50)
+    .borderRadius(12)
+    .backgroundColor(randomColor())
+}
+```
+
+![attachEasy](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102229299.gif)
+
+## 多方向定位
 
 ```typescript
 export function attachLocation() {
@@ -362,121 +568,52 @@ function targetLocationDialog() {
 }
 ```
 
-## 多位置弹窗
+![attachLocation](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102229386.gif)
+
+# Loading
+
+对于Loading而言，应该有几个比较明显的特性
+
+- loading和dialog都存在页面上，哪怕dialog打开，loading都应该显示dialog之上
+- loading应该具有单一特性，多次打开loading，页面也应该只存在一个loading
+- 刷新特性，多次打开loading，后续打开的loading样式，应该覆盖之前打开的loading样式
+- loading使用频率非常高，应该支持强大的拓展和极简的使用
+
+从上面列举几个特性而言，loading是一个非常特殊的dialog，所以需要针对其特性，进行定制化的实现
+
+当然了，内部已经屏蔽了细节，在使用上，和dialog的使用没什么区别
+
+## 默认loading
 
 ```typescript
-export async function customLocation() {
-  const animationTime = 1000
-  SmartDialog.show({
-    builder: dialogLocationHorizontal,
-    alignment: Alignment.Start,
-  })
-  await delay(animationTime)
-  SmartDialog.show({
-    builder: dialogLocationVertical,
-    alignment: Alignment.Top,
+SmartDialog.showLoading()
+```
+
+![loadingDefault](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102229871.gif)
+
+## 自定义Loading
+
+- 点击loading后，会再次打开一个loading，从效果图可以看出它的单一刷新特性
+
+```typescript
+export function loadingCustom() {
+  SmartDialog.showLoading({
+    builder: customLoading,
   })
 }
 
-
 @Builder
-function dialogLocationVertical() {
-  Text("location")
-    .width("100%")
-    .height("20%")
-    .fontSize(20)
-    .fontColor(Color.White)
-    .textAlign(TextAlign.Center)
-    .padding(50)
-    .backgroundColor(randomColor())
-}
-
-@Builder
-function dialogLocationHorizontal() {
-  Text("location")
-    .width("30%")
-    .height("100%")
-    .fontSize(20)
-    .fontColor(Color.White)
-    .textAlign(TextAlign.Center)
-    .padding(50)
-    .backgroundColor(randomColor())
+export function customLoading() {
+  Column({ space: 5 }) {
+    Text("again open loading").fontSize(16).fontColor(Color.White)
+    LoadingProgress().width(80).height(80).color(Color.White)
+  }
+  .padding(20)
+  .borderRadius(12)
+  .onClick(() => loadingCustom())
+  .backgroundColor(randomColor())
 }
 ```
 
-## 关闭指定弹窗
-
-```typescript
-export async function customTag() {
-  const animationTime = 1000
-  SmartDialog.show({
-    builder: dialogTagA,
-    alignment: Alignment.Start,
-    tag: "A",
-  })
-  await delay(animationTime)
-  SmartDialog.show({
-    builder: dialogTagB,
-    alignment: Alignment.Top,
-    tag: "B",
-  })
-}
-
-@Builder
-function dialogTagA() {
-  Text("A")
-    .width("20%")
-    .height("100%")
-    .fontSize(20)
-    .fontColor(Color.White)
-    .textAlign(TextAlign.Center)
-    .padding(50)
-    .backgroundColor(randomColor())
-}
-
-@Builder
-function dialogTagB() {
-  Flex({ wrap: FlexWrap.Wrap }) {
-    ForEach(["closA", "closeSelf"], (item: string, index: number) => {
-      Button(item)
-        .backgroundColor("#4169E1")
-        .margin(10)
-        .onClick(() => {
-          if (index === 0) {
-            SmartDialog.dismiss({ tag: "A" })
-          } else if (index === 1) {
-            SmartDialog.dismiss({ tag: "B" })
-          }
-        })
-    })
-  }.backgroundColor(Color.White).width(350).margin({ left: 30, right: 30 }).padding(10).borderRadius(10)
-}
-```
-
-## 自定义遮罩
-
-```typescript
-export function customMask() {
-  SmartDialog.show({
-    builder: dialogShowDialog,
-    maskBuilder: dialogCustomMask,
-  })
-}
-
-@Builder
-function dialogCustomMask() {
-  Stack().width("100%").height("100%").backgroundColor(randomColor()).opacity(0.6)
-}
-
-@Builder
-function dialogShowDialog() {
-  Text("showDialog")
-    .fontSize(30)
-    .padding(50)
-    .fontColor(Color.White)
-    .borderRadius(12)
-    .backgroundColor(randomColor())
-    .onClick(() => customMask())
-}
-```
+![loadingCustom](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102229335.gif)
 
