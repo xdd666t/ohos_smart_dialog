@@ -13,4 +13,5 @@ export class SmartCustomOption {
   onMask?: VoidCallback
   backType?: SmartBackType
   onDismiss?: VoidCallback
+  bindRouter?: string
 }

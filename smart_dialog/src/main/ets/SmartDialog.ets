@@ -33,6 +33,10 @@ export class SmartDialog {
   /// [tag]：如果你给dialog设置了tag, 你可以针对性的关闭它
   ///
   /// [backType]: 返回事件对弹窗的影响
+  ///
+  /// [onDismiss]: 弹窗关闭时, 触发该回调
+  ///
+  /// [bindRouter]: 当bindRouter为undefined时, 该弹窗将自动绑定当前路由; 如果你不想该弹窗绑定当前路由, 可将该值设置为负数("-1")
   static show(option: SmartCustomOption) {
     const customConfig = SmartDialog.config.custom
     DialogProxy.instance.show({
@@ -47,6 +51,7 @@ export class SmartDialog {
       tag: option.tag ?? randomTag(),
       backType: option.backType ?? customConfig.backType,
       onDismiss: option.onDismiss,
+      bindRouter: option.bindRouter,
     })
   }
 
@@ -73,6 +78,10 @@ export class SmartDialog {
   /// [tag]：如果你给dialog设置了tag, 你可以针对性的关闭它
   ///
   /// [backType]: 返回事件对弹窗的影响
+  ///
+  /// [onDismiss]: 弹窗关闭时, 触发该回调
+  ///
+  /// [bindRouter]: 当bindRouter为undefined时, 该弹窗将自动绑定当前路由; 如果你不想该弹窗绑定当前路由, 可将该值设置为负数("-1")
   static showAttach(option: SmartAttachOption) {
     const attachConfig = SmartDialog.config.attach
     DialogProxy.instance.showAttach({
@@ -88,6 +97,7 @@ export class SmartDialog {
       tag: option.tag ?? randomTag(),
       backType: option.backType ?? attachConfig.backType,
       onDismiss: option.onDismiss,
+      bindRouter: option.bindRouter,
     })
   }
 
@@ -112,6 +122,8 @@ export class SmartDialog {
   /// [tag]：如果你给dialog设置了tag, 你可以针对性的关闭它
   ///
   /// [backType]: 返回事件对弹窗的影响
+  ///
+  /// [onDismiss]: 弹窗关闭时, 触发该回调
   static showLoading(option?: SmartLoadingOption) {
     const loadingConfig = SmartDialog.config.loading
     DialogProxy.instance.showLoading({

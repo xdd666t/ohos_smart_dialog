@@ -2,14 +2,14 @@ import { DialogProxy } from './DialogProxy'
 import { safeReturn } from '../kit/function'
 
 export default class SmartNavigatorObserver implements NavigationInterception {
-  static curRouter?: string
+  curRouter?: string
   // 开始显示
   willShow?: InterceptionShowCallback =
     (from: NavDestinationContext | NavBar,
       to: NavDestinationContext | NavBar,
       operation: NavigationOperation,
       isAnimated: boolean) => {
-      SmartNavigatorObserver.curRouter = safeReturn(() => {
+      this.curRouter = safeReturn(() => {
         return (to as NavDestinationContext).navDestinationId
       })
       if (operation === NavigationOperation.PUSH) {
@@ -46,7 +46,7 @@ export default class SmartNavigatorObserver implements NavigationInterception {
       return (from as NavDestinationContext).navDestinationId
     })
     DialogProxy.instance.dialogList.filter((item) => {
-      let isAccess = item.router !== popRouter
+      let isAccess = item.bindRouter !== popRouter
       if (!isAccess) {
         item.remove()
       }
@@ -57,7 +57,7 @@ export default class SmartNavigatorObserver implements NavigationInterception {
 
   private dialogVisible() {
     DialogProxy.instance.dialogList.forEach((item) => {
-      item.visible = SmartNavigatorObserver.curRouter === item.router
+      item.visible = this.curRouter === item.bindRouter
     })
   }
 }

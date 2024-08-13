@@ -14,4 +14,5 @@ export class SmartAttachOption {
   onMask?: VoidCallback
   backType?: SmartBackType
   onDismiss?: VoidCallback
+  bindRouter?: string
 }

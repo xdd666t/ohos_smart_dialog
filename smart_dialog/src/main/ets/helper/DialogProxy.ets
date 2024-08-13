@@ -3,7 +3,6 @@ import { SmartDismissOption } from '../model/option/SmartDismissOption'
 import { BaseDialogModel } from '../model/BaseDialogModel'
 import { CustomDialogModel } from '../component/custom_dialog/CustomDialogModel'
 import { SmartCustomOption } from '../model/option/SmartCustomOption'
-import SmartNavigatorObserver from './SmartNavigatorObserver'
 import { SmartAttachOption } from '../model/option/SmartAttachOption'
 import { AttachDialogModel } from '../component/attach_dialog/AttachDialogModel'
 import { SmartLoadingOption } from '../model/option/SmartLoadingOption'
@@ -13,6 +12,7 @@ import { SmartAllDialogType } from '../config/EnumConfig'
 import { LoadingNodeController } from '../node_controller/LoadingNodeController'
 import { SmartBuilder } from '../kit/function'
 import { Configuration } from '@kit.AbilityKit'
+import { OhosSmartDialog } from '../InitDialog'
 
 
 export class DialogProxy {
@@ -55,7 +55,7 @@ export class DialogProxy {
     model.animation.endTime = option.animationTime
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
-    model.router = SmartNavigatorObserver.curRouter
+    model.bindRouter = option.bindRouter ?? OhosSmartDialog.observe.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
@@ -76,7 +76,7 @@ export class DialogProxy {
     model.animation.endTime = option.animationTime
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
-    model.router = SmartNavigatorObserver.curRouter
+    model.bindRouter = option.bindRouter ?? OhosSmartDialog.observe.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
@@ -96,7 +96,7 @@ export class DialogProxy {
     model.animation.endTime = option.animationTime
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
-    model.router = SmartNavigatorObserver.curRouter
+    model.bindRouter = OhosSmartDialog.observe.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
