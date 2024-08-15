@@ -3,6 +3,7 @@ import { safeReturn } from '../kit/function'
 
 export default class SmartNavigatorObserver implements NavigationInterception {
   curRouter?: string
+  private routerIdSet = new Set<string | undefined>()
   // 开始显示
   willShow?: InterceptionShowCallback =
     (from: NavDestinationContext | NavBar,
@@ -19,6 +20,7 @@ export default class SmartNavigatorObserver implements NavigationInterception {
       } else if (operation === NavigationOperation.POP) {
         this.onPop(from, to)
       }
+
       this.dialogVisible()
       // safeUse(() => {
       //   let fromCtx = from as NavDestinationContext
@@ -31,6 +33,11 @@ export default class SmartNavigatorObserver implements NavigationInterception {
   }
 
   private onPush(from: NavDestinationContext | NavBar, to: NavDestinationContext | NavBar) {
+    let pushRouter: string | undefined = safeReturn(() => {
+      return (from as NavDestinationContext).navDestinationId
+    })
+
+    this.routerIdSet.add(pushRouter)
   }
 
   private onReplace(from: NavDestinationContext | NavBar, to: NavDestinationContext | NavBar) {
@@ -53,11 +60,17 @@ export default class SmartNavigatorObserver implements NavigationInterception {
 
       return isAccess
     })
+
+    this.routerIdSet.delete(popRouter)
   }
 
   private dialogVisible() {
     DialogProxy.instance.dialogList.forEach((item) => {
-      item.visible = this.curRouter === item.bindRouter
+      if (this.routerIdSet.has(item.bindRouter)) {
+        item.visible = this.curRouter === item.bindRouter
+      } else {
+        item.visible = true
+      }
     })
   }
 }
