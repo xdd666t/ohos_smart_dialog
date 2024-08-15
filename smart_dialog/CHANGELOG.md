@@ -1,3 +1,6 @@
+# 1.5.5
+- 优化checkExist
+
 # 1.5.3
 - 新增bindRouter: 当bindRouter为undefined时, 该弹窗将自动绑定当前路由; 如果你不想该弹窗绑定当前路由, 可将该值设置为负数("-1")
 

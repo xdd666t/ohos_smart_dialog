@@ -17,8 +17,8 @@ export class DialogCheckHelper {
     const dialogTypes = option.dialogTypes
     const dialogProxy = DialogProxy.instance
 
-    if (option?.tag && (dialogProxy.findDialog(option?.tag) !== undefined)) {
-      return true
+    if (option?.tag) {
+      return (dialogProxy.findDialog(option?.tag) !== undefined)
     }
 
     let result = false
