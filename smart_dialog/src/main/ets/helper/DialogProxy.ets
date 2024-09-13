@@ -62,6 +62,7 @@ export class DialogProxy {
     model.dialogType = SmartAllDialogType.custom
     model.backType = option.backType
     model.onDismiss = option.onDismiss
+    model.usePenetrate = option.usePenetrate
     this.dialogNodeController.inset(model)
     this.dialogList.push(model)
   }
@@ -83,6 +84,7 @@ export class DialogProxy {
     model.dialogType = SmartAllDialogType.attach
     model.backType = option.backType
     model.onDismiss = option.onDismiss
+    model.usePenetrate = option.usePenetrate
     this.dialogNodeController.inset(model)
     this.dialogList.push(model)
   }
@@ -103,7 +105,7 @@ export class DialogProxy {
     model.dialogType = SmartAllDialogType.loading
     model.backType = option.backType
     model.onDismiss = option.onDismiss
-
+    model.usePenetrate = option.usePenetrate
     this.loadingNodeController.update(model)
   }
 

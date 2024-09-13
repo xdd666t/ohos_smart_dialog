@@ -5,6 +5,7 @@ import { BaseNodeController } from './BaseNodeController'
 import { SmartDialog } from '../SmartDialog'
 import { SmartAllDialogType } from '../config/EnumConfig'
 import { DialogProxy } from '../helper/DialogProxy'
+import { MaskComponent } from '../component/MaskComponent'
 
 export class LoadingNodeController extends BaseNodeController {
   inset(model: BaseDialogModel) {
@@ -32,6 +33,8 @@ export class LoadingNodeController extends BaseNodeController {
 @Builder
 function buildLoadingNode(loadingDialog: LoadingDialogModel) {
   Stack() {
+    MaskComponent({ item: loadingDialog })
+
     LoadingDialogComponent({
       item: loadingDialog,
       builder: loadingDialog.builder

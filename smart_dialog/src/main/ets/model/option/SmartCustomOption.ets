@@ -14,4 +14,5 @@ export class SmartCustomOption {
   backType?: SmartBackType
   onDismiss?: VoidCallback
   bindRouter?: string
+  usePenetrate?: boolean
 }

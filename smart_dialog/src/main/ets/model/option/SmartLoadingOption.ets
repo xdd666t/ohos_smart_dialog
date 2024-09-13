@@ -13,4 +13,5 @@ export class SmartLoadingOption {
   onMask?: VoidCallback
   backType?: SmartBackType
   onDismiss?: VoidCallback
+  usePenetrate?: boolean
 }

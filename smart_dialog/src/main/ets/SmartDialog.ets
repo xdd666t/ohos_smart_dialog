@@ -37,6 +37,8 @@ export class SmartDialog {
   /// [onDismiss]: 弹窗关闭时, 触发该回调
   ///
   /// [bindRouter]: 当bindRouter为undefined时, 该弹窗将自动绑定当前路由; 如果你不想该弹窗绑定当前路由, 可将该值设置为负数("-1")
+  ///
+  /// [usePenetrate]：true（点击事件将穿透遮罩），false（不穿透）; 同时遮罩将不再显示
   static show(option: SmartCustomOption) {
     const customConfig = SmartDialog.config.custom
     DialogProxy.instance.show({
@@ -52,6 +54,7 @@ export class SmartDialog {
       backType: option.backType ?? customConfig.backType,
       onDismiss: option.onDismiss,
       bindRouter: option.bindRouter,
+      usePenetrate: option.usePenetrate ?? false,
     })
   }
 
@@ -82,6 +85,8 @@ export class SmartDialog {
   /// [onDismiss]: 弹窗关闭时, 触发该回调
   ///
   /// [bindRouter]: 当bindRouter为undefined时, 该弹窗将自动绑定当前路由; 如果你不想该弹窗绑定当前路由, 可将该值设置为负数("-1")
+  ///
+  /// [usePenetrate]：true（点击事件将穿透遮罩），false（不穿透）; 同时遮罩将不再显示
   static showAttach(option: SmartAttachOption) {
     const attachConfig = SmartDialog.config.attach
     DialogProxy.instance.showAttach({
@@ -98,6 +103,7 @@ export class SmartDialog {
       backType: option.backType ?? attachConfig.backType,
       onDismiss: option.onDismiss,
       bindRouter: option.bindRouter,
+      usePenetrate: option.usePenetrate ?? false,
     })
   }
 
@@ -124,6 +130,8 @@ export class SmartDialog {
   /// [backType]: 返回事件对弹窗的影响
   ///
   /// [onDismiss]: 弹窗关闭时, 触发该回调
+  ///
+  /// [usePenetrate]：true（点击事件将穿透遮罩），false（不穿透）; 同时遮罩将不再显示
   static showLoading(option?: SmartLoadingOption) {
     const loadingConfig = SmartDialog.config.loading
     DialogProxy.instance.showLoading({
@@ -138,6 +146,7 @@ export class SmartDialog {
       tag: option?.tag,
       backType: option?.backType ?? loadingConfig.backType,
       onDismiss: option?.onDismiss,
+      usePenetrate: option?.usePenetrate ?? false,
     })
   }
 

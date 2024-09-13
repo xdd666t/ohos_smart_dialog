@@ -15,17 +15,13 @@ export struct LoadingDialogComponent {
 
   build() {
     Stack({ alignContent: this.item.alignment }) {
-      MaskComponent({ item: this.item })
-
-      Stack() {
-        this.builder?.(this.item.builderArgs)
-      }
-      .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
-      .position(this.item.animation.dialogPosition)
-      .animation({ duration: this.item.animation.time, curve: Curve.Linear })
-      .onAppear(() => {
-        this.item.show()
-      })
+      this.builder?.(this.item.builderArgs)
     }
+    .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
+    .position(this.item.animation.dialogPosition)
+    .animation({ duration: this.item.animation.time, curve: Curve.Linear })
+    .onAppear(() => {
+      this.item.show()
+    })
   }
 }

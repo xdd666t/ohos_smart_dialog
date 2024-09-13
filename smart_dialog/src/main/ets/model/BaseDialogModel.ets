@@ -33,6 +33,7 @@ export class BaseDialogModel {
   dialogType?: SmartAllDialogType
   backType?: SmartBackType
   onDismiss?: VoidCallback
+  usePenetrate?: boolean
 
   initAnimationStatus() {
     const animation = this.animation

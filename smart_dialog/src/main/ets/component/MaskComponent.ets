@@ -23,6 +23,7 @@ export struct MaskComponent {
     .animation({ duration: this.item.animation.time, curve: Curve.Linear })
     .width('100%')
     .height('100%')
+    .visibility(this.item.usePenetrate === true ? Visibility.None : Visibility.Visible)
     .onClick(() => {
       this.item.onMask?.()
       if (this.item.clickMaskDismiss) {
