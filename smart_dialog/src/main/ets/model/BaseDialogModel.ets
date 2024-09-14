@@ -55,6 +55,8 @@ export class BaseDialogModel {
   }
 
   remove() {
-    DialogProxy.instance.dialogNodeController.remove(this)
+    const dialogProxy = DialogProxy.instance
+    dialogProxy.dialogList = dialogProxy.dialogList.filter((item) => item.tag !== this?.tag)
+    dialogProxy.dialogNodeController.remove(this)
   }
 }

@@ -126,7 +126,6 @@ export class DialogProxy {
     }
 
     await dialog.dismiss()
-    this.dialogList = dialogList.filter((item) => item.tag !== dialog?.tag)
   }
 
   findDialog(tag?: string): BaseDialogModel | undefined {
