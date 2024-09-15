@@ -27,6 +27,6 @@ export struct OhosSmartDialog {
       NodeContainer(DialogProxy.instance.dialogNodeController)
 
       NodeContainer(DialogProxy.instance.loadingNodeController)
-    }
+    }.hitTestBehavior(HitTestMode.Transparent)
   }
 }

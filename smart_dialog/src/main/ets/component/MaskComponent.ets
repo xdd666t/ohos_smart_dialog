@@ -1,5 +1,5 @@
 import { BaseDialogModel } from '../model/BaseDialogModel'
-import { SmartBuilder } from '../kit/function'
+import { onBlockClick, SmartBuilder } from '../kit/function'
 import { DialogProxy } from '../helper/DialogProxy'
 
 @Component
@@ -23,12 +23,14 @@ export struct MaskComponent {
     .animation({ duration: this.item.animation.time, curve: Curve.Linear })
     .width('100%')
     .height('100%')
-    .visibility(this.item.usePenetrate === true ? Visibility.None : Visibility.Visible)
-    .onClick(() => {
-      this.item.onMask?.()
-      if (this.item.clickMaskDismiss) {
-        DialogProxy.instance.dismiss()
+    .onTouch((event: TouchEvent) => {
+      if (event.type === TouchType.Up) {
+        this.item.onMask?.()
+        if (this.item.clickMaskDismiss) {
+          DialogProxy.instance.dismiss()
+        }
       }
     })
+    .onClick(this.item.usePenetrate ? undefined : () => onBlockClick())
   }
 }

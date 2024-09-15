@@ -1,4 +1,4 @@
-import { SmartBuilder } from '../../kit/function'
+import { onBlockClick, SmartBuilder } from '../../kit/function'
 import { CustomDialogModel } from './CustomDialogModel'
 
 @Component
@@ -19,5 +19,6 @@ export struct CustomDialogComponent {
     .position(this.item.animation.dialogPosition)
     .animation({ duration: this.item.animation.time, curve: Curve.Linear })
     .onAppear(() => this.item.show())
+    .onClick(() => onBlockClick())
   }
 }

@@ -1,5 +1,5 @@
 import { AttachDialogModel } from './AttachDialogModel';
-import { randomTag, SmartBuilder } from '../../kit/function';
+import { onBlockClick, randomTag, SmartBuilder } from '../../kit/function';
 
 
 @Component
@@ -41,6 +41,7 @@ export struct AttachDialogComponent {
           this.item.show()
         }
       })
+      .onClick(() => onBlockClick())
     }
   }
 }

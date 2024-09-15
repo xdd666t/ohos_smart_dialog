@@ -2,6 +2,7 @@ import { SmartDialog } from 'ohos_smart_dialog'
 import { attachEasy } from '../dialog/attach/Easy'
 import { attachLocation } from '../dialog/attach/Location'
 import { customMask } from '../dialog/custom/CustomMask'
+import { customUsePenetrate } from '../dialog/custom/customUsePenetrate'
 import { customJumpPage } from '../dialog/custom/JumpPage'
 import { customLocation } from '../dialog/custom/LocationDialog'
 import { customTag } from '../dialog/custom/TagDialog'
@@ -28,6 +29,8 @@ export class MainViewModel {
       customMask()
     } else if (item === MainFeature.customTag) {
       customTag()
+    }else if (item === MainFeature.customUsePenetrate) {
+      customUsePenetrate()
     }
 
     // attach

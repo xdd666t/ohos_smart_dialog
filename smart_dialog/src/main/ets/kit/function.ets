@@ -22,3 +22,6 @@ export function safeUse(fn: Function) {
   } catch (error) {
   }
 }
+
+export function onBlockClick(): void {
+}

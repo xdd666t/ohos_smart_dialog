@@ -1,4 +1,4 @@
-import { SmartBuilder } from '../../kit/function'
+import { onBlockClick, SmartBuilder } from '../../kit/function'
 import { MaskComponent } from '../MaskComponent'
 import { LoadingDialogModel } from './LoadingDialogModel'
 
@@ -23,5 +23,6 @@ export struct LoadingDialogComponent {
     .onAppear(() => {
       this.item.show()
     })
+    .onClick(() => onBlockClick())
   }
 }

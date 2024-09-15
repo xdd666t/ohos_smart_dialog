@@ -10,6 +10,7 @@ export class MainState {
         { title: MainFeature.customJumpPage },
         { title: MainFeature.customMask },
         { title: MainFeature.customTag },
+        { title: MainFeature.customUsePenetrate },
       ]
     },
     {
@@ -37,6 +38,7 @@ export class MainFeature {
   static customJumpPage: string = "customJumpPage"
   static customMask: string = "customMask"
   static customTag: string = "customTag"
+  static customUsePenetrate: string = "customUsePenetrate"
   // attach
   static attachEasy: string = "attachEasy"
   static attachLocation: string = "attachLocation"
