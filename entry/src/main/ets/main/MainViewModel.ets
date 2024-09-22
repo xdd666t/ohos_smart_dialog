@@ -4,6 +4,7 @@ import { attachLocation } from '../dialog/attach/Location'
 import { customMask } from '../dialog/custom/CustomMask'
 import { customUsePenetrate } from '../dialog/custom/customUsePenetrate'
 import { customJumpPage } from '../dialog/custom/JumpPage'
+import { customKeepSingle } from '../dialog/custom/KeepSingleDialog'
 import { customLocation } from '../dialog/custom/LocationDialog'
 import { customTag } from '../dialog/custom/TagDialog'
 import { customUseArgs } from '../dialog/custom/UseArgs'
@@ -29,8 +30,10 @@ export class MainViewModel {
       customMask()
     } else if (item === MainFeature.customTag) {
       customTag()
-    }else if (item === MainFeature.customUsePenetrate) {
+    } else if (item === MainFeature.customUsePenetrate) {
       customUsePenetrate()
+    } else if (item === MainFeature.customKeepSingle) {
+      customKeepSingle()
     }
 
     // attach

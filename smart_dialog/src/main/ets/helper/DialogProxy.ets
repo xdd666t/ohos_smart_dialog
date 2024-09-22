@@ -23,7 +23,8 @@ export class DialogProxy {
     this.onConfigurationUpdate = (newConfig: Configuration) => {
       this.dialogList.forEach((item) => {
         item.remove()
-        item.animation.startTime = 0
+        item.animation.dialogStartTime = 0
+        item.animation.maskStartTime = 0
         this.dialogNodeController.inset(item)
       })
 
@@ -51,8 +52,7 @@ export class DialogProxy {
     model.builder = option.builder
     model.builderArgs = option.builderArgs
     model.alignment = option.alignment
-    model.animation.startTime = option.animationTime
-    model.animation.endTime = option.animationTime
+    model.animation.setTime(option.animationTime)
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
     model.bindRouter = option.bindRouter ?? OhosSmartDialog.observe.curRouter
@@ -63,8 +63,14 @@ export class DialogProxy {
     model.backType = option.backType
     model.onDismiss = option.onDismiss
     model.usePenetrate = option.usePenetrate
-    this.dialogNodeController.inset(model)
-    this.dialogList.push(model)
+    const keepSingle = option.keepSingle
+    model.keepSingle = keepSingle
+    if (keepSingle) {
+      this.dialogNodeController.update(model)
+    } else {
+      this.dialogNodeController.inset(model)
+      this.dialogList.push(model)
+    }
   }
 
   showAttach(option: SmartAttachOption) {
@@ -73,8 +79,7 @@ export class DialogProxy {
     model.builder = option.builder
     model.builderArgs = option.builderArgs
     model.alignment = option.alignment
-    model.animation.startTime = option.animationTime
-    model.animation.endTime = option.animationTime
+    model.animation.setTime(option.animationTime)
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
     model.bindRouter = option.bindRouter ?? OhosSmartDialog.observe.curRouter
@@ -85,8 +90,14 @@ export class DialogProxy {
     model.backType = option.backType
     model.onDismiss = option.onDismiss
     model.usePenetrate = option.usePenetrate
-    this.dialogNodeController.inset(model)
-    this.dialogList.push(model)
+    const keepSingle = option.keepSingle
+    model.keepSingle = keepSingle
+    if (keepSingle) {
+      this.dialogNodeController.update(model)
+    } else {
+      this.dialogNodeController.inset(model)
+      this.dialogList.push(model)
+    }
   }
 
   showLoading(option: SmartLoadingOption) {
@@ -94,8 +105,7 @@ export class DialogProxy {
     model.builder = option.builder
     model.builderArgs = option.builderArgs
     model.alignment = option.alignment
-    model.animation.startTime = option.animationTime
-    model.animation.endTime = option.animationTime
+    model.animation.setTime(option.animationTime)
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
     model.bindRouter = OhosSmartDialog.observe.curRouter

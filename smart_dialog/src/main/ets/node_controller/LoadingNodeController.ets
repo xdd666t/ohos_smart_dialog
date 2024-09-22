@@ -23,7 +23,9 @@ export class LoadingNodeController extends BaseNodeController {
     }
 
     if (SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {
-      loadingDialog.animation.startTime = 0
+      const animation = loadingDialog.animation
+      animation.dialogStartTime = 0
+      animation.maskStartTime = 0
     }
     loadingDialog.remove()
     this.inset(loadingDialog)

@@ -11,6 +11,7 @@ export class MainState {
         { title: MainFeature.customMask },
         { title: MainFeature.customTag },
         { title: MainFeature.customUsePenetrate },
+        { title: MainFeature.customKeepSingle },
       ]
     },
     {
@@ -39,6 +40,7 @@ export class MainFeature {
   static customMask: string = "customMask"
   static customTag: string = "customTag"
   static customUsePenetrate: string = "customUsePenetrate"
+  static customKeepSingle: string = "customKeepSingle"
   // attach
   static attachEasy: string = "attachEasy"
   static attachLocation: string = "attachLocation"

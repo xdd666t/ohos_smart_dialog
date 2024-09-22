@@ -11,9 +11,29 @@ class AnimationModel {
   @Trace dialogScale: number = 1
   @Trace dialogOpacity: number = 1
   @Trace dialogPosition?: Edges
-  @Trace time?: number
-  startTime?: number
-  endTime?: number
+  @Trace dialogTime?: number
+  @Trace maskTime?: number
+  dialogStartTime?: number
+  dialogEndTime?: number
+  maskStartTime?: number
+  maskEndTime?: number
+
+  setTime(time?: number) {
+    this.dialogStartTime = time
+    this.maskStartTime = time
+    this.dialogEndTime = time
+    this.maskEndTime = time
+  }
+
+  setStartTime() {
+    this.dialogTime = this.dialogStartTime
+    this.maskTime = this.maskStartTime
+  }
+
+  setEndTime() {
+    this.dialogTime = this.dialogEndTime
+    this.maskTime = this.maskEndTime
+  }
 }
 
 @ObservedV2
@@ -43,7 +63,7 @@ export class BaseDialogModel {
   async show(): Promise<void> {
     const animation = this.animation
     animation.maskOpacity = 1
-    await delay(animation.startTime)
+    await delay(animation.dialogStartTime)
   }
 
   async dismiss(): Promise<void> {
@@ -51,7 +71,7 @@ export class BaseDialogModel {
 
     const animation = this.animation
     animation.maskOpacity = 0
-    await delay(animation.endTime)
+    await delay(animation.dialogEndTime)
   }
 
   remove() {

@@ -39,7 +39,7 @@ export class LoadingDialogModel extends BaseDialogModel {
 
   show(): Promise<void> {
     const animation = this.animation
-    animation.time = animation.startTime
+    animation.setStartTime()
     alignmentAnimation(this.alignment, {
       onStart: () => {
         animation.dialogPosition = { left: 0 }
@@ -67,7 +67,7 @@ export class LoadingDialogModel extends BaseDialogModel {
       return
     }
     const animation = this.animation
-    animation.time = animation.endTime
+    animation.setEndTime()
     this.initAnimationStatus()
     await super.dismiss()
     this.remove()

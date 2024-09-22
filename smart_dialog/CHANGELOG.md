@@ -1,7 +1,10 @@
+# 1.5.7
+- 增加keepSingle: keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
+
+
 # 1.5.6
 - 增加usePenetrate: 可选点击事件是否穿透遮罩, 被下层组件响应
 - 优化remove逻辑
-
 
 # 1.5.5
 - 优化checkExist

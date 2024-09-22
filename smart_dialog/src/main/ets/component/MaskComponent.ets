@@ -20,7 +20,7 @@ export struct MaskComponent {
       }
     }
     .opacity(this.item.animation.maskOpacity)
-    .animation({ duration: this.item.animation.time, curve: Curve.Linear })
+    .animation({ duration: this.item.animation.maskTime, curve: Curve.Linear })
     .width('100%')
     .height('100%')
     .onTouch((event: TouchEvent) => {

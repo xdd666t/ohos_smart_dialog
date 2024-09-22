@@ -19,7 +19,7 @@ export struct LoadingDialogComponent {
     }
     .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
     .position(this.item.animation.dialogPosition)
-    .animation({ duration: this.item.animation.time, curve: Curve.Linear })
+    .animation({ duration: this.item.animation.dialogTime, curve: Curve.Linear })
     .onAppear(() => {
       this.item.show()
     })

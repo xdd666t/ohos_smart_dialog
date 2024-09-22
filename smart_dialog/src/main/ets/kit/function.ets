@@ -4,8 +4,14 @@ export function delay(ms?: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export function randomTag() {
-  return `${Date.now()}${Math.random()}`
+const keepSingleTag = `singleTag:${Date.now()}${Math.random()}`
+
+export function randomTag(keepSingle?: boolean) {
+  if (keepSingle === true) {
+    return keepSingleTag
+  } else {
+    return `${Date.now()}${Math.random()}`
+  }
 }
 
 export function safeReturn(fn: Function, defaultValue: ESObject = undefined): ESObject {

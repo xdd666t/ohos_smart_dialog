@@ -3,6 +3,8 @@ import { BaseDialogModel } from '../../model/BaseDialogModel'
 
 @ObservedV2
 export class CustomDialogModel extends BaseDialogModel {
+  keepSingle?: boolean
+
   initAnimationStatus(): void {
     const animation = this.animation
     alignmentAnimation(this.alignment, {
@@ -32,7 +34,7 @@ export class CustomDialogModel extends BaseDialogModel {
 
   show(): Promise<void> {
     const animation = this.animation
-    animation.time = animation.startTime
+    animation.setStartTime()
     alignmentAnimation(this.alignment, {
       onStart: () => {
         animation.dialogPosition = { left: 0 }
@@ -56,7 +58,7 @@ export class CustomDialogModel extends BaseDialogModel {
 
   async dismiss(): Promise<void> {
     const animation = this.animation
-    animation.time = animation.endTime
+    animation.setEndTime()
     this.initAnimationStatus()
     await super.dismiss()
     this.remove()

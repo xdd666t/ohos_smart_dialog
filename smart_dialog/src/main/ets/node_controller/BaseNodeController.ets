@@ -15,14 +15,18 @@ export class BaseNodeController extends NodeController {
     return this.rootNode
   }
 
-  inset(model: BaseDialogModel, wrapBuilder: WrappedBuilder<[ESObject]>) {
+  inset(model: BaseDialogModel, wrapBuilder: WrappedBuilder<[ESObject]>, sibling?: FrameNode | null) {
     if (this.uiContext === null || this.rootNode === null) {
       return
     }
 
     let builderNode = new BuilderNode(this.uiContext)
     builderNode.build(wrapBuilder, model)
-    this.rootNode.appendChild(builderNode.getFrameNode())
+    if (sibling) {
+      this.rootNode.insertChildAfter(builderNode.getFrameNode(), sibling)
+    } else {
+      this.rootNode.appendChild(builderNode.getFrameNode())
+    }
 
     model.builderNode = builderNode
   }

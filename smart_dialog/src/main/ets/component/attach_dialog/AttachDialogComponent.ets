@@ -34,7 +34,7 @@ export struct AttachDialogComponent {
       .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
       .position(this.item.animation.dialogPosition)
       .opacity(this.item.animation.dialogOpacity)
-      .animation({ duration: this.item.animation.time, curve: Curve.Linear })
+      .animation({ duration: this.item.animation.dialogTime, curve: Curve.Linear })
       .onSizeChange(() => {
         if (!this.alreadyStartAnimation) {
           this.alreadyStartAnimation = true

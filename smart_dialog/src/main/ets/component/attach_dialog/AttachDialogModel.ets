@@ -6,6 +6,7 @@ import { SmartAttachAlignmentType } from '../../config/EnumConfig'
 @ObservedV2
 export class AttachDialogModel extends BaseDialogModel {
   targetId: string = ''
+  keepSingle?: boolean
   private attachInfo = new AttachInfo()
 
   constructor() {
@@ -18,7 +19,7 @@ export class AttachDialogModel extends BaseDialogModel {
   initAnimationStatus(selfId?: string): void {
     const animation = this.animation
     const attachInfo = this.attachInfo
-    animation.time = animation.startTime
+    animation.setStartTime()
     attachInfo.targetInfo = componentUtils.getRectangleById(this.targetId)
     attachInfo.selfInfo = componentUtils.getRectangleById(selfId ?? '')
 
@@ -40,7 +41,7 @@ export class AttachDialogModel extends BaseDialogModel {
 
   async dismiss(): Promise<void> {
     const animation = this.animation
-    animation.time = animation.endTime
+    animation.setEndTime()
     animation.dialogOpacity = 0
     await super.dismiss()
     this.remove()

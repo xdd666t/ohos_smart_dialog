@@ -15,4 +15,5 @@ export class SmartCustomOption {
   onDismiss?: VoidCallback
   bindRouter?: string
   usePenetrate?: boolean
+  keepSingle?: boolean
 }

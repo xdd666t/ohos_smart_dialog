@@ -16,4 +16,5 @@ export class SmartAttachOption {
   onDismiss?: VoidCallback
   bindRouter?: string
   usePenetrate?: boolean
+  keepSingle?: boolean
 }
