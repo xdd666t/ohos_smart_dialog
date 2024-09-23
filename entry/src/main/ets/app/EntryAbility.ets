@@ -7,10 +7,12 @@ export default class EntryAbility extends UIAbility {
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     console.info(`${EntryAbility.tag}: onCreate`)
+    OhosSmartDialog.init(this.context)//这里配置初始化
   }
 
   onDestroy(): void {
     console.info(`${EntryAbility.tag}: onDestroy`)
+    OhosSmartDialog.destroy(this.context)//dialog也走destroy
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
