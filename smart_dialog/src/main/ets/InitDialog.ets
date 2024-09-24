@@ -17,11 +17,16 @@ export struct OhosSmartDialog {
 
   aboutToAppear(): void {
     DialogProxy.instance.loadingBuilder = this.loadingBuilder ?? defaultLoadingBuilder
+    this.registerNavSwitch()
   }
 
-  static init(uiAbilityContext: common.UIAbilityContext) {
+  aboutToDisappear(): void {
+    this.unregisterNavSwitch()
+  }
+
+  registerNavSwitch() {
     //这里监听Navigation的路由切换
-    uiObserver.on('navDestinationSwitch', uiAbilityContext, (info: uiObserver.NavDestinationSwitchInfo) => {
+    uiObserver.on('navDestinationSwitch', this.getUIContext(), (info: uiObserver.NavDestinationSwitchInfo) => {
       switch (info.operation) {
         case NavigationOperation.PUSH:
           OhosSmartDialog.observe.onPush(info.from, info.to)
@@ -36,8 +41,8 @@ export struct OhosSmartDialog {
     })
   }
 
-  static destroy(uiAbilityContext: common.UIAbilityContext){
-    uiObserver.off('navDestinationSwitch',uiAbilityContext)
+  unregisterNavSwitch(){
+    uiObserver.off('navDestinationSwitch',this.getUIContext())
   }
 
   static onBackPressed = BackHelper.instance.onBackPressed
