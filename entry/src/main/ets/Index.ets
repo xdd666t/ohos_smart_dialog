@@ -1,6 +1,4 @@
-import {
-    OhosSmartDialog
-} from 'ohos_smart_dialog/';
+import { OhosSmartDialog } from 'ohos_smart_dialog/';
 import { pageMap, RouterHelper } from './app/helper/RouterHelper';
 import { MainPage } from './main/MainPage';
 
@@ -9,7 +7,6 @@ import { MainPage } from './main/MainPage';
 struct Index {
   build() {
     Stack() {
-      // here: monitor router
       Navigation(RouterHelper.stack) {
         MainPage()
       }

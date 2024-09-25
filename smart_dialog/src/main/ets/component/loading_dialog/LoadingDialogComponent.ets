@@ -1,5 +1,4 @@
 import { onBlockClick, SmartBuilder } from '../../kit/function'
-import { MaskComponent } from '../MaskComponent'
 import { LoadingDialogModel } from './LoadingDialogModel'
 
 

@@ -12,6 +12,11 @@ import { SmartAllDialogType } from './config/EnumConfig'
 export class SmartDialog {
   static readonly config: SmartConfig = new SmartConfig()
 
+  static get curRouter(): string | undefined {
+    return DialogProxy.instance.navigatorObserve.curRouter
+  }
+
+
   /// custom弹窗
   ///
   /// [builder]：自定义 dialog

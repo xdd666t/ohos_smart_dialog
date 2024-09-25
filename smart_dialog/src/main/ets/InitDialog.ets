@@ -1,51 +1,39 @@
-import SmartNavigatorObserver from './helper/SmartNavigatorObserver'
 import { BackHelper } from './helper/BackHelper'
 import { DialogProxy } from './helper/DialogProxy'
 import { SmartBuilder } from './kit/function'
 import { defaultLoadingBuilder } from './component/default/loading_component'
-import { DialogNavigatorObserver } from './helper/DialogNavigatorObserver'
-import { uiObserver } from '@kit.ArkUI'
-import { common } from '@kit.AbilityKit'
+import SmartNavigatorObserver from './helper/SmartNavigatorObserver'
 
-const TAG = "OhosSmartDialog"
+
 @Component
 export struct OhosSmartDialog {
   // 默认loading样式
   @BuilderParam loadingBuilder?: SmartBuilder
-  static observe: DialogNavigatorObserver = new DialogNavigatorObserver()
+  // 监听暗黑模式切换
   static onConfigurationUpdate = DialogProxy.instance.onConfigurationUpdate
+  // 返回事件监听
+  static onBackPressed = BackHelper.instance.onBackPressed
+  /**
+   * @deprecated 无需使用属性兼容路由，内部已使用无感路由注册，该属性后续版本将被被移除
+   */
+  static observe: SmartNavigatorObserver = new SmartNavigatorObserver()
+
+  /**
+   * @deprecated 无需使用方法注册路由，内部已使用无感路由注册，该方法后续版本将被被移除
+   */
+  static registerRouter(navPathStack: NavPathStack): NavPathStack {
+    OhosSmartDialog.observe
+    return navPathStack
+  }
 
   aboutToAppear(): void {
     DialogProxy.instance.loadingBuilder = this.loadingBuilder ?? defaultLoadingBuilder
-    this.registerNavSwitch()
+    DialogProxy.instance.navigatorObserve.registerNavSwitch(this.getUIContext())
   }
 
   aboutToDisappear(): void {
-    this.unregisterNavSwitch()
+    DialogProxy.instance.navigatorObserve.unregisterNavSwitch(this.getUIContext())
   }
-
-  registerNavSwitch() {
-    //这里监听Navigation的路由切换
-    uiObserver.on('navDestinationSwitch', this.getUIContext(), (info: uiObserver.NavDestinationSwitchInfo) => {
-      switch (info.operation) {
-        case NavigationOperation.PUSH:
-          OhosSmartDialog.observe.onPush(info.from, info.to)
-          break;
-        case NavigationOperation.POP:
-          OhosSmartDialog.observe.onPop(info.from, info.to)
-          break;
-        case NavigationOperation.REPLACE:
-          OhosSmartDialog.observe.onReplace(info.from, info.to)
-          break;
-      }
-    })
-  }
-
-  unregisterNavSwitch(){
-    uiObserver.off('navDestinationSwitch',this.getUIContext())
-  }
-
-  static onBackPressed = BackHelper.instance.onBackPressed
 
   build() {
     Stack() {

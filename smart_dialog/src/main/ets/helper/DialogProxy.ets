@@ -12,7 +12,7 @@ import { SmartAllDialogType } from '../config/EnumConfig'
 import { LoadingNodeController } from '../node_controller/LoadingNodeController'
 import { SmartBuilder } from '../kit/function'
 import { Configuration } from '@kit.AbilityKit'
-import { OhosSmartDialog } from '../InitDialog'
+import { NavigatorObserver } from './NavigatorObserver'
 
 
 export class DialogProxy {
@@ -45,6 +45,7 @@ export class DialogProxy {
   // default style
   loadingBuilder?: SmartBuilder
   onConfigurationUpdate: (newConfig: Configuration) => void
+  navigatorObserve: NavigatorObserver = new NavigatorObserver()
 
   show(option: SmartCustomOption) {
     let model = new CustomDialogModel()
@@ -54,7 +55,7 @@ export class DialogProxy {
     model.animation.setTime(option.animationTime)
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
-    model.bindRouter = option.bindRouter ?? OhosSmartDialog.observe.curRouter
+    model.bindRouter = option.bindRouter ?? this.navigatorObserve.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
@@ -81,7 +82,7 @@ export class DialogProxy {
     model.animation.setTime(option.animationTime)
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
-    model.bindRouter = option.bindRouter ?? OhosSmartDialog.observe.curRouter
+    model.bindRouter = option.bindRouter ?? this.navigatorObserve.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
@@ -107,7 +108,7 @@ export class DialogProxy {
     model.animation.setTime(option.animationTime)
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
-    model.bindRouter = OhosSmartDialog.observe.curRouter
+    model.bindRouter = this.navigatorObserve.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.onMask = option.onMask
