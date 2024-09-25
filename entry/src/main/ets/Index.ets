@@ -10,7 +10,7 @@ struct Index {
   build() {
     Stack() {
       // here: monitor router
-      Navigation(OhosSmartDialog.registerRouter(RouterHelper.stack)) {
+      Navigation(RouterHelper.stack) {
         MainPage()
       }
       .mode(NavigationMode.Stack)

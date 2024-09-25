@@ -40,7 +40,6 @@ export class DialogProxy {
 
   dialogList: Array<BaseDialogModel> = []
   loadingDialog: LoadingDialogModel = new LoadingDialogModel()
-  navPathStack: NavPathStack = new NavPathStack()
   dialogNodeController: DialogNodeController = new DialogNodeController()
   loadingNodeController: LoadingNodeController = new LoadingNodeController()
   // default style
