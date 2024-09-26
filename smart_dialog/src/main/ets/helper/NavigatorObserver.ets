@@ -7,8 +7,9 @@ import { uiObserver } from '@kit.ArkUI'
  * @create: 2024-09-23 15:57
  */
 export class NavigatorObserver {
+  private defaultRouter = 'navBar'
   private backgroundRouterIdSet = new Set<string | undefined>()
-  curRouter?: string
+  curRouter?: string = this.defaultRouter
 
   registerNavSwitch(context: UIContext) {
     uiObserver.on('navDestinationSwitch', context, this.navDestinationSwitch)
@@ -22,6 +23,7 @@ export class NavigatorObserver {
     const navigatorObserve = DialogProxy.instance.navigatorObserve
     const fromId = this.getNavId(info.from)
     const toId = this.getNavId(info.to)
+    DialogProxy.instance.navigatorObserve.curRouter = toId
     switch (info.operation) {
       case NavigationOperation.PUSH:
         navigatorObserve.onPush(fromId, toId)
@@ -37,25 +39,22 @@ export class NavigatorObserver {
     // console.info(`DialogNavigatorObserver:${JSON.stringify(info)}`)
   }
 
-  private onPush(fromId?: string, toId?: string) {
+  private onPush(fromId?: string, _toId?: string) {
     this.backgroundRouterIdSet.add(fromId)
-    DialogProxy.instance.navigatorObserve.curRouter = toId
   }
 
-  private onPop(fromId?: string, toId?: string) {
+  private onPop(fromId?: string, _toId?: string) {
     this.popRouter(fromId)
-    DialogProxy.instance.navigatorObserve.curRouter = toId
   }
 
-  private onReplace(fromId?: string, toId?: string) {
+  private onReplace(fromId?: string, _toId?: string) {
     this.popRouter(fromId)
-    DialogProxy.instance.navigatorObserve.curRouter = toId
   }
 
   private getNavId(info: NavDestinationInfo | NavBar): string | undefined {
     let pushNavId: string | undefined = undefined
     if (typeof info === 'string') {
-      pushNavId = 'navBar'
+      pushNavId = this.defaultRouter
     } else {
       pushNavId = (info as NavDestinationInfo).navDestinationId
     }

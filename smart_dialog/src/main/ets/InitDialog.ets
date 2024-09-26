@@ -22,7 +22,6 @@ export struct OhosSmartDialog {
    * @deprecated 无需使用方法注册路由，内部已使用无感路由注册，该方法后续版本将被被移除
    */
   static registerRouter(navPathStack: NavPathStack): NavPathStack {
-    OhosSmartDialog.observe
     return navPathStack
   }
 
