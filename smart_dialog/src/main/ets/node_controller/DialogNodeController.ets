@@ -59,6 +59,9 @@ struct SmartNode {
         AttachDialogComponent({ item: this.item })
       }
     }
+    .onTouch((event: TouchEvent) => {
+      event.stopPropagation()
+    })
     .visibility(this.item.visible ? Visibility.Visible : Visibility.None)
   }
 }
