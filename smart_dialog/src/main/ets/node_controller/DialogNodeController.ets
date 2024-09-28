@@ -60,7 +60,9 @@ struct SmartNode {
       }
     }
     .onTouch((event: TouchEvent) => {
-      event.stopPropagation()
+      if (this.item.usePenetrate !== true) {
+        event.stopPropagation()
+      }
     })
     .visibility(this.item.visible ? Visibility.Visible : Visibility.None)
   }

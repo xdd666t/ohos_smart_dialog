@@ -1,6 +1,12 @@
+# 1.6.0
+- 使用无感路由监听，简化SmartDialog初始化流程
+- 废弃手动注册路由方式，以下方法已被废弃，后续版本将被删除
+  - OhosSmartDialog.observe 
+  - OhosSmartDialog.registerRouter
+
+
 # 1.5.8
 - 下线usePenetrate: 存在问题，暂时下线
-
 
 # 1.5.7
 - 增加keepSingle: keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗

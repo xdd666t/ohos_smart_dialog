@@ -57,7 +57,7 @@ ohpm install ohos_smart_dialog
 
 **配置完下述的初始化操作后，你将可以在任何地方使用弹窗，没有任何限制**
 
-- 因为弹窗需要处理跨页面交互，必须要监控路由
+- 注：内部已使用无感路由注册，外部无需手动处理
 
 ```typescript
 @Entry
@@ -67,15 +67,14 @@ struct Index {
 
   build() {
     Stack() {
-      // here: monitor router
-      Navigation(OhosSmartDialog.registerRouter(this.navPathStack)) {
+      Navigation(this.navPathStack) {
         MainPage()
       }
       .mode(NavigationMode.Stack)
       .hideTitleBar(true)
       .navDestination(pageMap)
 
-      // here
+      // here dialog init
       OhosSmartDialog()
     }.height('100%').width('100%')
   }
@@ -137,28 +136,6 @@ struct JumpPage {
 
   onCustomBackPress(): boolean {
     return false
-  }
-}
-```
-
-## 路由监听
-
-- 一般来说，你无需关注SmartDialog的路由监听，因为内部已经设置了路由监听拦截器
-- **但是**NavPathStack仅支持单拦截器（setInterception），如果业务代码也使用了这个api，会导致SmartDialog的路由监听被覆盖，从而失效
-
-> **如果出现该情况，请参照下述解决方案**
-
-- 在你的路由监听类中手动调用`OhosSmartDialog.observe`
-
-```typescript
-export default class YourNavigatorObserver implements NavigationInterception {
-  willShow?: InterceptionShowCallback = (from, to, operation, isAnimated) => {
-    OhosSmartDialog.observe.willShow?.(from, to, operation, isAnimated)
-    // ...
-  }
-  didShow?: InterceptionShowCallback = (from, to, operation, isAnimated) => {
-    OhosSmartDialog.observe.didShow?.(from, to, operation, isAnimated)
-    // ...
   }
 }
 ```
@@ -616,4 +593,3 @@ export function customLoading() {
 ```
 
 ![loadingCustom](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102229335.gif)
-
