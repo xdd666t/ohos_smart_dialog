@@ -1,6 +1,10 @@
+# 1.6.2
+- 增加usePenetrate: true（点击事件将穿透遮罩），false（不穿透）
+- 优化dismiss逻辑
+
+
 # 1.6.1
 - 更新文档内容
-
 
 # 1.6.0
 - 使用无感路由监听，简化SmartDialog初始化流程

@@ -1,7 +1,7 @@
 {
   // ohpm publish smart_dialog\build\default\outputs\default\smart_dialog.har
   "name": "ohos_smart_dialog",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "解决原生弹窗的各种痛点. 强大的一站式弹窗解决方案",
   "main": "Index.ets",
   "author": "xdd666",
