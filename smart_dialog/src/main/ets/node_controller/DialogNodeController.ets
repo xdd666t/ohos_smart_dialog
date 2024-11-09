@@ -50,7 +50,28 @@ struct SmartNode {
   item: BaseDialogModel = new BaseDialogModel()
 
   build() {
-    Stack({ alignContent: this.item.alignment }) {
+    if (this.item.usePenetrate) {
+      Stack({ alignContent: this.item.alignment }) {
+        this.buildContent()
+      }
+    } else {
+      Stack({ alignContent: this.item.alignment }) {
+        this.buildContent()
+      }
+      .gesture(GestureGroup(GestureMode.Exclusive,
+        TapGesture(),
+        LongPressGesture(),
+        PanGesture(),
+        PinchGesture(),
+        SwipeGesture(),
+        RotationGesture(),
+      ))
+    }
+  }
+
+  @Builder
+  buildContent() {
+    Stack() {
       MaskComponent({ item: this.item })
 
       if (this.item instanceof CustomDialogModel) {
@@ -58,12 +79,6 @@ struct SmartNode {
       } else if (this.item instanceof AttachDialogModel) {
         AttachDialogComponent({ item: this.item })
       }
-    }
-    .onTouch((event: TouchEvent) => {
-      if (this.item.usePenetrate !== true) {
-        event.stopPropagation()
-      }
-    })
-    .visibility(this.item.visible ? Visibility.Visible : Visibility.None)
+    }.visibility(this.item.visible ? Visibility.Visible : Visibility.None)
   }
 }

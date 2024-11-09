@@ -23,7 +23,6 @@ export struct MaskComponent {
     .animation({ duration: this.item.animation.maskTime, curve: Curve.Linear })
     .width('100%')
     .height('100%')
-    .hitTestBehavior(this.item.usePenetrate ? HitTestMode.Transparent : HitTestMode.Default)
     .onTouch((event: TouchEvent) => {
       if (event.type === TouchType.Up) {
         this.item.onMask?.()

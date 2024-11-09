@@ -18,6 +18,14 @@ export struct CustomDialogComponent {
     .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
     .position(this.item.animation.dialogPosition)
     .animation({ duration: this.item.animation.dialogTime, curve: Curve.Linear })
+    .gesture(GestureGroup(GestureMode.Exclusive,
+      TapGesture(),
+      LongPressGesture(),
+      PanGesture(),
+      PinchGesture(),
+      SwipeGesture(),
+      RotationGesture(),
+    ))
     .onAppear(() => this.item.show())
   }
 }

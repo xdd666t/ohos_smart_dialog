@@ -30,6 +30,8 @@ export struct MainPage {
             }
           }.alignItems(HorizontalAlign.Start).width("100%").padding(30)
         })
+
+        Stack().height(300)
       }
     }.margin({ top: 30 })
   }

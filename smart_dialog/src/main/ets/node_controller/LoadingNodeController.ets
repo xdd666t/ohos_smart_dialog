@@ -33,13 +33,43 @@ export class LoadingNodeController extends BaseNodeController {
 }
 
 @Builder
-function buildLoadingNode(loadingDialog: LoadingDialogModel) {
-  Stack() {
-    MaskComponent({ item: loadingDialog })
+function buildLoadingNode(item: LoadingDialogModel) {
+  LoadingNode({ item: item })
+}
 
-    LoadingDialogComponent({
-      item: loadingDialog,
-      builder: loadingDialog.builder
-    })
+@Component
+struct LoadingNode {
+  item: LoadingDialogModel = new LoadingDialogModel()
+
+  build() {
+    if (this.item.usePenetrate) {
+      Stack({ alignContent: this.item.alignment }) {
+        this.buildContent()
+      }
+    } else {
+      Stack({ alignContent: this.item.alignment }) {
+        this.buildContent()
+      }
+      .gesture(GestureGroup(GestureMode.Exclusive,
+        TapGesture(),
+        LongPressGesture(),
+        PanGesture(),
+        PinchGesture(),
+        SwipeGesture(),
+        RotationGesture(),
+      ))
+    }
+  }
+
+  @Builder
+  buildContent() {
+    Stack() {
+      MaskComponent({ item: this.item })
+
+      LoadingDialogComponent({
+        item: this.item,
+        builder: this.item.builder
+      })
+    }
   }
 }
