@@ -1,13 +1,14 @@
-import { AttachDialogModel } from '../component/attach_dialog/AttachDialogModel'
+import { AttachDialogModel } from '../dialog/attach/AttachDialogModel'
 import { BaseDialogModel } from '../model/BaseDialogModel'
-import { CustomDialogModel } from '../component/custom_dialog/CustomDialogModel'
-import { AttachDialogComponent } from '../component/attach_dialog/AttachDialogComponent'
-import { CustomDialogComponent } from '../component/custom_dialog/CustomDialogComponent'
+import { CustomDialogModel } from '../dialog/custom/CustomDialogModel'
+import { AttachDialogComponent } from '../dialog/attach/AttachDialogComponent'
+import { CustomDialogComponent } from '../dialog/custom/CustomDialogComponent'
 
-import { MaskComponent } from '../component/MaskComponent'
+import { MaskComponent } from '../dialog/MaskComponent'
 import { BaseNodeController } from './BaseNodeController'
 import { DialogProxy } from '../helper/DialogProxy'
 import { FrameNode } from '@kit.ArkUI'
+import { GestureComponent } from '../component/GestureComponent'
 
 export class DialogNodeController extends BaseNodeController {
   inset(model: BaseDialogModel) {
@@ -50,35 +51,16 @@ struct SmartNode {
   item: BaseDialogModel = new BaseDialogModel()
 
   build() {
-    if (this.item.usePenetrate) {
+    GestureComponent({ useDefaultGesture: !this.item.usePenetrate }) {
       Stack({ alignContent: this.item.alignment }) {
-        this.buildContent()
-      }
-    } else {
-      Stack({ alignContent: this.item.alignment }) {
-        this.buildContent()
-      }
-      .gesture(GestureGroup(GestureMode.Exclusive,
-        TapGesture(),
-        LongPressGesture(),
-        PanGesture(),
-        PinchGesture(),
-        SwipeGesture(),
-        RotationGesture(),
-      ))
+        MaskComponent({ item: this.item })
+
+        if (this.item instanceof CustomDialogModel) {
+          CustomDialogComponent({ item: this.item })
+        } else if (this.item instanceof AttachDialogModel) {
+          AttachDialogComponent({ item: this.item })
+        }
+      }.visibility(this.item.visible ? Visibility.Visible : Visibility.None)
     }
-  }
-
-  @Builder
-  buildContent() {
-    Stack() {
-      MaskComponent({ item: this.item })
-
-      if (this.item instanceof CustomDialogModel) {
-        CustomDialogComponent({ item: this.item })
-      } else if (this.item instanceof AttachDialogModel) {
-        AttachDialogComponent({ item: this.item })
-      }
-    }.visibility(this.item.visible ? Visibility.Visible : Visibility.None)
   }
 }

@@ -1,11 +1,12 @@
-import { LoadingDialogModel } from '../component/loading_dialog/LoadingDialogModel'
-import { LoadingDialogComponent } from '../component/loading_dialog/LoadingDialogComponent'
+import { LoadingDialogModel } from '../dialog/loading/LoadingDialogModel'
+import { LoadingDialogComponent } from '../dialog/loading/LoadingDialogComponent'
 import { BaseDialogModel } from '../model/BaseDialogModel'
 import { BaseNodeController } from './BaseNodeController'
 import { SmartDialog } from '../SmartDialog'
 import { SmartAllDialogType } from '../config/EnumConfig'
 import { DialogProxy } from '../helper/DialogProxy'
-import { MaskComponent } from '../component/MaskComponent'
+import { MaskComponent } from '../dialog/MaskComponent'
+import { GestureComponent } from '../component/GestureComponent'
 
 export class LoadingNodeController extends BaseNodeController {
   inset(model: BaseDialogModel) {
@@ -42,34 +43,15 @@ struct LoadingNode {
   item: LoadingDialogModel = new LoadingDialogModel()
 
   build() {
-    if (this.item.usePenetrate) {
-      Stack({ alignContent: this.item.alignment }) {
-        this.buildContent()
-      }
-    } else {
-      Stack({ alignContent: this.item.alignment }) {
-        this.buildContent()
-      }
-      .gesture(GestureGroup(GestureMode.Exclusive,
-        TapGesture(),
-        LongPressGesture(),
-        PanGesture(),
-        PinchGesture(),
-        SwipeGesture(),
-        RotationGesture(),
-      ))
-    }
-  }
+    GestureComponent({ useDefaultGesture: !this.item.usePenetrate }) {
+      Stack() {
+        MaskComponent({ item: this.item })
 
-  @Builder
-  buildContent() {
-    Stack() {
-      MaskComponent({ item: this.item })
-
-      LoadingDialogComponent({
-        item: this.item,
-        builder: this.item.builder
-      })
+        LoadingDialogComponent({
+          item: this.item,
+          builder: this.item.builder
+        })
+      }
     }
   }
 }
