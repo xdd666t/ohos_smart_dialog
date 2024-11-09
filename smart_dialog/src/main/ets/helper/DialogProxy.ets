@@ -120,8 +120,11 @@ export class DialogProxy {
   }
 
   async dismiss(option?: SmartDismissOption): Promise<void> {
-    if (SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {
-      await this.loadingDialog.dismiss(option?.tag)
+    const dismissTag = option?.tag
+    const loadingDialog = this.loadingDialog
+    const isExitLoading = SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })
+    if (isExitLoading && (dismissTag === undefined || dismissTag === loadingDialog.tag)) {
+      await loadingDialog.dismiss(option?.tag)
       return
     }
 
