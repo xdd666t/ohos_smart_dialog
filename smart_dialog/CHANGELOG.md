@@ -1,7 +1,10 @@
+# 1.6.3
+- usePenetrate: 该功能下线, 无法与Flutter容器兼容
+
+
 # 1.6.2
 - 增加usePenetrate: true（点击事件将穿透遮罩），false（不穿透）
 - 优化dismiss逻辑
-
 
 # 1.6.1
 - 更新文档内容

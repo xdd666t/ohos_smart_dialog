@@ -43,9 +43,9 @@ export class SmartDialog {
   ///
   /// [bindRouter]: 当bindRouter为undefined时, 该弹窗将自动绑定当前路由; 如果你不想该弹窗绑定当前路由, 可将该值设置为负数("-1")
   ///
-  /// [usePenetrate]: true（点击事件将穿透遮罩），false（不穿透）
+  /// [usePenetrate](该功能下线, 无法与Flutter容器兼容): true（点击事件将穿透遮罩），false（不穿透）
   ///
-  /// [keepSingle]：keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
+  /// [keepSingle]: keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
   static show(option: SmartCustomOption) {
     const customConfig = SmartDialog.config.custom
     DialogProxy.instance.show({
@@ -94,9 +94,9 @@ export class SmartDialog {
   ///
   /// [bindRouter]: 当bindRouter为undefined时, 该弹窗将自动绑定当前路由; 如果你不想该弹窗绑定当前路由, 可将该值设置为负数("-1")
   ///
-  /// [usePenetrate]: true（点击事件将穿透遮罩），false（不穿透）
+  /// [usePenetrate](该功能下线, 无法与Flutter容器兼容): true（点击事件将穿透遮罩），false（不穿透）
   ///
-  /// [keepSingle]：keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
+  /// [keepSingle]: keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
   static showAttach(option: SmartAttachOption) {
     const attachConfig = SmartDialog.config.attach
     DialogProxy.instance.showAttach({
@@ -142,7 +142,7 @@ export class SmartDialog {
   ///
   /// [onDismiss]: 弹窗关闭时, 触发该回调
   ///
-  /// [usePenetrate]: true（点击事件将穿透遮罩），false（不穿透）
+  /// [usePenetrate](该功能下线, 无法与Flutter容器兼容): true（点击事件将穿透遮罩），false（不穿透）
   static showLoading(option?: SmartLoadingOption) {
     const loadingConfig = SmartDialog.config.loading
     DialogProxy.instance.showLoading({
