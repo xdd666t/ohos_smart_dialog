@@ -3,6 +3,7 @@ import { DialogProxy } from './helper/DialogProxy'
 import { SmartBuilder } from './kit/function'
 import { defaultLoadingBuilder } from './dialog/default/loading_component'
 import SmartNavigatorObserver from './helper/SmartNavigatorObserver'
+import { SmartDialog } from './SmartDialog'
 
 
 @Component
@@ -39,6 +40,6 @@ export struct OhosSmartDialog {
       NodeContainer(DialogProxy.instance.dialogNodeController)
 
       NodeContainer(DialogProxy.instance.loadingNodeController)
-    }.hitTestBehavior(HitTestMode.Default)
+    }.hitTestBehavior(SmartDialog.config.global.usePenetrate ? HitTestMode.Transparent : HitTestMode.Default)
   }
 }

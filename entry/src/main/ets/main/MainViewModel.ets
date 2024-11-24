@@ -10,6 +10,8 @@ import { customTag } from '../dialog/custom/TagDialog'
 import { customUseArgs } from '../dialog/custom/UseArgs'
 import { loadingCustom } from '../dialog/loading/CustomLoading'
 import { MainFeature, MainState } from './MainState'
+import { globalUsePenetrate } from '../dialog/global/UsePenetrateConfig'
+import { customHalfPenetrate } from '../dialog/custom/HalfPenetrate'
 
 export class MainViewModel {
   mainState: MainState
@@ -30,10 +32,12 @@ export class MainViewModel {
       customMask()
     } else if (item === MainFeature.customTag) {
       customTag()
-    } else if (item === MainFeature.customUsePenetrate) {
-      customUsePenetrate()
     } else if (item === MainFeature.customKeepSingle) {
       customKeepSingle()
+    } else if (item === MainFeature.customUsePenetrate) {
+      customUsePenetrate()
+    } else if (item === MainFeature.customHalfPenetrate) {
+      customHalfPenetrate()
     }
 
     // attach
@@ -48,6 +52,11 @@ export class MainViewModel {
       SmartDialog.showLoading()
     } else if (item === MainFeature.loadingCustom) {
       loadingCustom()
+    }
+
+    // global
+    if (item === MainFeature.globalUsePenetrate) {
+      globalUsePenetrate()
     }
   }
 }

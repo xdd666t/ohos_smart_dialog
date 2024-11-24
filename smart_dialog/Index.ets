@@ -9,3 +9,5 @@ export * from './src/main/ets/config/SmartConfig'
 export * from './src/main/ets/config/SmartConfigAttach'
 
 export * from './src/main/ets/config/SmartConfigCustom'
+
+export * from './src/main/ets/config/SmartConfigGlobal'

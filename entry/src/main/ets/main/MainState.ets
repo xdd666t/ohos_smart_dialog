@@ -10,8 +10,9 @@ export class MainState {
         { title: MainFeature.customJumpPage },
         { title: MainFeature.customMask },
         { title: MainFeature.customTag },
-        { title: MainFeature.customUsePenetrate },
         { title: MainFeature.customKeepSingle },
+        { title: MainFeature.customUsePenetrate },
+        { title: MainFeature.customHalfPenetrate },
       ]
     },
     {
@@ -28,6 +29,12 @@ export class MainState {
         { title: MainFeature.loadingCustom },
       ]
     },
+    {
+      title: "globalConfig",
+      items: [
+        { title: MainFeature.globalUsePenetrate },
+      ]
+    },
   ]
 }
 
@@ -39,14 +46,17 @@ export class MainFeature {
   static customJumpPage: string = "customJumpPage"
   static customMask: string = "customMask"
   static customTag: string = "customTag"
-  static customUsePenetrate: string = "customUsePenetrate"
   static customKeepSingle: string = "customKeepSingle"
+  static customUsePenetrate: string = "customUsePenetrate"
+  static customHalfPenetrate: string = "customHalfPenetrate"
   // attach
   static attachEasy: string = "attachEasy"
   static attachLocation: string = "attachLocation"
   // loading
   static loadingDefault: string = "loadingDefault"
   static loadingCustom: string = "loadingCustom"
+  // global
+  static globalUsePenetrate: string = "globalUsePenetrate"
 }
 
 

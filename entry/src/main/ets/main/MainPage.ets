@@ -28,7 +28,7 @@ export struct MainPage {
                   })
               })
             }
-          }.alignItems(HorizontalAlign.Start).width("100%").padding(30)
+          }.alignItems(HorizontalAlign.Start).width("100%").padding(20)
         })
 
         Stack().height(300)
