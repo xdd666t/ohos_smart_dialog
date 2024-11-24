@@ -46,6 +46,8 @@ export class SmartDialog {
   /// [usePenetrate](该功能下线, 无法与Flutter容器兼容): true（点击事件将穿透遮罩），false（不穿透）
   ///
   /// [keepSingle]: keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
+  ///
+  /// [animationType]: 动画类型
   static show(option: SmartCustomOption) {
     const customConfig = SmartDialog.config.custom
     DialogProxy.instance.show({
@@ -63,6 +65,7 @@ export class SmartDialog {
       bindRouter: option.bindRouter,
       usePenetrate: option.usePenetrate ?? false,
       keepSingle: option.keepSingle ?? false,
+      animationType: option.animationType ?? customConfig.animationType,
     })
   }
 
@@ -97,6 +100,8 @@ export class SmartDialog {
   /// [usePenetrate](该功能下线, 无法与Flutter容器兼容): true（点击事件将穿透遮罩），false（不穿透）
   ///
   /// [keepSingle]: keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
+  ///
+  /// [animationType]: 动画类型
   static showAttach(option: SmartAttachOption) {
     const attachConfig = SmartDialog.config.attach
     DialogProxy.instance.showAttach({
@@ -115,6 +120,7 @@ export class SmartDialog {
       bindRouter: option.bindRouter,
       usePenetrate: option.usePenetrate ?? false,
       keepSingle: option.keepSingle ?? false,
+      animationType: option.animationType ?? attachConfig.animationType,
     })
   }
 
@@ -143,6 +149,8 @@ export class SmartDialog {
   /// [onDismiss]: 弹窗关闭时, 触发该回调
   ///
   /// [usePenetrate](该功能下线, 无法与Flutter容器兼容): true（点击事件将穿透遮罩），false（不穿透）
+  ///
+  /// [animationType]: 动画类型
   static showLoading(option?: SmartLoadingOption) {
     const loadingConfig = SmartDialog.config.loading
     DialogProxy.instance.showLoading({
@@ -158,6 +166,7 @@ export class SmartDialog {
       backType: option?.backType ?? loadingConfig.backType,
       onDismiss: option?.onDismiss,
       usePenetrate: option?.usePenetrate ?? false,
+      animationType: option?.animationType ?? loadingConfig.animationType,
     })
   }
 

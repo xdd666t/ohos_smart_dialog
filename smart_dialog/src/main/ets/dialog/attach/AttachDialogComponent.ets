@@ -29,9 +29,7 @@ export struct AttachDialogComponent {
       Stack() {
         this.builder?.(this.item.builderArgs)
       }
-      .height(this.item.animation.dialogHeight)
-      .width(this.item.animation.dialogWidth)
-      .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
+      .scale({ x: this.item.animation.dialogScaleX, y: this.item.animation.dialogScaleY })
       .position(this.item.animation.dialogPosition)
       .opacity(this.item.animation.dialogOpacity)
       .animation({ duration: this.item.animation.dialogTime, curve: Curve.Linear })

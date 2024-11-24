@@ -81,7 +81,7 @@ function targetLocationDialog() {
     .fontSize(20)
     .fontColor(Color.White)
     .textAlign(TextAlign.Center)
-    .padding(50)
+    .padding(35)
     .borderRadius(12)
     .backgroundColor(randomColor())
 }

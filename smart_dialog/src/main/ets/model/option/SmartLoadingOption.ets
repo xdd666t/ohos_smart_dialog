@@ -1,7 +1,7 @@
-import { SmartBackType } from '../../config/EnumConfig'
+import { SmartAnimationType, SmartBackType } from '../../config/EnumConfig'
 import { SmartBuilder } from '../../kit/function'
 
-export class SmartLoadingOption {
+export interface SmartLoadingOption {
   builder?: SmartBuilder
   builderArgs?: ESObject
   alignment?: Alignment
@@ -14,4 +14,5 @@ export class SmartLoadingOption {
   backType?: SmartBackType
   onDismiss?: VoidCallback
   usePenetrate?: boolean
+  animationType?: SmartAnimationType
 }

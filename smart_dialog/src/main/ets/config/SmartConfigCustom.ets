@@ -1,5 +1,5 @@
 import { SmartBuilder } from '../kit/function'
-import { SmartBackType } from './EnumConfig'
+import { SmartAnimationType, SmartBackType } from './EnumConfig'
 
 export class SmartConfigCustom {
   constructor() {
@@ -27,4 +27,6 @@ export class SmartConfigCustom {
   maskWrapBuild?: SmartBuilder
   /// 返回事件对弹窗的影响
   backType: SmartBackType = SmartBackType.dismiss
+  // 动画类型
+  animationType: SmartAnimationType = SmartAnimationType.scale
 }

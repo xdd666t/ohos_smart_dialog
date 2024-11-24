@@ -1,7 +1,7 @@
 import { BaseDialogModel } from '../../model/BaseDialogModel'
 import { componentUtils, display, Offset } from '@kit.ArkUI'
 import { SmartDialog } from '../../SmartDialog'
-import { SmartAttachAlignmentType } from '../../config/EnumConfig'
+import { SmartAnimationType, SmartAttachAlignmentType } from '../../config/EnumConfig'
 
 @ObservedV2
 export class AttachDialogModel extends BaseDialogModel {
@@ -11,9 +11,11 @@ export class AttachDialogModel extends BaseDialogModel {
 
   constructor() {
     super()
-    this.animation.dialogOpacity = 0
-    this.animation.dialogScale = 1
-    this.animation.dialogPosition = undefined
+    const animation = this.animation
+    animation.dialogOpacity = 0
+    animation.dialogScaleX = 0
+    animation.dialogScaleY = 0
+    animation.dialogPosition = undefined
   }
 
   initAnimationStatus(selfId?: string): void {
@@ -30,53 +32,99 @@ export class AttachDialogModel extends BaseDialogModel {
       right: px2vp(targetRect.right),
       bottom: px2vp(targetRect.bottom),
     } as Edges
+    this.handleScaleAnimation(true)
     super.initAnimationStatus()
   }
 
   show(): Promise<void> {
-    const animation = this.animation
-    animation.dialogOpacity = 1
+    this.handleScaleAnimation(false)
     return super.show()
   }
 
   async dismiss(): Promise<void> {
     const animation = this.animation
     animation.setEndTime()
-    animation.dialogOpacity = 0
+    // 恢复到渲染前状态
+    this.handleScaleAnimation(true)
     await super.dismiss()
     this.remove()
+  }
+
+  private handleScaleAnimation(beforeRender: boolean) {
+    const animation = this.animation
+
+    // 渐隐动画
+    if (this.animationType === SmartAnimationType.fade) {
+      animation.dialogScaleX = 1
+      animation.dialogScaleY = 1
+      animation.dialogOpacity = beforeRender ? 0 : 1
+      return
+    }
+
+    // 类位移动画
+    const alignment = this.alignment
+    const selfSize = this.attachInfo.selfInfo?.size ?? {} as Size
+    const selfWidth = px2vp(selfSize.width ?? 0)
+    const selfHeight = px2vp(selfSize.height ?? 0)
+    const position = animation.dialogPosition
+    const positionTop = (position?.top ?? 0) as number
+    const positionLeft = (position?.left ?? 0) as number
+    if (!position) {
+      return
+    }
+    animation.dialogOpacity = 1
+    if (alignment == Alignment.TopStart || alignment == Alignment.Top || alignment == Alignment.TopEnd) {
+      position.top = positionTop + (selfHeight / 2) * (beforeRender ? 1 : -1)
+      animation.dialogScaleX = 1
+      animation.dialogScaleY = beforeRender ? 0 : 1
+    } else if (alignment == Alignment.Start) {
+      position.left = positionLeft + (selfWidth / 2) * (beforeRender ? 1 : -1)
+      animation.dialogScaleX = beforeRender ? 0 : 1
+      animation.dialogScaleY = 1
+    } else if (alignment == Alignment.Center) {
+      animation.dialogScaleX = beforeRender ? 0 : 1
+      animation.dialogScaleY = beforeRender ? 0 : 1
+    } else if (alignment == Alignment.End) {
+      position.left = positionLeft + (selfWidth / 2) * (beforeRender ? -1 : 1)
+      animation.dialogScaleX = beforeRender ? 0 : 1
+      animation.dialogScaleY = 1
+    } else if (alignment == Alignment.BottomStart || alignment == Alignment.Bottom ||
+      alignment == Alignment.BottomEnd) {
+      position.top = positionTop + (selfHeight / 2) * (beforeRender ? -1 : 1)
+      animation.dialogScaleX = 1
+      animation.dialogScaleY = beforeRender ? 0 : 1
+    }
   }
 
   /// 处理: 方向及其位置
   private handleLocation(): RectInfo {
     const attachInfo = this.attachInfo
-    let alignment = this.alignment
+    const alignment = this.alignment
     let targetRect = new RectInfo()
-    let targetOffset = attachInfo.targetInfo?.screenOffset ?? {} as Offset
-    let targetSize = attachInfo.targetInfo?.size ?? {} as Size
-    let selfSize = attachInfo.selfInfo?.size ?? {} as Size
-    let screen = attachInfo.screen
+    const targetOffset = attachInfo.targetInfo?.screenOffset ?? {} as Offset
+    const targetSize = attachInfo.targetInfo?.size ?? {} as Size
+    const selfSize = attachInfo.selfInfo?.size ?? {} as Size
     if (alignment == Alignment.TopStart) {
       targetRect = this.adjustReactInfo({
-        bottom: screen.height - targetOffset.y,
+        top: targetOffset.y - selfSize.height,
         left: targetOffset.x + this.calculateDx(),
         fixedVertical: true,
       })
     } else if (alignment == Alignment.Top) {
       targetRect = this.adjustReactInfo({
-        bottom: screen.height - targetOffset.y,
+        top: targetOffset.y - selfSize.height,
         left: targetOffset.x + targetSize.width / 2 - selfSize.width / 2,
         fixedVertical: true,
       })
     } else if (alignment == Alignment.TopEnd) {
       targetRect = this.adjustReactInfo({
-        bottom: screen.height - targetOffset.y,
+        top: targetOffset.y - selfSize.height,
         left: targetOffset.x + targetSize.width + this.calculateDx(),
         fixedVertical: true,
       })
     } else if (alignment == Alignment.Start) {
       targetRect = this.adjustReactInfo({
-        right: screen.width - targetOffset.x,
+        left: targetOffset.x - selfSize.width,
         top: targetOffset.y + targetSize.height / 2 - selfSize.height / 2,
         fixedHorizontal: true,
       })
@@ -117,15 +165,15 @@ export class AttachDialogModel extends BaseDialogModel {
 
 
   private adjustReactInfo(option: AdjustRectInfo): RectInfo {
-    let rectInfo: RectInfo = {
+    const rectInfo: RectInfo = {
       left: option.left,
       right: option.right,
       top: option.top,
       bottom: option.bottom
     }
     const attachInfo = this.attachInfo
-    let selfSize = attachInfo.selfInfo?.size ?? {} as Size
-    let screen = attachInfo.screen
+    const selfSize = attachInfo.selfInfo?.size ?? {} as Size
+    const screen = attachInfo.screen
 
     //处理左右边界问题
     if (!option.fixedHorizontal && option.left !== undefined) {
@@ -133,7 +181,7 @@ export class AttachDialogModel extends BaseDialogModel {
         rectInfo.left = 0
         rectInfo.right = undefined
       } else {
-        let rightEdge = screen.width - option.left - selfSize.width
+        const rightEdge = screen.width - option.left - selfSize.width
         if (rightEdge < 0) {
           rectInfo.left = undefined
           rectInfo.right = 0
@@ -147,7 +195,7 @@ export class AttachDialogModel extends BaseDialogModel {
         rectInfo.top = 0
         rectInfo.bottom = undefined
       } else {
-        let bottomEdge = screen.height - option.top - selfSize.height
+        const bottomEdge = screen.height - option.top - selfSize.height
         if (bottomEdge < 0) {
           rectInfo.top = undefined
           rectInfo.bottom = 0
@@ -161,10 +209,10 @@ export class AttachDialogModel extends BaseDialogModel {
   /// 计算attach alignment类型的偏移量
   private calculateDx() {
     let offset: number = 0
-    let type = SmartDialog.config.attach.attachAlignmentType
+    const type = SmartDialog.config.attach.attachAlignmentType
     const attachInfo = this.attachInfo
-    let alignment = this.alignment
-    let selfSize = attachInfo.selfInfo?.size ?? {} as Size
+    const alignment = this.alignment
+    const selfSize = attachInfo.selfInfo?.size ?? {} as Size
 
     if (alignment == Alignment.TopStart || alignment == Alignment.BottomStart) {
       if (type == SmartAttachAlignmentType.inside) {

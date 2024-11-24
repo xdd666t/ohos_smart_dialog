@@ -1,3 +1,4 @@
+import { SmartAnimationType } from '../../config/EnumConfig'
 import { alignmentAnimation } from '../../helper/AlignmentHelper'
 import { BaseDialogModel } from '../../model/BaseDialogModel'
 
@@ -6,54 +7,52 @@ export class CustomDialogModel extends BaseDialogModel {
   keepSingle?: boolean
 
   initAnimationStatus(): void {
-    const animation = this.animation
-    alignmentAnimation(this.alignment, {
-      onStart: () => {
-        animation.dialogScale = 1
-        animation.dialogPosition = { right: "100%" }
-      },
-      onTop: () => {
-        animation.dialogScale = 1
-        animation.dialogPosition = { bottom: "100%" }
-      },
-      onEnd: () => {
-        animation.dialogScale = 1
-        animation.dialogPosition = { left: "100%" }
-      },
-      onBottom: () => {
-        animation.dialogScale = 1
-        animation.dialogPosition = { top: "100%" }
-      },
-      onCenter: () => {
-        animation.dialogScale = 0
-        animation.dialogPosition = undefined
-      },
-    })
+    this.handleScaleAnimation(true)
     super.initAnimationStatus()
   }
 
   show(): Promise<void> {
     const animation = this.animation
     animation.setStartTime()
+    this.handleScaleAnimation(false)
+    return super.show()
+  }
+
+  private handleScaleAnimation(beforeRender: boolean) {
+    const animation = this.animation
+    this.setDialogScale(1)
+
+    // 渐隐动画
+    if (this.animationType === SmartAnimationType.fade) {
+      animation.dialogOpacity = beforeRender ? 0 : 1
+      return
+    }
+
+    // 位移动画
     alignmentAnimation(this.alignment, {
       onStart: () => {
-        animation.dialogPosition = { left: 0 }
+        animation.dialogPosition = beforeRender ? { right: "100%" } : { left: 0 }
       },
       onTop: () => {
-        animation.dialogPosition = { top: 0 }
+        animation.dialogPosition = beforeRender ? { bottom: "100%" } : { top: 0 }
       },
       onEnd: () => {
-        animation.dialogPosition = { right: 0 }
+        animation.dialogPosition = beforeRender ? { left: "100%" } : { right: 0 }
       },
       onBottom: () => {
-        animation.dialogPosition = { bottom: 0 }
+        animation.dialogPosition = beforeRender ? { top: "100%" } : { bottom: 0 }
       },
       onCenter: () => {
+        this.setDialogScale(beforeRender ? 0 : 1)
         animation.dialogPosition = undefined
       },
     })
-    animation.dialogScale = 1
-    return super.show()
+  }
+
+  private setDialogScale(scale: number) {
+    const animation = this.animation
+    animation.dialogScaleX = scale
+    animation.dialogScaleY = scale
   }
 
   async dismiss(): Promise<void> {

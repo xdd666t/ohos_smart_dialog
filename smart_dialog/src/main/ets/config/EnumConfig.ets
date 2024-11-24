@@ -106,3 +106,12 @@ export enum SmartBackType {
   /// 忽略返回事件: 返回事件不会关闭弹窗, 且返回事件继续向后传递
   ignore,
 }
+
+/// 可给弹窗(出现和消失)设置不同的动画类型
+export enum SmartAnimationType {
+  /// 全部位置都为渐隐动画
+  fade,
+
+  /// 中间位置的为缩放, 其他位置为类位移动画
+  scale,
+}

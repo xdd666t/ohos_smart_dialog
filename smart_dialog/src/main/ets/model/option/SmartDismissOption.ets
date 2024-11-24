@@ -1,3 +1,3 @@
-export class SmartDismissOption {
+export interface SmartDismissOption {
   tag?: string
 }

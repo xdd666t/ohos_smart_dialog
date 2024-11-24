@@ -1,14 +1,13 @@
 import { delay, SmartBuilder } from '../kit/function'
 import { BuilderNode } from '@kit.ArkUI'
-import { SmartAllDialogType, SmartBackType } from '../config/EnumConfig'
+import { SmartAllDialogType, SmartAnimationType, SmartBackType } from '../config/EnumConfig'
 import { DialogProxy } from '../helper/DialogProxy'
 
 @ObservedV2
 class AnimationModel {
   @Trace maskOpacity: number = 0
-  @Trace dialogHeight: Length | undefined = undefined
-  @Trace dialogWidth: Length | undefined = undefined
-  @Trace dialogScale: number = 1
+  @Trace dialogScaleX: number = 1
+  @Trace dialogScaleY: number = 1
   @Trace dialogOpacity: number = 1
   @Trace dialogPosition?: Edges
   @Trace dialogTime?: number
@@ -54,6 +53,7 @@ export class BaseDialogModel {
   backType?: SmartBackType
   onDismiss?: VoidCallback
   usePenetrate?: boolean
+  animationType?: SmartAnimationType
 
   initAnimationStatus() {
     const animation = this.animation

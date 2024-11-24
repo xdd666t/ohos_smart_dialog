@@ -18,7 +18,7 @@
 
 - Tablet 模拟器目前有些问题，会导致动画闪烁，请忽略；注：真机动画丝滑流畅，无任何问题
 
-![attachLocation](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725613.gif)
+![attachLocation](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202411241515570.gif)
 
 ![customTag](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102228252.gif)
 
@@ -71,8 +71,8 @@ struct Index {
         MainPage()
       }
       .mode(NavigationMode.Stack)
-      .hideTitleBar(true)
-      .navDestination(pageMap)
+        .hideTitleBar(true)
+        .navDestination(pageMap)
 
       // here dialog init
       OhosSmartDialog()
@@ -145,10 +145,10 @@ struct JumpPage {
 - 为了极致的体验，深色模式切换时，打开态弹窗也应刷新为对应模式的样式，故需要进行下述配置
 
 ```typescript
-export default class EntryAbility extends UIAbility {  
-  onConfigurationUpdate(newConfig: Configuration): void {  
-    OhosSmartDialog.onConfigurationUpdate(newConfig)  
-  }  
+export default class EntryAbility extends UIAbility {
+  onConfigurationUpdate(newConfig: Configuration): void {
+    OhosSmartDialog.onConfigurationUpdate(newConfig)
+  }
 }
 ```
 
@@ -439,8 +439,8 @@ function dialog() {
       .id("Attach")
   }
   .borderRadius(12)
-  .padding(50)
-  .backgroundColor(Color.White)
+    .padding(50)
+    .backgroundColor(Color.White)
 }
 
 @Builder
@@ -586,9 +586,9 @@ export function customLoading() {
     LoadingProgress().width(80).height(80).color(Color.White)
   }
   .padding(20)
-  .borderRadius(12)
-  .onClick(() => loadingCustom())
-  .backgroundColor(randomColor())
+    .borderRadius(12)
+    .onClick(() => loadingCustom())
+    .backgroundColor(randomColor())
 }
 ```
 

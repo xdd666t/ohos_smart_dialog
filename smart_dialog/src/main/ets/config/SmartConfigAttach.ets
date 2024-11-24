@@ -1,5 +1,5 @@
 import { SmartBuilder } from '../kit/function'
-import { SmartAttachAlignmentType, SmartBackType } from './EnumConfig'
+import { SmartAnimationType, SmartAttachAlignmentType, SmartBackType } from './EnumConfig'
 
 export class SmartConfigAttach {
   constructor() {
@@ -29,4 +29,6 @@ export class SmartConfigAttach {
   attachAlignmentType: SmartAttachAlignmentType = SmartAttachAlignmentType.center
   /// 返回事件对弹窗的影响
   backType: SmartBackType = SmartBackType.dismiss
+  // 动画类型
+  animationType: SmartAnimationType = SmartAnimationType.scale
 }

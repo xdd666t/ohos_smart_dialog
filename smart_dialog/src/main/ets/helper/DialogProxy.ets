@@ -65,6 +65,7 @@ export class DialogProxy {
     model.usePenetrate = option.usePenetrate
     const keepSingle = option.keepSingle
     model.keepSingle = keepSingle
+    model.animationType = option.animationType
     if (keepSingle) {
       this.dialogNodeController.update(model)
     } else {
@@ -92,6 +93,7 @@ export class DialogProxy {
     model.usePenetrate = option.usePenetrate
     const keepSingle = option.keepSingle
     model.keepSingle = keepSingle
+    model.animationType = option.animationType
     if (keepSingle) {
       this.dialogNodeController.update(model)
     } else {
@@ -116,6 +118,7 @@ export class DialogProxy {
     model.backType = option.backType
     model.onDismiss = option.onDismiss
     model.usePenetrate = option.usePenetrate
+    model.animationType = option.animationType
     this.loadingNodeController.update(model)
   }
 

@@ -16,5 +16,4 @@ function dialogArgs(args: number) {
     .padding(50)
     .borderRadius(12)
     .backgroundColor(randomColor())
-    .hitTestBehavior(HitTestMode.Transparent)
 }

@@ -1,9 +1,9 @@
-import { SmartBackType } from '../../config/EnumConfig'
+import { SmartAnimationType, SmartBackType } from '../../config/EnumConfig'
 import { SmartBuilder } from '../../kit/function'
 
-export class SmartAttachOption {
-  targetId: string = ''
-  builder?: SmartBuilder
+export interface SmartAttachOption {
+  targetId: string
+  builder: SmartBuilder
   builderArgs?: ESObject
   alignment?: Alignment
   animationTime?: number
@@ -17,4 +17,5 @@ export class SmartAttachOption {
   bindRouter?: string
   usePenetrate?: boolean
   keepSingle?: boolean
+  animationType?: SmartAnimationType
 }

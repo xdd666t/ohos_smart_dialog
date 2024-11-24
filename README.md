@@ -18,7 +18,7 @@
 
 - Tablet 模拟器目前有些问题，会导致动画闪烁，请忽略；注：真机动画丝滑流畅，无任何问题
 
-![attachLocation](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202406231725613.gif)
+![attachLocation](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202411241515570.gif)
 
 ![customTag](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202408102228252.gif)
 

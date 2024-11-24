@@ -16,7 +16,8 @@ export struct LoadingDialogComponent {
     Stack({ alignContent: this.item.alignment }) {
       this.builder?.(this.item.builderArgs)
     }
-    .scale({ x: this.item.animation.dialogScale, y: this.item.animation.dialogScale })
+    .scale({ x: this.item.animation.dialogScaleX, y: this.item.animation.dialogScaleY })
+    .opacity(this.item.animation.dialogOpacity)
     .position(this.item.animation.dialogPosition)
     .animation({ duration: this.item.animation.dialogTime, curve: Curve.Linear })
     .gesture(GestureGroup(GestureMode.Exclusive,
