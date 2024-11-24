@@ -12,18 +12,18 @@ export class LoadingDialogModel extends BaseDialogModel {
   }
 
   initAnimationStatus(): void {
-    this.handleScaleAnimation(true)
+    this.handleAnimation(true)
     super.initAnimationStatus()
   }
 
   show(): Promise<void> {
     const animation = this.animation
     animation.setStartTime()
-    this.handleScaleAnimation(false)
+    this.handleAnimation(false)
     return super.show()
   }
 
-  private handleScaleAnimation(beforeRender: boolean) {
+  private handleAnimation(beforeRender: boolean) {
     const animation = this.animation
     this.setDialogScale(1)
 

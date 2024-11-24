@@ -32,12 +32,12 @@ export class AttachDialogModel extends BaseDialogModel {
       right: px2vp(targetRect.right),
       bottom: px2vp(targetRect.bottom),
     } as Edges
-    this.handleScaleAnimation(true)
+    this.handleAnimation(true)
     super.initAnimationStatus()
   }
 
   show(): Promise<void> {
-    this.handleScaleAnimation(false)
+    this.handleAnimation(false)
     return super.show()
   }
 
@@ -45,12 +45,12 @@ export class AttachDialogModel extends BaseDialogModel {
     const animation = this.animation
     animation.setEndTime()
     // 恢复到渲染前状态
-    this.handleScaleAnimation(true)
+    this.handleAnimation(true)
     await super.dismiss()
     this.remove()
   }
 
-  private handleScaleAnimation(beforeRender: boolean) {
+  private handleAnimation(beforeRender: boolean) {
     const animation = this.animation
 
     // 渐隐动画
@@ -66,33 +66,29 @@ export class AttachDialogModel extends BaseDialogModel {
     const selfSize = this.attachInfo.selfInfo?.size ?? {} as Size
     const selfWidth = px2vp(selfSize.width ?? 0)
     const selfHeight = px2vp(selfSize.height ?? 0)
-    const position = animation.dialogPosition
-    const positionTop = (position?.top ?? 0) as number
-    const positionLeft = (position?.left ?? 0) as number
-    if (!position) {
-      return
-    }
     animation.dialogOpacity = 1
+    animation.dialogScaleCenterX = undefined
+    animation.dialogScaleCenterY = undefined
     if (alignment == Alignment.TopStart || alignment == Alignment.Top || alignment == Alignment.TopEnd) {
-      position.top = positionTop + (selfHeight / 2) * (beforeRender ? 1 : -1)
       animation.dialogScaleX = 1
       animation.dialogScaleY = beforeRender ? 0 : 1
+      animation.dialogScaleCenterY = selfHeight
     } else if (alignment == Alignment.Start) {
-      position.left = positionLeft + (selfWidth / 2) * (beforeRender ? 1 : -1)
       animation.dialogScaleX = beforeRender ? 0 : 1
+      animation.dialogScaleCenterX = selfWidth
       animation.dialogScaleY = 1
     } else if (alignment == Alignment.Center) {
       animation.dialogScaleX = beforeRender ? 0 : 1
       animation.dialogScaleY = beforeRender ? 0 : 1
     } else if (alignment == Alignment.End) {
-      position.left = positionLeft + (selfWidth / 2) * (beforeRender ? -1 : 1)
       animation.dialogScaleX = beforeRender ? 0 : 1
+      animation.dialogScaleCenterX = 0
       animation.dialogScaleY = 1
     } else if (alignment == Alignment.BottomStart || alignment == Alignment.Bottom ||
       alignment == Alignment.BottomEnd) {
-      position.top = positionTop + (selfHeight / 2) * (beforeRender ? -1 : 1)
       animation.dialogScaleX = 1
       animation.dialogScaleY = beforeRender ? 0 : 1
+      animation.dialogScaleCenterY = 0
     }
   }
 

@@ -1,6 +1,7 @@
 # 1.7.0
 - 增加animationType: 可设置动画类型
 - 重构SmartDialog.showAttach动画, 默认动画调整为类位移动画
+- 增加SmartDialog.config.global: 可开启实验性穿透遮罩功能
 
 
 # 1.6.3

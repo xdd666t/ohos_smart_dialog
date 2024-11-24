@@ -8,6 +8,8 @@ class AnimationModel {
   @Trace maskOpacity: number = 0
   @Trace dialogScaleX: number = 1
   @Trace dialogScaleY: number = 1
+  @Trace dialogScaleCenterX?: number
+  @Trace dialogScaleCenterY?: number
   @Trace dialogOpacity: number = 1
   @Trace dialogPosition?: Edges
   @Trace dialogTime?: number
