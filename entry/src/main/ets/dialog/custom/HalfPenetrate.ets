@@ -11,7 +11,7 @@ export function customHalfPenetrate() {
 
 @Builder
 function dialogUsePenetrate() {
-  Text(`点击mask的事件能透传给页面`).fontColor(Color.White).padding(50)
+  Text(`透明遮罩事件穿透, 非透明遮罩事件不穿透`).fontColor(Color.White).padding(50)
     .borderRadius(12)
     .backgroundColor(randomColor())
 }

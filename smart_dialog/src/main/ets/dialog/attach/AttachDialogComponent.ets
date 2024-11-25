@@ -1,5 +1,5 @@
 import { AttachDialogModel } from './AttachDialogModel';
-import { onBlockClick, randomTag, SmartBuilder } from '../../kit/function';
+import { randomTag, SmartBuilder } from '../../kit/function';
 
 
 @Component
@@ -46,13 +46,13 @@ export struct AttachDialogComponent {
         SwipeGesture(),
         RotationGesture(),
       ))
+      .onTouch((event: TouchEvent) => event.stopPropagation())
       .onSizeChange(() => {
         if (!this.alreadyStartAnimation) {
           this.alreadyStartAnimation = true
           this.item.show()
         }
       })
-      .onClick(() => onBlockClick())
     }
   }
 }

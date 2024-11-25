@@ -27,6 +27,7 @@ export struct CustomDialogComponent {
       SwipeGesture(),
       RotationGesture(),
     ))
+    .onTouch((event: TouchEvent) => event.stopPropagation())
     .onAppear(() => this.item.show())
   }
 }

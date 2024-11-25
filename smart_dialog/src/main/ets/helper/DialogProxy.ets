@@ -20,12 +20,13 @@ export class DialogProxy {
 
   private constructor() {
     // 处理暗黑模式
-    this.onConfigurationUpdate = (newConfig: Configuration) => {
+    this.onConfigurationUpdate = (_newConfig: Configuration) => {
+      const dialogNodeController = this.dialogNodeController
       this.dialogList.forEach((item) => {
-        item.remove()
+        dialogNodeController.remove(item)
         item.animation.dialogStartTime = 0
         item.animation.maskStartTime = 0
-        this.dialogNodeController.inset(item)
+        dialogNodeController.inset(item)
       })
 
       if (SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })) {

@@ -16,6 +16,7 @@ export struct GestureComponent {
         SwipeGesture(),
         RotationGesture(),
       ))
+      .onTouch((event: TouchEvent) => event.stopPropagation())
     } else {
       this.builder?.()
     }

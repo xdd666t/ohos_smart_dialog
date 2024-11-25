@@ -1,4 +1,4 @@
-import { onBlockClick, SmartBuilder } from '../../kit/function'
+import { SmartBuilder } from '../../kit/function'
 import { LoadingDialogModel } from './LoadingDialogModel'
 
 
@@ -28,9 +28,9 @@ export struct LoadingDialogComponent {
       SwipeGesture(),
       RotationGesture(),
     ))
+    .onTouch((event: TouchEvent) => event.stopPropagation())
     .onAppear(() => {
       this.item.show()
     })
-    .onClick(() => onBlockClick())
   }
 }

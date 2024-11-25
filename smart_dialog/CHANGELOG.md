@@ -1,8 +1,14 @@
+# 1.7.1
+- 修复切换暗黑模式, 弹窗栈异常被清空问题(现象: 切换暗黑模式后, 返回事件无法关闭已打开弹窗)
+- 穿透模式增强: 非穿透模式下, 拦截onTouch所有事件 (应该稳了)
+- 全局事件穿透遮罩功能默认打开: 如果产生弹窗事件异常穿透, 可以按需关闭
+- 全局关闭事件穿透可设置: SmartDialog.config.global.usePenetrate = false
+
+
 # 1.7.0
 - 增加animationType: 可设置动画类型
 - 重构SmartDialog.showAttach动画, 默认动画调整为类位移动画
 - 增加SmartDialog.config.global: 可开启实验性穿透遮罩功能
-
 
 # 1.6.3
 - usePenetrate: 该功能下线, 无法与Flutter容器兼容
