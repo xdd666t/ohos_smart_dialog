@@ -28,6 +28,7 @@ export class DialogNodeController extends BaseNodeController {
     if (targetIndex !== -1) {
       const targetDialog = dialogList[targetIndex]
       currentDialog.animation.maskStartTime = 0
+      currentDialog.animation.maskOpacity = 1
       this.insertChildAfter(currentDialog, targetDialog.builderNode?.getFrameNode())
       // 移除之前的node
       dialogProxy.dialogNodeController.remove(targetDialog)

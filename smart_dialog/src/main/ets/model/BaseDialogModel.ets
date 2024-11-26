@@ -59,7 +59,7 @@ export class BaseDialogModel {
 
   initAnimationStatus() {
     const animation = this.animation
-    animation.maskOpacity = 0
+    animation.maskOpacity = (animation.maskStartTime === 0 ? 1 : 0)
   }
 
   async show(): Promise<void> {
@@ -72,7 +72,7 @@ export class BaseDialogModel {
     this.onDismiss?.()
 
     const animation = this.animation
-    animation.maskOpacity = 0
+    animation.maskOpacity = (animation.maskEndTime === 0 ? 1 : 0)
     await delay(animation.dialogEndTime)
   }
 
