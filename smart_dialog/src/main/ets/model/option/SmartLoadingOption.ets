@@ -1,4 +1,4 @@
-import { SmartAnimationType, SmartBackType } from '../../config/EnumConfig'
+import { SmartAnimationType, SmartBackType, SmartNonAnimationType } from '../../config/EnumConfig'
 import { SmartBuilder } from '../../kit/function'
 
 export interface SmartLoadingOption {
@@ -15,4 +15,5 @@ export interface SmartLoadingOption {
   onDismiss?: VoidCallback
   usePenetrate?: boolean
   animationType?: SmartAnimationType
+  nonAnimationTypes?: Array<SmartNonAnimationType>
 }

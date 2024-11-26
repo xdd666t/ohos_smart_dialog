@@ -8,6 +8,8 @@ export struct MaskComponent {
   item: BaseDialogModel = new BaseDialogModel()
 
   aboutToAppear(): void {
+    const animation = this.item.animation
+    animation.maskOpacity = (animation.maskStartTime === 0 ? 1 : 0)
     this.maskBuilder = this.item.maskBuilder
   }
 

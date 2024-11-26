@@ -8,7 +8,7 @@ import { AttachDialogModel } from '../dialog/attach/AttachDialogModel'
 import { SmartLoadingOption } from '../model/option/SmartLoadingOption'
 import { LoadingDialogModel } from '../dialog/loading/LoadingDialogModel'
 import { SmartDialog } from '../SmartDialog'
-import { SmartAllDialogType } from '../config/EnumConfig'
+import { SmartAllDialogType, SmartNonAnimationType } from '../config/EnumConfig'
 import { LoadingNodeController } from '../node_controller/LoadingNodeController'
 import { SmartBuilder } from '../kit/function'
 import { Configuration } from '@kit.AbilityKit'
@@ -67,6 +67,8 @@ export class DialogProxy {
     const keepSingle = option.keepSingle
     model.keepSingle = keepSingle
     model.animationType = option.animationType
+    this.processNonAnimation(model, option.nonAnimationTypes)
+
     if (keepSingle) {
       this.dialogNodeController.update(model)
     } else {
@@ -95,6 +97,8 @@ export class DialogProxy {
     const keepSingle = option.keepSingle
     model.keepSingle = keepSingle
     model.animationType = option.animationType
+    this.processNonAnimation(model, option.nonAnimationTypes)
+
     if (keepSingle) {
       this.dialogNodeController.update(model)
     } else {
@@ -120,6 +124,8 @@ export class DialogProxy {
     model.onDismiss = option.onDismiss
     model.usePenetrate = option.usePenetrate
     model.animationType = option.animationType
+    this.processNonAnimation(model, option.nonAnimationTypes)
+
     this.loadingNodeController.update(model)
   }
 
@@ -171,5 +177,28 @@ export class DialogProxy {
     }
 
     return undefined
+  }
+
+  private processNonAnimation(model: BaseDialogModel, nonAnimationTypes?: Array<SmartNonAnimationType>) {
+    if (!nonAnimationTypes || nonAnimationTypes.length === 0) {
+      return
+    }
+
+    const animation = model.animation
+    model.nonAnimationTypes = nonAnimationTypes
+    nonAnimationTypes.forEach((type: SmartNonAnimationType) => {
+      if (type === SmartNonAnimationType.openDialog) {
+        animation.dialogStartTime = 0
+      }
+      if (type === SmartNonAnimationType.closeDialog) {
+        animation.dialogEndTime = 0
+      }
+      if (type === SmartNonAnimationType.openMask) {
+        animation.maskStartTime = 0
+      }
+      if (type === SmartNonAnimationType.closeMask) {
+        animation.maskEndTime = 0
+      }
+    })
   }
 }

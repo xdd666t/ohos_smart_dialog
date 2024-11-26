@@ -9,6 +9,7 @@ import { BaseNodeController } from './BaseNodeController'
 import { DialogProxy } from '../helper/DialogProxy'
 import { FrameNode } from '@kit.ArkUI'
 import { GestureComponent } from '../component/GestureComponent'
+import { SmartNonAnimationType } from '../config/EnumConfig'
 
 export class DialogNodeController extends BaseNodeController {
   inset(model: BaseDialogModel) {
@@ -28,7 +29,9 @@ export class DialogNodeController extends BaseNodeController {
     if (targetIndex !== -1) {
       const targetDialog = dialogList[targetIndex]
       currentDialog.animation.maskStartTime = 0
-      currentDialog.animation.maskOpacity = 1
+      if (currentDialog.nonAnimationTypes?.includes(SmartNonAnimationType.continueKeepSingle)) {
+        currentDialog.animation.dialogStartTime = 0
+      }
       this.insertChildAfter(currentDialog, targetDialog.builderNode?.getFrameNode())
       // 移除之前的node
       dialogProxy.dialogNodeController.remove(targetDialog)

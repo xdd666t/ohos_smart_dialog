@@ -48,6 +48,8 @@ export class SmartDialog {
   /// [keepSingle]: keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
   ///
   /// [animationType]: 动画类型
+  ///
+  /// [nonAnimationTypes]: 对于不同的场景, 可动态关闭弹窗动画, 具体请参照[SmartNonAnimationType]
   static show(option: SmartCustomOption) {
     const customConfig = SmartDialog.config.custom
     DialogProxy.instance.show({
@@ -66,6 +68,7 @@ export class SmartDialog {
       usePenetrate: option.usePenetrate ?? false,
       keepSingle: option.keepSingle ?? false,
       animationType: option.animationType ?? customConfig.animationType,
+      nonAnimationTypes: option.nonAnimationTypes ?? customConfig.nonAnimationTypes,
     })
   }
 
@@ -102,6 +105,8 @@ export class SmartDialog {
   /// [keepSingle]: keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
   ///
   /// [animationType]: 动画类型
+  ///
+  /// [nonAnimationTypes]: 对于不同的场景, 可动态关闭弹窗动画, 具体请参照[SmartNonAnimationType]
   static showAttach(option: SmartAttachOption) {
     const attachConfig = SmartDialog.config.attach
     DialogProxy.instance.showAttach({
@@ -121,6 +126,7 @@ export class SmartDialog {
       usePenetrate: option.usePenetrate ?? false,
       keepSingle: option.keepSingle ?? false,
       animationType: option.animationType ?? attachConfig.animationType,
+      nonAnimationTypes: option.nonAnimationTypes ?? attachConfig.nonAnimationTypes,
     })
   }
 
@@ -151,6 +157,8 @@ export class SmartDialog {
   /// [usePenetrate]: true（点击事件将穿透遮罩），false（不穿透）
   ///
   /// [animationType]: 动画类型
+  ///
+  /// [nonAnimationTypes]: 对于不同的场景, 可动态关闭弹窗动画, 具体请参照[SmartNonAnimationType]
   static showLoading(option?: SmartLoadingOption) {
     const loadingConfig = SmartDialog.config.loading
     DialogProxy.instance.showLoading({
@@ -167,6 +175,7 @@ export class SmartDialog {
       onDismiss: option?.onDismiss,
       usePenetrate: option?.usePenetrate ?? false,
       animationType: option?.animationType ?? loadingConfig.animationType,
+      nonAnimationTypes: option?.nonAnimationTypes ?? loadingConfig.nonAnimationTypes,
     })
   }
 

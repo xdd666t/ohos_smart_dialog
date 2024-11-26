@@ -1,4 +1,4 @@
-import { SmartAnimationType, SmartBackType } from '../../config/EnumConfig'
+import { SmartAnimationType, SmartBackType, SmartNonAnimationType } from '../../config/EnumConfig'
 import { SmartBuilder } from '../../kit/function'
 
 export interface SmartCustomOption {
@@ -17,4 +17,5 @@ export interface SmartCustomOption {
   usePenetrate?: boolean
   keepSingle?: boolean
   animationType?: SmartAnimationType
+  nonAnimationTypes?: Array<SmartNonAnimationType>
 }

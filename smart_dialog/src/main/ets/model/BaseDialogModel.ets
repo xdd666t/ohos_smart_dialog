@@ -1,6 +1,6 @@
 import { delay, SmartBuilder } from '../kit/function'
 import { BuilderNode } from '@kit.ArkUI'
-import { SmartAllDialogType, SmartAnimationType, SmartBackType } from '../config/EnumConfig'
+import { SmartAllDialogType, SmartAnimationType, SmartBackType, SmartNonAnimationType } from '../config/EnumConfig'
 import { DialogProxy } from '../helper/DialogProxy'
 
 @ObservedV2
@@ -56,6 +56,7 @@ export class BaseDialogModel {
   onDismiss?: VoidCallback
   usePenetrate?: boolean
   animationType?: SmartAnimationType
+  nonAnimationTypes?: Array<SmartNonAnimationType>
 
   initAnimationStatus() {
     const animation = this.animation
@@ -73,7 +74,7 @@ export class BaseDialogModel {
 
     const animation = this.animation
     animation.maskOpacity = (animation.maskEndTime === 0 ? 1 : 0)
-    await delay(animation.dialogEndTime)
+    await delay(Math.max(animation.dialogEndTime ?? 0, animation.maskEndTime ?? 0))
   }
 
   remove() {

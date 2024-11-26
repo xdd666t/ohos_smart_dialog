@@ -27,7 +27,6 @@ export class LoadingNodeController extends BaseNodeController {
       const animation = loadingDialog.animation
       animation.dialogStartTime = 0
       animation.maskStartTime = 0
-      animation.maskOpacity = 1
     }
     loadingDialog.remove()
     this.inset(loadingDialog)

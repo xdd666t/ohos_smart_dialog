@@ -1,5 +1,5 @@
 import { SmartBuilder } from '../kit/function'
-import { SmartAnimationType, SmartBackType } from './EnumConfig'
+import { SmartAnimationType, SmartBackType, SmartNonAnimationType } from './EnumConfig'
 
 export class SmartConfigLoading {
   constructor() {
@@ -29,4 +29,6 @@ export class SmartConfigLoading {
   backType: SmartBackType = SmartBackType.dismiss
   // 动画类型
   animationType: SmartAnimationType = SmartAnimationType.scale
+  /// 对于不同的场景, 可动态关闭弹窗动画, 具体请参照[SmartNonAnimationType]
+  nonAnimationTypes: Array<SmartNonAnimationType> = []
 }

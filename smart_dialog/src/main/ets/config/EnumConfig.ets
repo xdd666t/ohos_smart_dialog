@@ -115,3 +115,21 @@ export enum SmartAnimationType {
   /// 中间位置的为缩放, 其他位置为类位移动画
   scale,
 }
+
+/// 对于不同的场景, 可动态关闭弹窗动画
+export enum SmartNonAnimationType {
+  /// 打开dialog, 弹窗无开始动画
+  openDialog,
+
+  /// 所有场景关闭弹窗, 弹窗无结束动画
+  closeDialog,
+
+  /// 打开dialog, 遮罩无开始动画
+  openMask,
+
+  /// 打开dialog, 遮罩无结束动画
+  closeMask,
+
+  /// keepSingle弹窗连续调用, 间隔无动画
+  continueKeepSingle,
+}
