@@ -11,6 +11,7 @@ export interface SmartAttachOption {
   tag?: string
   maskColor?: ResourceColor
   maskBuilder?: SmartBuilder
+  maskBuilderArgs?: ESObject
   onMask?: VoidCallback
   backType?: SmartBackType
   onDismiss?: VoidCallback

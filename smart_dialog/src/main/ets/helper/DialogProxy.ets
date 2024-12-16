@@ -59,6 +59,7 @@ export class DialogProxy {
     model.bindRouter = option.bindRouter ?? this.navigatorObserve.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
+    model.maskBuilderArgs = option.maskBuilderArgs
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.custom
     model.backType = option.backType
@@ -89,6 +90,7 @@ export class DialogProxy {
     model.bindRouter = option.bindRouter ?? this.navigatorObserve.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
+    model.maskBuilderArgs = option.maskBuilderArgs
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.attach
     model.backType = option.backType
@@ -118,6 +120,7 @@ export class DialogProxy {
     model.bindRouter = this.navigatorObserve.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
+    model.maskBuilderArgs = option.maskBuilderArgs
     model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.loading
     model.backType = option.backType

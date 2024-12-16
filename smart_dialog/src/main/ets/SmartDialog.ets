@@ -31,6 +31,8 @@ export class SmartDialog {
   ///
   /// [maskBuilder]：可高度定制遮罩
   ///
+  /// [maskBuilderArgs]：自定义遮罩传参
+  ///
   /// [clickMaskDismiss]：true（点击遮罩后，将关闭dialog），false（不关闭）
   ///
   /// [onMask]：点击遮罩时，该回调将会被触发
@@ -59,6 +61,7 @@ export class SmartDialog {
       animationTime: option.animationTime ?? customConfig.animationTime,
       maskColor: option.maskColor ?? customConfig.maskColor,
       maskBuilder: option.maskBuilder ?? customConfig.maskWrapBuild,
+      maskBuilderArgs: option.maskBuilderArgs,
       clickMaskDismiss: option.clickMaskDismiss ?? customConfig.clickMaskDismiss,
       onMask: option.onMask,
       tag: option.tag ?? randomTag(option.keepSingle),
@@ -87,6 +90,8 @@ export class SmartDialog {
   /// [maskColor]：遮罩颜色，如果给[maskWidget]设置了值，该参数将会失效
   ///
   /// [maskBuilder]：可高度定制遮罩
+  ///
+  /// [maskBuilderArgs]：自定义遮罩传参
   ///
   /// [clickMaskDismiss]：true（点击遮罩后，将关闭dialog），false（不关闭）
   ///
@@ -117,6 +122,7 @@ export class SmartDialog {
       animationTime: option.animationTime ?? attachConfig.animationTime,
       maskColor: option.maskColor ?? attachConfig.maskColor,
       maskBuilder: option.maskBuilder ?? attachConfig.maskWrapBuild,
+      maskBuilderArgs: option.maskBuilderArgs,
       clickMaskDismiss: option.clickMaskDismiss ?? attachConfig.clickMaskDismiss,
       onMask: option.onMask,
       tag: option.tag ?? randomTag(option.keepSingle),
@@ -144,6 +150,8 @@ export class SmartDialog {
   ///
   /// [maskBuilder]：可高度定制遮罩
   ///
+  /// [maskBuilderArgs]：自定义遮罩传参
+  ///
   /// [clickMaskDismiss]：true（点击遮罩后，将关闭dialog），false（不关闭）
   ///
   /// [onMask]：点击遮罩时，该回调将会被触发
@@ -168,6 +176,7 @@ export class SmartDialog {
       animationTime: option?.animationTime ?? loadingConfig.animationTime,
       maskColor: option?.maskColor ?? loadingConfig.maskColor,
       maskBuilder: option?.maskBuilder ?? loadingConfig.maskWrapBuild,
+      maskBuilderArgs: option?.maskBuilderArgs,
       clickMaskDismiss: option?.clickMaskDismiss ?? loadingConfig.clickMaskDismiss,
       onMask: option?.onMask,
       tag: option?.tag,

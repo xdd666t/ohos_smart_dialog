@@ -49,6 +49,7 @@ export class BaseDialogModel {
   @Trace visible: boolean = true
   maskColor?: ResourceColor
   maskBuilder?: SmartBuilder
+  maskBuilderArgs?: ESObject
   onMask?: VoidCallback
   builderNode?: BuilderNode<[ESObject]> | null = null
   dialogType?: SmartAllDialogType

@@ -16,7 +16,7 @@ export struct MaskComponent {
   build() {
     Stack() {
       if (this.maskBuilder) {
-        this.maskBuilder()
+        this.maskBuilder(this.item.maskBuilderArgs)
       } else {
         Stack().width('100%').height('100%').backgroundColor(this.item.maskColor)
       }
