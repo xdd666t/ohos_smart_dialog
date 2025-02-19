@@ -1,6 +1,9 @@
+# 1.7.7
+- showAttach: 优化缩放动画计算逻辑
+
 # 1.7.6
 - showAttach: 优化alignment边界条件时显示逻辑
-- 
+
 # 1.7.5
 - 增加maskBuilderArgs: 自定义遮罩可传递参数
 

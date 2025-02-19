@@ -1,12 +1,11 @@
 import { AttachDialogModel } from './AttachDialogModel';
-import { randomTag, SmartBuilder } from '../../kit/function';
+import { randomTag, SmartBuilder } from '../../kit/Function';
 
 
 @Component
 export struct AttachDialogComponent {
   @BuilderParam builder?: SmartBuilder
   item: AttachDialogModel = new AttachDialogModel()
-  selfId = randomTag()
   @State firstRender: boolean = true
   alreadyStartAnimation: boolean = false
 
@@ -20,11 +19,11 @@ export struct AttachDialogComponent {
         this.builder?.(this.item.builderArgs)
       }
       .onSizeChange(() => {
-        this.item.initAnimationStatus(this.selfId)
+        this.item.initAnimationStatus()
         this.firstRender = false
       })
       .visibility(Visibility.Hidden)
-      .id(this.selfId)
+      .id(this.item.selfId)
     } else {
       Stack() {
         this.builder?.(this.item.builderArgs)
@@ -53,6 +52,7 @@ export struct AttachDialogComponent {
           this.item.show()
         }
       })
+      .id(this.item.selfId)
     }
   }
 }

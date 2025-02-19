@@ -1,4 +1,4 @@
-import { delay, SmartBuilder } from '../kit/function'
+import { delay, SmartBuilder } from '../kit/Function'
 import { BuilderNode } from '@kit.ArkUI'
 import { SmartAllDialogType, SmartAnimationType, SmartBackType, SmartNonAnimationType } from '../config/EnumConfig'
 import { DialogProxy } from '../helper/DialogProxy'

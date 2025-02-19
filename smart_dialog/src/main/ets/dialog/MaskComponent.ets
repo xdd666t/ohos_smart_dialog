@@ -1,5 +1,5 @@
 import { BaseDialogModel } from '../model/BaseDialogModel'
-import { SmartBuilder } from '../kit/function'
+import { SmartBuilder } from '../kit/Function'
 import { DialogProxy } from '../helper/DialogProxy'
 
 @Component

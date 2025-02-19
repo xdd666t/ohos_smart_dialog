@@ -2,12 +2,15 @@ import { BaseDialogModel } from '../../model/BaseDialogModel'
 import { componentUtils, display, Offset } from '@kit.ArkUI'
 import { SmartDialog } from '../../SmartDialog'
 import { SmartAnimationType, SmartAttachAlignmentType } from '../../config/EnumConfig'
+import { ViewUtil } from '../../kit/ViewUtil'
+import { randomTag } from '../../kit/Function'
 
 @ObservedV2
 export class AttachDialogModel extends BaseDialogModel {
   targetId: string = ''
   keepSingle?: boolean
   private attachInfo = new AttachInfo()
+  readonly selfId: string = randomTag()
 
   constructor() {
     super()
@@ -18,12 +21,12 @@ export class AttachDialogModel extends BaseDialogModel {
     animation.dialogPosition = undefined
   }
 
-  initAnimationStatus(selfId?: string): void {
+  initAnimationStatus(): void {
     const animation = this.animation
     const attachInfo = this.attachInfo
     animation.setStartTime()
-    attachInfo.targetInfo = componentUtils.getRectangleById(this.targetId)
-    attachInfo.selfInfo = componentUtils.getRectangleById(selfId ?? '')
+    attachInfo.targetInfo = ViewUtil.getRectangleById(this.targetId)
+    attachInfo.selfInfo = ViewUtil.getRectangleById(this.selfId)
 
     let targetRect = this.handleLocation()
     animation.dialogPosition = {
@@ -63,7 +66,12 @@ export class AttachDialogModel extends BaseDialogModel {
 
     // 类位移动画
     const alignment = this.alignment
-    const selfSize = this.attachInfo.selfInfo?.size ?? {} as Size
+    let selfSize = {} as Size
+    if (beforeRender) {
+      selfSize = ViewUtil.getRectangleById(this.selfId)?.size ?? ({} as Size)
+    } else {
+      selfSize = this.attachInfo.selfInfo?.size ?? ({} as Size)
+    }
     const selfWidth = px2vp(selfSize.width ?? 0)
     const selfHeight = px2vp(selfSize.height ?? 0)
     animation.dialogOpacity = 1

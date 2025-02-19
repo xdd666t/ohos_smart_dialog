@@ -10,7 +10,7 @@ import { LoadingDialogModel } from '../dialog/loading/LoadingDialogModel'
 import { SmartDialog } from '../SmartDialog'
 import { SmartAllDialogType, SmartNonAnimationType } from '../config/EnumConfig'
 import { LoadingNodeController } from '../node_controller/LoadingNodeController'
-import { SmartBuilder } from '../kit/function'
+import { SmartBuilder } from '../kit/Function'
 import { Configuration } from '@kit.AbilityKit'
 import { NavigatorObserver } from './NavigatorObserver'
 

@@ -1,5 +1,5 @@
 import { DialogProxy } from './DialogProxy'
-import { safeReturn } from '../kit/function'
+import { safeReturn } from '../kit/Function'
 
 export default class SmartNavigatorObserver implements NavigationInterception {
   curRouter?: string

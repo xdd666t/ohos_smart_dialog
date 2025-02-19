@@ -1,6 +1,6 @@
 import { SmartConfig } from './config/SmartConfig'
 import { DialogProxy } from './helper/DialogProxy'
-import { randomTag } from './kit/function'
+import { randomTag } from './kit/Function'
 import { SmartDismissOption } from './model/option/SmartDismissOption'
 import { SmartCustomOption } from './model/option/SmartCustomOption'
 import { SmartAttachOption } from './model/option/SmartAttachOption'

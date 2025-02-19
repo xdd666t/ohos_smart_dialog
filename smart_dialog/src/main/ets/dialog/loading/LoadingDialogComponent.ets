@@ -1,4 +1,4 @@
-import { SmartBuilder } from '../../kit/function'
+import { SmartBuilder } from '../../kit/Function'
 import { LoadingDialogModel } from './LoadingDialogModel'
 
 

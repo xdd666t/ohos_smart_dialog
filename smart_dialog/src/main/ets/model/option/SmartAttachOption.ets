@@ -1,5 +1,5 @@
 import { SmartAnimationType, SmartBackType, SmartNonAnimationType } from '../../config/EnumConfig'
-import { SmartBuilder } from '../../kit/function'
+import { SmartBuilder } from '../../kit/Function'
 
 export interface SmartAttachOption {
   targetId: string

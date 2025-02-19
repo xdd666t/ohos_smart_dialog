@@ -1,6 +1,6 @@
 import { BackHelper } from './helper/BackHelper'
 import { DialogProxy } from './helper/DialogProxy'
-import { SmartBuilder } from './kit/function'
+import { SmartBuilder } from './kit/Function'
 import { defaultLoadingBuilder } from './dialog/default/loading_component'
 import SmartNavigatorObserver from './helper/SmartNavigatorObserver'
 import { SmartDialog } from './SmartDialog'

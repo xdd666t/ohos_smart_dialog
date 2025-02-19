@@ -6,7 +6,8 @@ export function delay(ms?: number): Promise<void> {
 
 const keepSingleTag = `singleTag:${Date.now()}${Math.random()}`
 
-export function randomTag(keepSingle?: boolean) {
+export function randomTag(keepSingle?: boolean): string
+{
   if (keepSingle === true) {
     return keepSingleTag
   } else {
