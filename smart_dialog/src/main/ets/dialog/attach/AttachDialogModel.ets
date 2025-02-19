@@ -97,30 +97,31 @@ export class AttachDialogModel extends BaseDialogModel {
     const attachInfo = this.attachInfo
     const alignment = this.alignment
     let targetRect = new RectInfo()
+    const screenSize = attachInfo.screen
     const targetOffset = attachInfo.targetInfo?.screenOffset ?? {} as Offset
     const targetSize = attachInfo.targetInfo?.size ?? {} as Size
     const selfSize = attachInfo.selfInfo?.size ?? {} as Size
     if (alignment == Alignment.TopStart) {
       targetRect = this.adjustReactInfo({
-        top: targetOffset.y - selfSize.height,
+        bottom: screenSize.height - targetOffset.y,
         left: targetOffset.x + this.calculateDx(),
         fixedVertical: true,
       })
     } else if (alignment == Alignment.Top) {
       targetRect = this.adjustReactInfo({
-        top: targetOffset.y - selfSize.height,
+        bottom: screenSize.height - targetOffset.y,
         left: targetOffset.x + targetSize.width / 2 - selfSize.width / 2,
         fixedVertical: true,
       })
     } else if (alignment == Alignment.TopEnd) {
       targetRect = this.adjustReactInfo({
-        top: targetOffset.y - selfSize.height,
+        bottom: screenSize.height - targetOffset.y,
         left: targetOffset.x + targetSize.width + this.calculateDx(),
         fixedVertical: true,
       })
     } else if (alignment == Alignment.Start) {
       targetRect = this.adjustReactInfo({
-        left: targetOffset.x - selfSize.width,
+        right: screenSize.width - targetOffset.x,
         top: targetOffset.y + targetSize.height / 2 - selfSize.height / 2,
         fixedHorizontal: true,
       })
