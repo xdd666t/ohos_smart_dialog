@@ -1,4 +1,4 @@
-import { OhosSmartDialog } from 'ohos_smart_dialog'
+import { SmartDialog } from 'ohos_smart_dialog'
 import { randomColor } from '../app/kit/Color'
 import { customJumpPage } from '../dialog/custom/JumpPage'
 
@@ -18,6 +18,6 @@ struct JumpPage {
       }.width("100%").height("100%").backgroundColor(randomColor())
     }
     .hideTitleBar(true)
-    .onBackPressed(OhosSmartDialog.onBackPressed())
+    .onBackPressed(SmartDialog.onBackPressed())
   }
 }

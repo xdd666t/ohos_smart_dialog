@@ -1,4 +1,4 @@
-import { OhosSmartDialog } from 'ohos_smart_dialog/';
+import { OhosSmartDialog, SmartDialog } from 'ohos_smart_dialog/';
 import { pageMap, RouterHelper } from './app/helper/RouterHelper';
 import { MainPage } from './main/MainPage';
 
@@ -20,6 +20,6 @@ struct Index {
   }
 
   onBackPress(): boolean | void {
-    return OhosSmartDialog.onBackPressed()()
+    return SmartDialog.onBackPressed()()
   }
 }

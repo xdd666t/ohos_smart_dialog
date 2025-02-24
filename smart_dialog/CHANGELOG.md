@@ -1,3 +1,6 @@
+# 1.8.0
+- 解决编译器警告: OhosSmartDialog.onBackPressed() 替换为 SmartDialog.onBackPressed()
+
 # 1.7.7
 - showAttach: 优化缩放动画计算逻辑
 

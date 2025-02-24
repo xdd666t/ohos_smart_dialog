@@ -93,7 +93,7 @@ struct Index {
 @Component
 struct Index {
   onBackPress(): boolean | void {
-    return OhosSmartDialog.onBackPressed()()
+    return SmartDialog.onBackPressed()()
   }
 }
 
@@ -103,12 +103,12 @@ struct JumpPage {
     NavDestination() {
       // ....
     }
-    .onBackPressed(OhosSmartDialog.onBackPressed())
+    .onBackPressed(SmartDialog.onBackPressed())
   }
 }
 ```
 
-- 如果你需要处理返回事件，在OhosSmartDialog.onBackPressed()中传入你的方法即可
+- 如果你需要处理返回事件，在SmartDialog.onBackPressed()中传入你的方法即可
 
 ```typescript
 // Entry页面处理
@@ -116,7 +116,7 @@ struct JumpPage {
 @Component
 struct Index {
   onBackPress(): boolean | void {
-    return OhosSmartDialog.onBackPressed(this.onCustomBackPress)()
+    return SmartDialog.onBackPressed(this.onCustomBackPress)()
   }
 
   onCustomBackPress(): boolean {
@@ -131,7 +131,7 @@ struct JumpPage {
     NavDestination() {
       // ...
     }
-    .onBackPressed(OhosSmartDialog.onBackPressed(this.onCustomBackPress))
+    .onBackPressed(SmartDialog.onBackPressed(this.onCustomBackPress))
   }
 
   onCustomBackPress(): boolean {

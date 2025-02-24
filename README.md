@@ -71,8 +71,8 @@ struct Index {
         MainPage()
       }
       .mode(NavigationMode.Stack)
-      .hideTitleBar(true)
-      .navDestination(pageMap)
+        .hideTitleBar(true)
+        .navDestination(pageMap)
 
       // here dialog init
       OhosSmartDialog()
@@ -93,7 +93,7 @@ struct Index {
 @Component
 struct Index {
   onBackPress(): boolean | void {
-    return OhosSmartDialog.onBackPressed()()
+    return SmartDialog.onBackPressed()()
   }
 }
 
@@ -103,12 +103,12 @@ struct JumpPage {
     NavDestination() {
       // ....
     }
-    .onBackPressed(OhosSmartDialog.onBackPressed())
+    .onBackPressed(SmartDialog.onBackPressed())
   }
 }
 ```
 
-- 如果你需要处理返回事件，在OhosSmartDialog.onBackPressed()中传入你的方法即可
+- 如果你需要处理返回事件，在SmartDialog.onBackPressed()中传入你的方法即可
 
 ```typescript
 // Entry页面处理
@@ -116,7 +116,7 @@ struct JumpPage {
 @Component
 struct Index {
   onBackPress(): boolean | void {
-    return OhosSmartDialog.onBackPressed(this.onCustomBackPress)()
+    return SmartDialog.onBackPressed(this.onCustomBackPress)()
   }
 
   onCustomBackPress(): boolean {
@@ -131,7 +131,7 @@ struct JumpPage {
     NavDestination() {
       // ...
     }
-    .onBackPressed(OhosSmartDialog.onBackPressed(this.onCustomBackPress))
+    .onBackPressed(SmartDialog.onBackPressed(this.onCustomBackPress))
   }
 
   onCustomBackPress(): boolean {
@@ -145,10 +145,10 @@ struct JumpPage {
 - 为了极致的体验，深色模式切换时，打开态弹窗也应刷新为对应模式的样式，故需要进行下述配置
 
 ```typescript
-export default class EntryAbility extends UIAbility {  
-  onConfigurationUpdate(newConfig: Configuration): void {  
-    OhosSmartDialog.onConfigurationUpdate(newConfig)  
-  }  
+export default class EntryAbility extends UIAbility {
+  onConfigurationUpdate(newConfig: Configuration): void {
+    OhosSmartDialog.onConfigurationUpdate(newConfig)
+  }
 }
 ```
 
@@ -439,8 +439,8 @@ function dialog() {
       .id("Attach")
   }
   .borderRadius(12)
-  .padding(50)
-  .backgroundColor(Color.White)
+    .padding(50)
+    .backgroundColor(Color.White)
 }
 
 @Builder
@@ -586,9 +586,9 @@ export function customLoading() {
     LoadingProgress().width(80).height(80).color(Color.White)
   }
   .padding(20)
-  .borderRadius(12)
-  .onClick(() => loadingCustom())
-  .backgroundColor(randomColor())
+    .borderRadius(12)
+    .onClick(() => loadingCustom())
+    .backgroundColor(randomColor())
 }
 ```
 

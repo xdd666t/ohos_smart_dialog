@@ -8,6 +8,7 @@ import { SmartLoadingOption } from './model/option/SmartLoadingOption'
 import { CheckExistOption } from './model/option/CheckExistOption'
 import { DialogCheckHelper } from './helper/DialogCheckHelper'
 import { SmartAllDialogType } from './config/EnumConfig'
+import { BackHelper } from './helper/BackHelper'
 
 export class SmartDialog {
   static readonly config: SmartConfig = new SmartConfig()
@@ -204,5 +205,10 @@ export class SmartDialog {
         SmartAllDialogType.loading,
       ]
     })
+  }
+
+  // 返回事件监听
+  static onBackPressed(onBack?: () => boolean): () => boolean {
+    return BackHelper.instance.onBackPressed(onBack)
   }
 }

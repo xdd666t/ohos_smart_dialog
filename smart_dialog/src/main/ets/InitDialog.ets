@@ -12,8 +12,11 @@ export struct OhosSmartDialog {
   @BuilderParam loadingBuilder?: SmartBuilder
   // 监听暗黑模式切换
   static onConfigurationUpdate = DialogProxy.instance.onConfigurationUpdate
-  // 返回事件监听
+  /**
+   * @deprecated 请使用SmartDialog.onBackPressed()
+   */
   static onBackPressed = BackHelper.instance.onBackPressed
+
   /**
    * @deprecated 无需使用属性兼容路由，内部已使用无感路由注册，该属性后续版本将被被移除
    */
