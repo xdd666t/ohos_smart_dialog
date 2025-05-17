@@ -11,6 +11,8 @@ export class AttachDialogModel extends BaseDialogModel {
   keepSingle?: boolean
   private attachInfo = new AttachInfo()
   readonly selfId: string = randomTag()
+  private windowWidth: number = display.getDefaultDisplaySync().availableWidth
+  private windowHeight: number = display.getDefaultDisplaySync().availableHeight
 
   constructor() {
     super()
@@ -22,21 +24,27 @@ export class AttachDialogModel extends BaseDialogModel {
   }
 
   initAnimationStatus(): void {
-    const animation = this.animation
-    const attachInfo = this.attachInfo
-    animation.setStartTime()
-    attachInfo.targetInfo = ViewUtil.getRectangleById(this.targetId)
-    attachInfo.selfInfo = ViewUtil.getRectangleById(this.selfId)
+    this.animation.setStartTime()
+    this.resetLocation()
+    this.handleAnimation(true)
+    super.initAnimationStatus()
+  }
 
-    let targetRect = this.handleLocation()
-    animation.dialogPosition = {
+  resetLocation() {
+    const attachInfo = this.attachInfo
+    attachInfo.targetInfo = ViewUtil.getRectangleById(this.targetId)
+    attachInfo.screen = {
+      width: this.windowWidth,
+      height: this.windowHeight,
+    }
+    attachInfo.selfInfo = ViewUtil.getRectangleById(this.selfId)
+    const targetRect = this.handleLocation()
+    this.animation.dialogPosition = {
       left: px2vp(targetRect.left),
       top: px2vp(targetRect.top),
       right: px2vp(targetRect.right),
       bottom: px2vp(targetRect.bottom),
     } as Edges
-    this.handleAnimation(true)
-    super.initAnimationStatus()
   }
 
   show(): Promise<void> {
@@ -106,7 +114,7 @@ export class AttachDialogModel extends BaseDialogModel {
     const alignment = this.alignment
     let targetRect = new RectInfo()
     const screenSize = attachInfo.screen
-    const targetOffset = attachInfo.targetInfo?.screenOffset ?? {} as Offset
+    const targetOffset = attachInfo.targetInfo?.windowOffset ?? {} as Offset
     const targetSize = attachInfo.targetInfo?.size ?? {} as Size
     const selfSize = attachInfo.selfInfo?.size ?? {} as Size
     if (alignment == Alignment.TopStart) {
@@ -238,6 +246,11 @@ export class AttachDialogModel extends BaseDialogModel {
     }
 
     return offset;
+  }
+
+  setWindowSize(width: number, height: number) {
+    this.windowWidth = width
+    this.windowHeight = height
   }
 }
 
