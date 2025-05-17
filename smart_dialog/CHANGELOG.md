@@ -1,3 +1,6 @@
+# 1.8.
+- 优化showAttach: 平板上窗口切换时, 定位动态变化
+
 # 1.8.0
 - 解决编译器警告: OhosSmartDialog.onBackPressed() 替换为 SmartDialog.onBackPressed()
 
