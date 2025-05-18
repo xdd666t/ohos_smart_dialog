@@ -49,7 +49,7 @@ export class DialogProxy {
   navigatorObserve: NavigatorObserver = new NavigatorObserver()
 
   show(option: SmartCustomOption) {
-    let model = new CustomDialogModel()
+    const model = new CustomDialogModel()
     model.builder = option.builder
     model.builderArgs = option.builderArgs
     model.alignment = option.alignment
@@ -79,7 +79,7 @@ export class DialogProxy {
   }
 
   showAttach(option: SmartAttachOption) {
-    let model = new AttachDialogModel()
+    const model = new AttachDialogModel()
     model.targetId = option.targetId
     model.builder = option.builder
     model.builderArgs = option.builderArgs
@@ -110,7 +110,7 @@ export class DialogProxy {
   }
 
   showLoading(option: SmartLoadingOption) {
-    let model = this.loadingDialog = new LoadingDialogModel()
+    const model = this.loadingDialog = new LoadingDialogModel()
     model.builder = option.builder
     model.builderArgs = option.builderArgs
     model.alignment = option.alignment

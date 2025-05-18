@@ -36,6 +36,7 @@ export class NavigatorObserver {
         break;
     }
     this.updateDialogVisibleState()
+    // console.info(`DialogNavigatorObserver:fromId:${fromId}:toId:${toId}`)
     // console.info(`DialogNavigatorObserver:${JSON.stringify(info)}`)
   }
 
@@ -43,12 +44,13 @@ export class NavigatorObserver {
     this.backgroundRouterIdSet.add(fromId)
   }
 
-  private onPop(fromId?: string, _toId?: string) {
-    this.popRouter(fromId)
+  private onPop(fromId?: string, toId?: string) {
+    this.removeTargetRouter(fromId)
+    this.popRouter(toId)
   }
 
   private onReplace(fromId?: string, _toId?: string) {
-    this.popRouter(fromId)
+    this.removeTargetRouter(fromId)
   }
 
   private getNavId(info: NavDestinationInfo | NavBar): string | undefined {
@@ -61,17 +63,52 @@ export class NavigatorObserver {
     return pushNavId
   }
 
-  // 某一个路由走到了pop,那就隐藏这路由关联的兑换框并删除
-  private popRouter(popRouter: string | undefined) {
-    DialogProxy.instance.dialogList.filter((item) => {
-      let isAccess = item.bindRouter !== popRouter
+  // 移除指定路由
+  private removeTargetRouter(targetId: string | undefined) {
+    const dialogProxy = DialogProxy.instance
+    dialogProxy.dialogList = dialogProxy.dialogList.filter((item) => {
+      const isAccess = (item.bindRouter !== targetId)
       if (!isAccess) {
         item.remove()
+        this.backgroundRouterIdSet.delete(item.bindRouter)
       }
       return isAccess
     })
+  }
 
-    this.backgroundRouterIdSet.delete(popRouter)
+  // 某一个路由走到了pop,需要将路由关联的弹窗删除
+  private popRouter(toId: string | undefined) {
+    const dialogProxy = DialogProxy.instance
+    // 兼容pop多个路由场景
+    try {
+      if (toId == undefined) {
+        return
+      }
+      const toIdNum = this.parseNum(toId)
+      dialogProxy.dialogList = dialogProxy.dialogList.filter((item) => {
+        const bindRouter = item.bindRouter
+        const bindRouterNum = this.parseNum(bindRouter)
+        const isAccess = (bindRouterNum <= toIdNum)
+        if (!isAccess) {
+          item.remove()
+          this.backgroundRouterIdSet.delete(bindRouter)
+        }
+        return isAccess
+      })
+    } catch (error) {
+    }
+  }
+
+  private parseNum(value: string | undefined): number {
+    try {
+      if (value === this.defaultRouter) {
+        return -1
+      }
+      const valueNum = parseInt(value ?? "-1")
+      return isNaN(valueNum) ? -1 : valueNum
+    } catch (error) {
+      return -1
+    }
   }
 
   // 路由状态变化，要判断非当前路由的对话框都隐藏掉
