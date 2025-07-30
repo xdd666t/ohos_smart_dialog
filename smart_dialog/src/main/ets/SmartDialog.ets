@@ -198,13 +198,7 @@ export class SmartDialog {
 
   /// 检查弹窗是否存在
   static checkExist(option?: CheckExistOption): boolean {
-    return DialogCheckHelper.instance.checkExist(option ?? {
-      dialogTypes: [
-        SmartAllDialogType.custom,
-        SmartAllDialogType.attach,
-        SmartAllDialogType.loading,
-      ]
-    })
+    return DialogCheckHelper.instance.checkExist(option)
   }
 
   // 返回事件监听

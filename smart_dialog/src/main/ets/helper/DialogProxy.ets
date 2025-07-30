@@ -142,7 +142,7 @@ export class DialogProxy {
     }
 
     const dialogList = this.dialogList
-    let dialog = this.findDialog(option?.tag)
+    const dialog = this.findDialog(dismissTag, option?.force)
     if (!dialog) {
       const rootNode = this.dialogNodeController.rootNode
       if (dialogList.length === 0 && rootNode?.getFirstChild()) {
@@ -154,8 +154,8 @@ export class DialogProxy {
     await dialog.dismiss()
   }
 
-  findDialog(tag?: string): BaseDialogModel | undefined {
-    let dialogList = this.dialogList
+  findDialog(tag?: string, force?: boolean): BaseDialogModel | undefined {
+    const dialogList = this.dialogList
     if (dialogList.length === 0) {
       return undefined
     }
@@ -169,12 +169,12 @@ export class DialogProxy {
           break;
         }
       }
-      return dialogInfo?.visible ? dialogInfo : undefined
+      return (dialogInfo?.visible || force) ? dialogInfo : undefined
     }
 
     for (let i = dialogList.length - 1; i >= 0; i--) {
-      let item = dialogList[i]
-      if (item.visible) {
+      const item = dialogList[i]
+      if (item.visible || force) {
         return item
       }
     }

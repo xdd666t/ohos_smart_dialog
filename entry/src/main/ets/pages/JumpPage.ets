@@ -20,6 +20,9 @@ struct JumpPage {
           Button("backHome")
             .backgroundColor(Color.Orange)
             .onClick(() => this.backHome())
+          Button("forceDismiss")
+            .backgroundColor(Color.Orange)
+            .onClick(() => SmartDialog.dismiss({ force: true }))
         }
       }.width("100%").height("100%").backgroundColor(randomColor())
     }

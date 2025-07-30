@@ -13,20 +13,26 @@ export class DialogCheckHelper {
       DialogCheckHelper._instance = new DialogCheckHelper()
   }
 
-  checkExist(option: CheckExistOption): boolean {
-    const dialogTypes = option.dialogTypes
+  checkExist(option?: CheckExistOption): boolean {
+    const dialogTypes = option?.dialogTypes ?? [
+      SmartAllDialogType.custom,
+      SmartAllDialogType.attach,
+      SmartAllDialogType.loading,
+    ]
+    const force = option?.force ?? false
+    const tag = option?.tag
     const dialogProxy = DialogProxy.instance
 
-    if (option?.tag) {
-      return (dialogProxy.findDialog(option?.tag) !== undefined)
+    if (tag) {
+      return (dialogProxy.findDialog(tag, force) !== undefined)
     }
 
     let result = false
     if (!result && dialogTypes?.includes(SmartAllDialogType.custom)) {
-      result = this.isExistDialog(SmartAllDialogType.custom)
+      result = this.isExistDialog(SmartAllDialogType.custom, force)
     }
     if (!result && dialogTypes?.includes(SmartAllDialogType.attach)) {
-      result = this.isExistDialog(SmartAllDialogType.attach)
+      result = this.isExistDialog(SmartAllDialogType.attach, force)
     }
     if (!result && dialogTypes?.includes(SmartAllDialogType.loading)) {
       result = dialogProxy.loadingNodeController.rootNode?.getFirstChild() !== null
@@ -35,11 +41,11 @@ export class DialogCheckHelper {
     return result
   }
 
-  private isExistDialog(dialogType: SmartAllDialogType): boolean {
+  private isExistDialog(dialogType: SmartAllDialogType, force?: boolean): boolean {
     const dialogProxy = DialogProxy.instance
     let isExist = false
     for (let item of dialogProxy.dialogList) {
-      if (item.visible && item.dialogType === dialogType) {
+      if ((item.visible || force) && item.dialogType === dialogType) {
         isExist = true
         break
       }
