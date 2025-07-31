@@ -137,7 +137,7 @@ export class DialogProxy {
     const loadingDialog = this.loadingDialog
     const isExitLoading = SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })
     if (isExitLoading && (dismissTag === undefined || dismissTag === loadingDialog.tag)) {
-      await loadingDialog.dismiss(option?.tag)
+      await loadingDialog.dismiss(option)
       return
     }
 
@@ -151,7 +151,7 @@ export class DialogProxy {
       return
     }
 
-    await dialog.dismiss()
+    await dialog.dismiss(option)
   }
 
   findDialog(tag?: string, force?: boolean): BaseDialogModel | undefined {

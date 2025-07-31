@@ -4,6 +4,7 @@ import { SmartDialog } from '../../SmartDialog'
 import { SmartAnimationType, SmartAttachAlignmentType } from '../../config/EnumConfig'
 import { ViewUtil } from '../../kit/ViewUtil'
 import { randomTag } from '../../kit/Function'
+import { SmartDismissOption } from '../../model/option/SmartDismissOption'
 
 @ObservedV2
 export class AttachDialogModel extends BaseDialogModel {
@@ -52,12 +53,12 @@ export class AttachDialogModel extends BaseDialogModel {
     return super.show()
   }
 
-  async dismiss(): Promise<void> {
+  async dismiss(option: SmartDismissOption | undefined): Promise<void> {
     const animation = this.animation
     animation.setEndTime()
     // 恢复到渲染前状态
     this.handleAnimation(true)
-    await super.dismiss()
+    await super.dismiss(option)
     this.remove()
   }
 

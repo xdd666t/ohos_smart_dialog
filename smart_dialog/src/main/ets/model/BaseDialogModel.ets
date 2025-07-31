@@ -2,6 +2,7 @@ import { delay, SmartBuilder } from '../kit/Function'
 import { BuilderNode } from '@kit.ArkUI'
 import { SmartAllDialogType, SmartAnimationType, SmartBackType, SmartNonAnimationType } from '../config/EnumConfig'
 import { DialogProxy } from '../helper/DialogProxy'
+import { SmartDismissOption } from './option/SmartDismissOption'
 
 @ObservedV2
 class AnimationModel {
@@ -70,12 +71,14 @@ export class BaseDialogModel {
     await delay(animation.dialogStartTime)
   }
 
-  async dismiss(): Promise<void> {
+  async dismiss(option: SmartDismissOption | undefined): Promise<void> {
     this.onDismiss?.()
 
-    const animation = this.animation
-    animation.maskOpacity = (animation.maskEndTime === 0 ? 1 : 0)
-    await delay(Math.max(animation.dialogEndTime ?? 0, animation.maskEndTime ?? 0))
+    if (option?.noAnimation !== true) {
+      const animation = this.animation
+      animation.maskOpacity = (animation.maskEndTime === 0 ? 1 : 0)
+      await delay(Math.max(animation.dialogEndTime ?? 0, animation.maskEndTime ?? 0))
+    }
   }
 
   remove() {

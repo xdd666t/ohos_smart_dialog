@@ -2,6 +2,7 @@ import { DialogProxy } from '../../helper/DialogProxy'
 import { alignmentAnimation } from '../../helper/AlignmentHelper'
 import { BaseDialogModel } from '../../model/BaseDialogModel'
 import { SmartAnimationType } from '../../config/EnumConfig'
+import { SmartDismissOption } from '../../model/option/SmartDismissOption'
 
 @ObservedV2
 export class LoadingDialogModel extends BaseDialogModel {
@@ -60,14 +61,15 @@ export class LoadingDialogModel extends BaseDialogModel {
     animation.dialogScaleY = scale
   }
 
-  async dismiss(tag?: string): Promise<void> {
+  async dismiss(option: SmartDismissOption | undefined): Promise<void> {
+    const tag = option?.tag
     if (tag && tag !== this.tag) {
       return
     }
     const animation = this.animation
     animation.setEndTime()
     this.initAnimationStatus()
-    await super.dismiss()
+    await super.dismiss(option)
     this.remove()
   }
 

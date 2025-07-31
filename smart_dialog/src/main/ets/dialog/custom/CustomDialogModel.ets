@@ -1,6 +1,7 @@
 import { SmartAnimationType } from '../../config/EnumConfig'
 import { alignmentAnimation } from '../../helper/AlignmentHelper'
 import { BaseDialogModel } from '../../model/BaseDialogModel'
+import { SmartDismissOption } from '../../model/option/SmartDismissOption'
 
 @ObservedV2
 export class CustomDialogModel extends BaseDialogModel {
@@ -55,11 +56,11 @@ export class CustomDialogModel extends BaseDialogModel {
     animation.dialogScaleY = scale
   }
 
-  async dismiss(): Promise<void> {
+  async dismiss(option: SmartDismissOption | undefined): Promise<void> {
     const animation = this.animation
     animation.setEndTime()
     this.initAnimationStatus()
-    await super.dismiss()
+    await super.dismiss(option)
     this.remove()
   }
 }
