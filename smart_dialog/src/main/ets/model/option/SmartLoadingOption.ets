@@ -1,6 +1,5 @@
 import { SmartAnimationType, SmartBackType, SmartNonAnimationType } from '../../config/EnumConfig'
 import { SmartBuilder } from '../../kit/Function'
-import { StackModifier } from '@kit.ArkUI'
 
 export interface SmartLoadingOption {
   builder?: SmartBuilder
@@ -18,5 +17,5 @@ export interface SmartLoadingOption {
   usePenetrate?: boolean
   animationType?: SmartAnimationType
   nonAnimationTypes?: Array<SmartNonAnimationType>
-  attributeModifier?: AttributeModifier<StackModifier>
+  attributeModifier?: AttributeModifier<StackAttribute>
 }

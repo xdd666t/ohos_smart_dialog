@@ -1,3 +1,6 @@
+# 1.8.7
+- 优化attributeModifier泛型
+
 # 1.8.6
 - 增加attributeModifier: 可对弹窗整体设置通用属性,例如设置灰度属性
 
