@@ -1,3 +1,6 @@
+# 1.8.6
+- 增加attributeModifier: 可对弹窗整体设置通用属性,例如设置灰度属性
+
 # 1.8.5
 - dismiss: 增加noAnimation, 关闭弹窗时可不播放动画
 

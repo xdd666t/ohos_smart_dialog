@@ -1,5 +1,6 @@
 import { SmartAnimationType, SmartBackType, SmartNonAnimationType } from '../../config/EnumConfig'
 import { SmartBuilder } from '../../kit/Function'
+import { StackModifier } from '@kit.ArkUI'
 
 export interface SmartAttachOption {
   targetId: string
@@ -20,4 +21,5 @@ export interface SmartAttachOption {
   keepSingle?: boolean
   animationType?: SmartAnimationType
   nonAnimationTypes?: Array<SmartNonAnimationType>
+  attributeModifier?: AttributeModifier<StackModifier>
 }

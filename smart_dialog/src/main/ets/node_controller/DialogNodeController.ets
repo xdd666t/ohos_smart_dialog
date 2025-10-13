@@ -64,7 +64,9 @@ struct SmartNode {
         } else if (this.item instanceof AttachDialogModel) {
           AttachDialogComponent({ item: this.item })
         }
-      }.visibility(this.item.visible ? Visibility.Visible : Visibility.None)
+      }
+      .visibility(this.item.visible ? Visibility.Visible : Visibility.None)
+      .attributeModifier(this.item.attributeModifier)
     }
   }
 }

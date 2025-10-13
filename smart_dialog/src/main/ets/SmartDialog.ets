@@ -53,6 +53,8 @@ export class SmartDialog {
   /// [animationType]: 动画类型
   ///
   /// [nonAnimationTypes]: 对于不同的场景, 可动态关闭弹窗动画, 具体请参照[SmartNonAnimationType]
+  ///
+  /// [attributeModifier]: 可对弹窗整体设置通用属性,例如设置灰度属性
   static show(option: SmartCustomOption) {
     const customConfig = SmartDialog.config.custom
     DialogProxy.instance.show({
@@ -73,6 +75,7 @@ export class SmartDialog {
       keepSingle: option.keepSingle ?? false,
       animationType: option.animationType ?? customConfig.animationType,
       nonAnimationTypes: option.nonAnimationTypes ?? customConfig.nonAnimationTypes,
+      attributeModifier: option.attributeModifier,
     })
   }
 
@@ -113,6 +116,8 @@ export class SmartDialog {
   /// [animationType]: 动画类型
   ///
   /// [nonAnimationTypes]: 对于不同的场景, 可动态关闭弹窗动画, 具体请参照[SmartNonAnimationType]
+  ///
+  /// [attributeModifier]: 可对弹窗整体设置通用属性,例如设置灰度属性
   static showAttach(option: SmartAttachOption) {
     const attachConfig = SmartDialog.config.attach
     DialogProxy.instance.showAttach({
@@ -134,6 +139,7 @@ export class SmartDialog {
       keepSingle: option.keepSingle ?? false,
       animationType: option.animationType ?? attachConfig.animationType,
       nonAnimationTypes: option.nonAnimationTypes ?? attachConfig.nonAnimationTypes,
+      attributeModifier: option.attributeModifier,
     })
   }
 
@@ -168,6 +174,8 @@ export class SmartDialog {
   /// [animationType]: 动画类型
   ///
   /// [nonAnimationTypes]: 对于不同的场景, 可动态关闭弹窗动画, 具体请参照[SmartNonAnimationType]
+  ///
+  /// [attributeModifier]: 可对弹窗整体设置通用属性,例如设置灰度属性
   static showLoading(option?: SmartLoadingOption) {
     const loadingConfig = SmartDialog.config.loading
     DialogProxy.instance.showLoading({
@@ -186,6 +194,7 @@ export class SmartDialog {
       usePenetrate: option?.usePenetrate ?? false,
       animationType: option?.animationType ?? loadingConfig.animationType,
       nonAnimationTypes: option?.nonAnimationTypes ?? loadingConfig.nonAnimationTypes,
+      attributeModifier: option?.attributeModifier,
     })
   }
 

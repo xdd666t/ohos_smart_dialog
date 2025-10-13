@@ -1,5 +1,5 @@
 import { delay, SmartBuilder } from '../kit/Function'
-import { BuilderNode } from '@kit.ArkUI'
+import { BuilderNode, StackModifier } from '@kit.ArkUI'
 import { SmartAllDialogType, SmartAnimationType, SmartBackType, SmartNonAnimationType } from '../config/EnumConfig'
 import { DialogProxy } from '../helper/DialogProxy'
 import { SmartDismissOption } from './option/SmartDismissOption'
@@ -59,6 +59,7 @@ export class BaseDialogModel {
   usePenetrate?: boolean
   animationType?: SmartAnimationType
   nonAnimationTypes?: Array<SmartNonAnimationType>
+  attributeModifier?: AttributeModifier<StackModifier>
 
   initAnimationStatus() {
     const animation = this.animation

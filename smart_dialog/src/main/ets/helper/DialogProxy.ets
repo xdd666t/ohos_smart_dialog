@@ -68,6 +68,7 @@ export class DialogProxy {
     const keepSingle = option.keepSingle
     model.keepSingle = keepSingle
     model.animationType = option.animationType
+    model.attributeModifier = option.attributeModifier
     this.processNonAnimation(model, option.nonAnimationTypes)
 
     if (keepSingle) {
@@ -99,6 +100,7 @@ export class DialogProxy {
     const keepSingle = option.keepSingle
     model.keepSingle = keepSingle
     model.animationType = option.animationType
+    model.attributeModifier = option.attributeModifier
     this.processNonAnimation(model, option.nonAnimationTypes)
 
     if (keepSingle) {
@@ -127,6 +129,7 @@ export class DialogProxy {
     model.onDismiss = option.onDismiss
     model.usePenetrate = option.usePenetrate
     model.animationType = option.animationType
+    model.attributeModifier = option.attributeModifier
     this.processNonAnimation(model, option.nonAnimationTypes)
 
     this.loadingNodeController.update(model)

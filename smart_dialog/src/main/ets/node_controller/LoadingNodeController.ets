@@ -51,7 +51,7 @@ struct LoadingNode {
           item: this.item,
           builder: this.item.builder
         })
-      }
+      }.attributeModifier(this.item.attributeModifier)
     }
   }
 }
