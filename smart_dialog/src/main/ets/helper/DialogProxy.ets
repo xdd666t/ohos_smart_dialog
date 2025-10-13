@@ -13,6 +13,7 @@ import { LoadingNodeController } from '../node_controller/LoadingNodeController'
 import { SmartBuilder } from '../kit/Function'
 import { Configuration } from '@kit.AbilityKit'
 import { NavigatorObserver } from './NavigatorObserver'
+import { SmartBaseOption } from '../model/option/SmartBaseOption'
 
 
 export class DialogProxy {
@@ -50,26 +51,12 @@ export class DialogProxy {
 
   show(option: SmartCustomOption) {
     const model = new CustomDialogModel()
+    this.syncOptionData(model, option)
     model.builder = option.builder
-    model.builderArgs = option.builderArgs
-    model.alignment = option.alignment
-    model.animation.setTime(option.animationTime)
-    model.clickMaskDismiss = option.clickMaskDismiss
-    model.tag = option.tag
-    model.bindRouter = option.bindRouter ?? this.navigatorObserve.curRouter
-    model.maskColor = option.maskColor
-    model.maskBuilder = option.maskBuilder
-    model.maskBuilderArgs = option.maskBuilderArgs
-    model.onMask = option.onMask
-    model.dialogType = SmartAllDialogType.custom
-    model.backType = option.backType
-    model.onDismiss = option.onDismiss
-    model.usePenetrate = option.usePenetrate
     const keepSingle = option.keepSingle
     model.keepSingle = keepSingle
-    model.animationType = option.animationType
-    model.attributeModifier = option.attributeModifier
-    this.processNonAnimation(model, option.nonAnimationTypes)
+    model.dialogType = SmartAllDialogType.custom
+    model.bindRouter = option.bindRouter ?? this.navigatorObserve.curRouter
 
     if (keepSingle) {
       this.dialogNodeController.update(model)
@@ -81,27 +68,13 @@ export class DialogProxy {
 
   showAttach(option: SmartAttachOption) {
     const model = new AttachDialogModel()
+    this.syncOptionData(model, option)
     model.targetId = option.targetId
     model.builder = option.builder
-    model.builderArgs = option.builderArgs
-    model.alignment = option.alignment
-    model.animation.setTime(option.animationTime)
-    model.clickMaskDismiss = option.clickMaskDismiss
-    model.tag = option.tag
     model.bindRouter = option.bindRouter ?? this.navigatorObserve.curRouter
-    model.maskColor = option.maskColor
-    model.maskBuilder = option.maskBuilder
-    model.maskBuilderArgs = option.maskBuilderArgs
-    model.onMask = option.onMask
     model.dialogType = SmartAllDialogType.attach
-    model.backType = option.backType
-    model.onDismiss = option.onDismiss
-    model.usePenetrate = option.usePenetrate
     const keepSingle = option.keepSingle
     model.keepSingle = keepSingle
-    model.animationType = option.animationType
-    model.attributeModifier = option.attributeModifier
-    this.processNonAnimation(model, option.nonAnimationTypes)
 
     if (keepSingle) {
       this.dialogNodeController.update(model)
@@ -113,26 +86,30 @@ export class DialogProxy {
 
   showLoading(option: SmartLoadingOption) {
     const model = this.loadingDialog = new LoadingDialogModel()
+    this.syncOptionData(model, option)
     model.builder = option.builder
+    model.bindRouter = this.navigatorObserve.curRouter
+    model.dialogType = SmartAllDialogType.loading
+
+    this.loadingNodeController.update(model)
+  }
+
+  syncOptionData(model: BaseDialogModel, option: SmartBaseOption) {
     model.builderArgs = option.builderArgs
     model.alignment = option.alignment
     model.animation.setTime(option.animationTime)
     model.clickMaskDismiss = option.clickMaskDismiss
     model.tag = option.tag
-    model.bindRouter = this.navigatorObserve.curRouter
     model.maskColor = option.maskColor
     model.maskBuilder = option.maskBuilder
     model.maskBuilderArgs = option.maskBuilderArgs
     model.onMask = option.onMask
-    model.dialogType = SmartAllDialogType.loading
     model.backType = option.backType
     model.onDismiss = option.onDismiss
     model.usePenetrate = option.usePenetrate
     model.animationType = option.animationType
     model.attributeModifier = option.attributeModifier
     this.processNonAnimation(model, option.nonAnimationTypes)
-
-    this.loadingNodeController.update(model)
   }
 
   async dismiss(option?: SmartDismissOption): Promise<void> {
@@ -149,7 +126,10 @@ export class DialogProxy {
     if (!dialog) {
       const rootNode = this.dialogNodeController.rootNode
       if (dialogList.length === 0 && rootNode?.getFirstChild()) {
-        rootNode?.clearChildren()
+        try {
+          rootNode?.clearChildren()
+        } catch (error) {
+        }
       }
       return
     }
