@@ -8,12 +8,13 @@ import { AttachDialogModel } from '../dialog/attach/AttachDialogModel'
 import { SmartLoadingOption } from '../model/option/SmartLoadingOption'
 import { LoadingDialogModel } from '../dialog/loading/LoadingDialogModel'
 import { SmartDialog } from '../SmartDialog'
-import { SmartAllDialogType, SmartNonAnimationType } from '../config/EnumConfig'
+import { SmartAllDialogType, SmartCloseType, SmartNonAnimationType } from '../config/EnumConfig'
 import { LoadingNodeController } from '../node_controller/LoadingNodeController'
 import { SmartBuilder } from '../kit/Function'
 import { Configuration } from '@kit.AbilityKit'
 import { NavigatorObserver } from './NavigatorObserver'
 import { SmartBaseOption } from '../model/option/SmartBaseOption'
+import { CloseHelper } from './CloseHelper'
 
 
 export class DialogProxy {
@@ -113,41 +114,32 @@ export class DialogProxy {
   }
 
   async dismiss(option?: SmartDismissOption): Promise<void> {
-    const dismissTag = option?.tag
-    const loadingDialog = this.loadingDialog
-    const isExitLoading = SmartDialog.checkExist({ dialogTypes: [SmartAllDialogType.loading] })
-    if (isExitLoading && (dismissTag === undefined || dismissTag === loadingDialog.tag)) {
-      await loadingDialog.dismiss(option)
-      return
-    }
+    const closeType = option?.closeType ?? SmartCloseType.smart
 
-    const dialogList = this.dialogList
-    const dialog = this.findDialog(dismissTag, option?.force)
-    if (!dialog) {
-      const rootNode = this.dialogNodeController.rootNode
-      if (dialogList.length === 0 && rootNode?.getFirstChild()) {
-        try {
-          rootNode?.clearChildren()
-        } catch (error) {
-        }
-      }
-      return
+    if (closeType === SmartCloseType.loading) {
+      await CloseHelper.loadingDismiss(option)
+    } else if (closeType === SmartCloseType.custom) {
+      await CloseHelper.customDismiss(option)
+    } else if (closeType === SmartCloseType.attach) {
+      await CloseHelper.attachDismiss(option)
+    } else if (closeType === SmartCloseType.allDialog) {
+      await CloseHelper.allDialogDismiss(option)
+    } else {
+      await CloseHelper.smartDismiss(option)
     }
-
-    await dialog.dismiss(option)
   }
 
-  findDialog(tag?: string, force?: boolean): BaseDialogModel | undefined {
+  findDialog(tag?: string, force?: boolean, dialogType?: SmartAllDialogType): BaseDialogModel | undefined {
     const dialogList = this.dialogList
     if (dialogList.length === 0) {
       return undefined
     }
 
-    if (tag) {
+    if (tag || (dialogType !== undefined)) {
       let dialogInfo: BaseDialogModel | undefined = undefined
       for (let index = dialogList.length - 1; index >= 0; index--) {
-        let item = dialogList[index]
-        if (item.tag === tag) {
+        const item = dialogList[index]
+        if (item.tag === tag || item.dialogType === dialogType) {
           dialogInfo = item
           break;
         }

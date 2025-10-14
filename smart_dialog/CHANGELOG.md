@@ -1,3 +1,6 @@
+# 1.8.8
+- 新增CloseType: 弹窗关闭时, 可针对性关闭弹窗
+
 # 1.8.7
 - 优化attributeModifier泛型
 

@@ -1,4 +1,4 @@
-import { SmartDialog } from 'ohos_smart_dialog'
+import { SmartCloseType, SmartDialog } from 'ohos_smart_dialog'
 import { randomColor } from '../../app/kit/Color'
 import { delay } from '../../app/kit/function'
 
@@ -57,13 +57,16 @@ function dialogLocationHorizontal() {
 
 @Builder
 function dialogLocationCenter() {
-  Text("location")
+  Text("close all")
     .width("30%")
     .height("30%")
     .fontSize(20)
     .borderRadius(12)
     .fontColor(Color.White)
     .textAlign(TextAlign.Center)
-    .padding(50)
+    .padding(20)
     .backgroundColor(randomColor())
+    .onClick(() => {
+      SmartDialog.dismiss({ closeType: SmartCloseType.allDialog })
+    })
 }

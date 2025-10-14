@@ -20,3 +20,8 @@
 -enable-toplevel-obfuscation
 -enable-filename-obfuscation
 -enable-export-obfuscation
+
+-keep
+./**/SmartDialog.ets
+./**/InitDialog.ets
+./**/config

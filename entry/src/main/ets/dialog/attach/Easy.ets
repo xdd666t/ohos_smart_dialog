@@ -1,4 +1,4 @@
-import { SmartDialog } from 'ohos_smart_dialog'
+import { SmartCloseType, SmartDialog } from 'ohos_smart_dialog'
 import { randomColor } from '../../app/kit/Color'
 
 export function attachEasy() {
@@ -37,4 +37,7 @@ function targetLocationDialog() {
     .padding(50)
     .borderRadius(12)
     .backgroundColor(randomColor())
+    .onClick(() => {
+      SmartDialog.dismiss({ closeType: SmartCloseType.custom })
+    })
 }
