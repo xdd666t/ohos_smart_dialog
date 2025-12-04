@@ -1,4 +1,4 @@
-import { SmartAnimationType, SmartBackType, SmartNonAnimationType } from '../../config/EnumConfig'
+import { SmartAnimationType, SmartBackType, SmartNonAnimationType, SmartPenetrateType } from '../../config/EnumConfig'
 import { SmartBuilder } from '../../kit/Function'
 import { StackModifier } from '@kit.ArkUI'
 
@@ -15,6 +15,7 @@ export interface SmartBaseOption {
   backType?: SmartBackType
   onDismiss?: VoidCallback
   usePenetrate?: boolean
+  penetrateTypes?: Array<SmartPenetrateType>
   animationType?: SmartAnimationType
   nonAnimationTypes?: Array<SmartNonAnimationType>
   attributeModifier?: AttributeModifier<StackModifier>

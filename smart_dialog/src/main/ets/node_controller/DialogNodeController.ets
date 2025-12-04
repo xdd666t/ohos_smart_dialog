@@ -9,7 +9,7 @@ import { BaseNodeController } from './BaseNodeController'
 import { DialogProxy } from '../helper/DialogProxy'
 import { FrameNode } from '@kit.ArkUI'
 import { GestureComponent } from '../component/GestureComponent'
-import { SmartNonAnimationType } from '../config/EnumConfig'
+import { SmartNonAnimationType, SmartPenetrateType } from '../config/EnumConfig'
 
 export class DialogNodeController extends BaseNodeController {
   inset(model: BaseDialogModel) {
@@ -55,7 +55,7 @@ struct SmartNode {
   item: BaseDialogModel = new BaseDialogModel()
 
   build() {
-    GestureComponent({ useDefaultGesture: !this.item.usePenetrate }) {
+    GestureComponent({ usePenetrate: this.item.penetrateTypes.includes(SmartPenetrateType.mask) }) {
       Stack({ alignContent: this.item.alignment }) {
         MaskComponent({ item: this.item })
 

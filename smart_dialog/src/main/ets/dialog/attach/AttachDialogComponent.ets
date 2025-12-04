@@ -1,6 +1,8 @@
 import { AttachDialogModel } from './AttachDialogModel';
 import { SmartBuilder } from '../../kit/Function';
 import { window } from '@kit.ArkUI';
+import { GestureComponent } from '../../component/GestureComponent';
+import { SmartPenetrateType } from '../../config/EnumConfig';
 
 
 @Component
@@ -35,7 +37,9 @@ export struct AttachDialogComponent {
       .id(this.item.selfId)
     } else {
       Stack() {
-        this.builder?.(this.item.builderArgs)
+        GestureComponent({ usePenetrate: this.item.penetrateTypes.includes(SmartPenetrateType.dialog) }) {
+          this.builder?.(this.item.builderArgs)
+        }
       }
       .scale({
         x: this.item.animation.dialogScaleX,
@@ -46,14 +50,6 @@ export struct AttachDialogComponent {
       .position(this.item.animation.dialogPosition)
       .opacity(this.item.animation.dialogOpacity)
       .animation({ duration: this.item.animation.dialogTime, curve: Curve.Linear })
-      .gesture(GestureGroup(GestureMode.Exclusive,
-        TapGesture(),
-        LongPressGesture(),
-        PanGesture(),
-        PinchGesture(),
-        SwipeGesture(),
-        RotationGesture(),
-      ))
       .onTouch((event: TouchEvent) => event.stopPropagation())
       .onSizeChange(() => {
         if (!this.alreadyStartAnimation) {

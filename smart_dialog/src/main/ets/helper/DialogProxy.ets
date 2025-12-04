@@ -107,7 +107,7 @@ export class DialogProxy {
     model.onMask = option.onMask
     model.backType = option.backType
     model.onDismiss = option.onDismiss
-    model.usePenetrate = option.usePenetrate
+    model.penetrateTypes = option.penetrateTypes ?? []
     model.animationType = option.animationType
     model.attributeModifier = option.attributeModifier
     this.processNonAnimation(model, option.nonAnimationTypes)

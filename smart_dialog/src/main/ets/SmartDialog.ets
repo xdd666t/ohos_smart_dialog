@@ -7,7 +7,7 @@ import { SmartAttachOption } from './model/option/SmartAttachOption'
 import { SmartLoadingOption } from './model/option/SmartLoadingOption'
 import { CheckExistOption } from './model/option/CheckExistOption'
 import { DialogCheckHelper } from './helper/DialogCheckHelper'
-import { SmartAllDialogType } from './config/EnumConfig'
+import { SmartPenetrateType } from './config/EnumConfig'
 import { BackHelper } from './helper/BackHelper'
 
 export class SmartDialog {
@@ -48,6 +48,8 @@ export class SmartDialog {
   ///
   /// [usePenetrate]: true（点击事件将穿透遮罩），false（不穿透）
   ///
+  /// [penetrateTypes]: 点击事件将穿透的组件类型,相对usePenetrate更强大
+  ///
   /// [keepSingle]: keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
   ///
   /// [animationType]: 动画类型
@@ -71,7 +73,7 @@ export class SmartDialog {
       backType: option.backType ?? customConfig.backType,
       onDismiss: option.onDismiss,
       bindRouter: option.bindRouter,
-      usePenetrate: option.usePenetrate ?? false,
+      penetrateTypes: option.penetrateTypes ?? (option.usePenetrate ? [SmartPenetrateType.mask] : []),
       keepSingle: option.keepSingle ?? false,
       animationType: option.animationType ?? customConfig.animationType,
       nonAnimationTypes: option.nonAnimationTypes ?? customConfig.nonAnimationTypes,
@@ -111,6 +113,8 @@ export class SmartDialog {
   ///
   /// [usePenetrate]: true（点击事件将穿透遮罩），false（不穿透）
   ///
+  /// [penetrateTypes]: 点击事件将穿透的组件类型,相对usePenetrate更强大
+  ///
   /// [keepSingle]: keepSingle设置为true，多次调用仍能保持一个弹窗；手动设置tag, 可创建多个同时存在的keepSingle弹窗
   ///
   /// [animationType]: 动画类型
@@ -135,7 +139,7 @@ export class SmartDialog {
       backType: option.backType ?? attachConfig.backType,
       onDismiss: option.onDismiss,
       bindRouter: option.bindRouter,
-      usePenetrate: option.usePenetrate ?? false,
+      penetrateTypes: option.penetrateTypes ?? (option.usePenetrate ? [SmartPenetrateType.mask] : []),
       keepSingle: option.keepSingle ?? false,
       animationType: option.animationType ?? attachConfig.animationType,
       nonAnimationTypes: option.nonAnimationTypes ?? attachConfig.nonAnimationTypes,
@@ -171,6 +175,8 @@ export class SmartDialog {
   ///
   /// [usePenetrate]: true（点击事件将穿透遮罩），false（不穿透）
   ///
+  /// [penetrateTypes]: 点击事件将穿透的组件类型,相对usePenetrate更强大
+  ///
   /// [animationType]: 动画类型
   ///
   /// [nonAnimationTypes]: 对于不同的场景, 可动态关闭弹窗动画, 具体请参照[SmartNonAnimationType]
@@ -191,7 +197,7 @@ export class SmartDialog {
       tag: option?.tag,
       backType: option?.backType ?? loadingConfig.backType,
       onDismiss: option?.onDismiss,
-      usePenetrate: option?.usePenetrate ?? false,
+      penetrateTypes: option?.penetrateTypes ?? (option?.usePenetrate ? [SmartPenetrateType.mask] : []),
       animationType: option?.animationType ?? loadingConfig.animationType,
       nonAnimationTypes: option?.nonAnimationTypes ?? loadingConfig.nonAnimationTypes,
       attributeModifier: option?.attributeModifier,

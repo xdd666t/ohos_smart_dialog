@@ -3,7 +3,7 @@ import { LoadingDialogComponent } from '../dialog/loading/LoadingDialogComponent
 import { BaseDialogModel } from '../model/BaseDialogModel'
 import { BaseNodeController } from './BaseNodeController'
 import { SmartDialog } from '../SmartDialog'
-import { SmartAllDialogType } from '../config/EnumConfig'
+import { SmartAllDialogType, SmartPenetrateType } from '../config/EnumConfig'
 import { DialogProxy } from '../helper/DialogProxy'
 import { MaskComponent } from '../dialog/MaskComponent'
 import { GestureComponent } from '../component/GestureComponent'
@@ -43,7 +43,7 @@ struct LoadingNode {
   item: LoadingDialogModel = new LoadingDialogModel()
 
   build() {
-    GestureComponent({ useDefaultGesture: !this.item.usePenetrate }) {
+    GestureComponent({ usePenetrate: this.item.penetrateTypes.includes(SmartPenetrateType.mask) }) {
       Stack() {
         MaskComponent({ item: this.item })
 

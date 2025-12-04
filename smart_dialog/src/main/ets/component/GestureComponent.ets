@@ -1,10 +1,12 @@
 @Component
 export struct GestureComponent {
-  useDefaultGesture: boolean = false
+  usePenetrate: boolean = false
   @BuilderParam builder?: VoidCallback
 
   build() {
-    if (this.useDefaultGesture) {
+    if (this.usePenetrate) {
+      this.builder?.()
+    } else {
       Stack() {
         this.builder?.()
       }
@@ -17,8 +19,6 @@ export struct GestureComponent {
         RotationGesture(),
       ))
       .onTouch((event: TouchEvent) => event.stopPropagation())
-    } else {
-      this.builder?.()
     }
   }
 }

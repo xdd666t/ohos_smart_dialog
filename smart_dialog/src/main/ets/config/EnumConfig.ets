@@ -98,3 +98,11 @@ export enum SmartNonAnimationType {
   /// keepSingle弹窗连续调用, 间隔无动画
   continueKeepSingle,
 }
+
+export enum SmartPenetrateType {
+  /// 遮罩透传
+  mask,
+
+  /// 弹窗透传
+  dialog,
+}
