@@ -1,5 +1,4 @@
 import { delay, SmartBuilder } from '../kit/Function'
-import { BuilderNode } from '@kit.ArkUI'
 import {
   SmartAllDialogType,
   SmartAnimationType,

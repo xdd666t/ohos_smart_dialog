@@ -1,3 +1,6 @@
+# 1.9.0
+- 增强penetrateTypes: 支持多层dialog穿透
+
 # 1.8.10
 - 优化penetrateTypes: 调整onTouch事件穿透逻辑
 
