@@ -23,7 +23,6 @@ export struct CustomDialogComponent {
     .opacity(this.item.animation.dialogOpacity)
     .position(this.item.animation.dialogPosition)
     .animation({ duration: this.item.animation.dialogTime, curve: Curve.Linear })
-    .onTouch((event: TouchEvent) => event.stopPropagation())
     .onAppear(() => this.item.show())
   }
 }

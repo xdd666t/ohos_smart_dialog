@@ -1,3 +1,6 @@
+# 1.8.10
+- 优化penetrateTypes: 调整onTouch事件穿透逻辑
+
 # 1.8.9
 - 新增penetrateTypes: 更强大的穿透模式, 可设置多个穿透类型
 

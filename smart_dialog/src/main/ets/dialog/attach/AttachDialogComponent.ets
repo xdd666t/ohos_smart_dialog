@@ -50,7 +50,6 @@ export struct AttachDialogComponent {
       .position(this.item.animation.dialogPosition)
       .opacity(this.item.animation.dialogOpacity)
       .animation({ duration: this.item.animation.dialogTime, curve: Curve.Linear })
-      .onTouch((event: TouchEvent) => event.stopPropagation())
       .onSizeChange(() => {
         if (!this.alreadyStartAnimation) {
           this.alreadyStartAnimation = true
