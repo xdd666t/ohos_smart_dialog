@@ -32,7 +32,7 @@ export class DialogNodeController extends BaseNodeController {
       if (currentDialog.nonAnimationTypes?.includes(SmartNonAnimationType.continueKeepSingle)) {
         currentDialog.animation.dialogStartTime = 0
       }
-      this.insertChildAfter(currentDialog, targetDialog.builderNode?.getFrameNode())
+      this.insertChildAfter(currentDialog, targetDialog.builderNode)
       // 移除之前的node
       dialogProxy.dialogNodeController.remove(targetDialog)
       // 置换模板弹窗栈中的数据

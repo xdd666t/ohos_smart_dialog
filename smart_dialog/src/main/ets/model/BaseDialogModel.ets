@@ -58,7 +58,7 @@ export class BaseDialogModel {
   maskBuilder?: SmartBuilder
   maskBuilderArgs?: ESObject
   onMask?: VoidCallback
-  builderNode?: BuilderNode<[ESObject]> | null = null
+  builderNode?: FrameNode | null = null
   dialogType?: SmartAllDialogType
   backType?: SmartBackType
   onDismiss?: VoidCallback

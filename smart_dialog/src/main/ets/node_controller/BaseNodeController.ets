@@ -1,4 +1,4 @@
-import { BuilderNode, FrameNode, NodeController } from '@kit.ArkUI'
+import { ComponentContent, FrameNode, NodeController, typeNode } from '@kit.ArkUI'
 import { BaseDialogModel } from '../model/BaseDialogModel'
 
 
@@ -9,7 +9,7 @@ export class BaseNodeController extends NodeController {
   makeNode(uiContext: UIContext): FrameNode | null {
     this.uiContext = uiContext
     if (this.rootNode == null) {
-      this.rootNode = new FrameNode(uiContext)
+      this.rootNode = typeNode.createNode(this.uiContext, 'Stack')
     }
 
     return this.rootNode
@@ -19,16 +19,16 @@ export class BaseNodeController extends NodeController {
     if (this.uiContext === null || this.rootNode === null) {
       return
     }
+    const stack = typeNode.createNode(this.uiContext, 'Stack')
+    stack.addComponentContent(new ComponentContent<ESObject>(this.uiContext, wrapBuilder, model))
+    stack.initialize().hitTestBehavior(HitTestMode.Transparent)
 
-    let builderNode = new BuilderNode(this.uiContext)
-    builderNode.build(wrapBuilder, model)
     if (sibling) {
-      this.rootNode.insertChildAfter(builderNode.getFrameNode(), sibling)
+      this.rootNode.insertChildAfter(stack, sibling)
     } else {
-      this.rootNode.appendChild(builderNode.getFrameNode())
+      this.rootNode.appendChild(stack)
     }
-
-    model.builderNode = builderNode
+    model.builderNode = stack
   }
 
   remove(model: BaseDialogModel) {
@@ -36,7 +36,7 @@ export class BaseNodeController extends NodeController {
       return
     }
 
-    const frameNode = model.builderNode?.getFrameNode()
+    const frameNode = model.builderNode
     this.rootNode.removeChild(frameNode)
     frameNode?.disposeTree()
   }

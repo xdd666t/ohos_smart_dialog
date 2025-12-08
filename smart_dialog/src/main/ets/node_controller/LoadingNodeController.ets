@@ -14,7 +14,7 @@ export class LoadingNodeController extends BaseNodeController {
   }
 
   clearChildren() {
-    DialogProxy.instance.loadingDialog.builderNode?.getFrameNode()?.disposeTree()
+    DialogProxy.instance.loadingDialog.builderNode?.disposeTree()
     this.rootNode?.clearChildren()
   }
 
